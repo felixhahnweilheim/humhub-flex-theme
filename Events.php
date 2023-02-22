@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use yii\base\Theme;
+use yii\helpers\Url;
 
 class Events
 {
