@@ -1,0 +1,21 @@
+{
+	"id": "flex-theme",
+	"version": "0.1.0",
+	"name": "Flex Theme",
+	"description": "Flexible Theme for HumHub",
+	"humhub": {
+		"minVersion": "1.13"
+	},
+	"keywords": [
+		"flexible", "configurable"
+	],
+	"screenshots": [],
+  "homepage": "https://github.com/felixhahnweilheim/humhub-flex-theme",
+	"authors": [
+        {
+            "name": "Felix Hahn",
+            "email": "info@hahn-felix.de",
+            "role": "Developer"
+        }
+    ]  
+}
