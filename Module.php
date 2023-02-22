@@ -24,7 +24,7 @@ class Module extends \humhub\components\Module
 	public function disable() {
     
 	    // Deselect theme (select community theme)
-		if (Yii::$app->view->theme->name == 'flex-theme') {
+		if (Yii::$app->view->theme->name == 'FlexTheme') {
 		    $theme = ThemeHelper::getThemeByName('HumHub');
 		    if ($theme !== null) {
 		    	$theme->activate();
