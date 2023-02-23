@@ -7,6 +7,14 @@ use yii\helpers\Html;
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.base', '<b>Orange Theme</b> Configuration'); ?></div>
     <div class="panel-body">
+	    <?php if (!Yii::$app->view->theme->name == 'FlexTheme'): ?>
+		    <div class="alert alert-danger">
+                <p>
+                    <strong><?= Yii::t('FlexTheme.admin', 'Warning: Flex Theme is not active, settings on this page won\'t have any effect!'); ?><strong><br>
+					<?= Yii::t('FlexTheme.admin', 'Please go to Administration > Settings > Html::a(Url::to(['/admin/setting/design']), "Design") and select "Flex Theme".'); ?>
+        </p>
+    </div>
+		<?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 		    <?= $form->field($model, 'commentLink')->radioList([
 	            'text' => 'Text link',
