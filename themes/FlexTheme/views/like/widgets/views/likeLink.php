@@ -1,4 +1,4 @@
-?php
+<?php
 
 use \humhub\modules\flexTheme\Module;
 use yii\helpers\Html;
@@ -23,7 +23,7 @@ if ($icon == 'thumbs_up') {
 
 // additional CSS class
 if ($style == 'text') {
-    $likeContainerClass = '';
+    $iconContainerClass = '';
 } else {
     $likeContainerClass = $icon . '-' . 'container';
 }
@@ -32,14 +32,13 @@ if ($style == 'text') {
 if ($style == 'icon') {
     $likeText = $iconEmpty;
     $unlikeText = $iconFull;
-elseif ($style == 'both') {
+} elseif ($style == 'both') {
 	$likeText = $iconEmpty . HTML::tag('span', Yii::t('LikeModule.base', 'Like'), ['class' => 'like-label-both']);
 	$unlikeText = $iconFull . HTML::tag('span', Yii::t('LikeModule.base', 'Unlike'), ['class' => 'unlike-label-both']);
-else {
+} else {
     $likeText = Yii::t('LikeModule.base', 'Like');
     $unlikeText = Yii::t('LikeModule.base', 'Unlike');
 }
-
 
 ?>
 
@@ -53,7 +52,7 @@ else {
 			<?= $likeText ?>
         </a>
         <a href="#" data-action-click="like.toggleLike" data-action-url="<?= $unlikeUrl ?>" class="unlike likeAnchor<?= !$canLike ? ' disabled' : '' ?>" style="<?= ($currentUserLiked) ? '' : 'display:none'?>" title="<?= Yii::t('LikeModule.base', 'Unlike') ?>">
-			<?> $unlikeText ?>
+			<?= $unlikeText ?>
         </a>
     <?php endif; ?>
 
