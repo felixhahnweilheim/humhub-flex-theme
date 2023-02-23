@@ -25,15 +25,20 @@ class Module extends \humhub\components\Module
     }
 	
 	public function enable() {
+		// Activate Flex Theme
         if (parent::enable()) {
             $theme = ThemeHelper::getThemeByName('FlexTheme');
             if ($theme !== null) {
                 $theme->activate();
                 DynamicConfig::rewrite();
-			}
-            return true;
+	        }
         }
-        return false;
+		
+        /*Add Module settings*/
+		$module = Yii::$app->getModule('flex-theme');
+		$module->settings->set('commentLink', $this->commentLink);
+	    $module->settings->set('likeLink', $this->likeLink);
+		$module->settings->set('likeIcon', $this->likeIcon);
     }
 	
 	public function disable() {
