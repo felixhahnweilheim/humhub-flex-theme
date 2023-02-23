@@ -11,7 +11,8 @@ use yii\helpers\Html;
 		    <div class="alert alert-danger">
                 <p>
                     <strong><?= Yii::t('FlexTheme.admin', 'Warning: Flex Theme is not active, settings on this page won\'t have any effect!'); ?><strong><br>
-					<?= Yii::t('FlexTheme.admin', 'Please go to Administration > Settings > Html::a(Url::to(['/admin/setting/design']), "Design") and select "Flex Theme".'); ?>
+					<?= Yii::t('FlexTheme.admin', 'Please go to Administration > Settings > Design and select "Flex Theme".'); ?>
+					<?= Html::a(Url::to(['/admin/setting/design']), Yii:t('FlexTheme.admin', 'Or click here'); ?>
                 </p>
             </div>
 	    <?php endif; ?>
