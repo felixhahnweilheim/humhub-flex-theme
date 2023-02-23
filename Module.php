@@ -7,20 +7,18 @@ use Yii;
 
 class Module extends \humhub\components\Module
 {
+	/*Module settings and their default values*/
     /*@var string defines the style of comment links (options: icon, text, both)*/
-	public $commentLink = 'icon';
+	public $commentLink = 'text';
     /*@var string defines the style of like links (options: icon, text, both)*/
-	public $likeLink = 'icon';
+	public $likeLink = 'text';
     /*@var string defines the like icon (options: heart, thumbsup, star)*/
-	public $likeIcon = 'heart';
+	public $likeIcon = 'thumbsup';
     
     public static function getThemeSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function disable() {
     
 	    // Deselect theme (select community theme)
