@@ -12,7 +12,7 @@ use yii\helpers\Html;
                 <p>
                     <strong><?= Yii::t('FlexTheme.admin', 'Warning: Flex Theme is not active, settings on this page won\'t have any effect!'); ?><strong><br>
 					<?= Yii::t('FlexTheme.admin', 'Please go to Administration > Settings > Design and select "Flex Theme".'); ?>
-					<?= Html::a(Url::to(['/admin/setting/design']), Yii:t('FlexTheme.admin', 'Or click here'); ?>
+					<?= Html::a(Url::to(['/admin/setting/design']), Yii:t('FlexTheme.admin', 'Or click here')); ?>
                 </p>
             </div>
 	    <?php endif; ?>
