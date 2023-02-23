@@ -12,9 +12,9 @@ use yii\helpers\Html;
                 <p>
                     <strong><?= Yii::t('FlexTheme.admin', 'Warning: Flex Theme is not active, settings on this page won\'t have any effect!'); ?><strong><br>
 					<?= Yii::t('FlexTheme.admin', 'Please go to Administration > Settings > Html::a(Url::to(['/admin/setting/design']), "Design") and select "Flex Theme".'); ?>
-        </p>
-    </div>
-		<?php endif; ?>
+                </p>
+            </div>
+	    <?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 		    <?= $form->field($model, 'commentLink')->radioList([
 	            'text' => 'Text link',
