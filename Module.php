@@ -13,10 +13,10 @@ class Module extends \humhub\components\Module
 	public $commentLink = 'text';
     /*@var string defines the style of like links (options: icon, text, both)*/
 	public $likeLink = 'text';
-    /*@var string defines the like icon (options: heart, thumbsup, star)*/
+    /*@var string defines the like icon (options: heart, thumbs_up, star)*/
 	public $likeIcon = 'thumbsup';
     
-    public static function getThemeSetting(string $setting_name) {
+    public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
 	}
 	
