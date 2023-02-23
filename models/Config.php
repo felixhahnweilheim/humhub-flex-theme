@@ -26,9 +26,9 @@ class Config extends \yii\base\Model
 	public function attributeLabels()
     {
         return [
-            'commentLink' => Yii::t('FlexThemeModule.base', 'Style of Comment Button'),
-			'likeLink' => Yii::t('FlexThemeModule.base', 'Style of Like Button'),
-			'likeIcon' => Yii::t('FlexThemeModule.base', 'Like Icon'),
+            'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
+			'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
+			'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
         ];
     }
 
