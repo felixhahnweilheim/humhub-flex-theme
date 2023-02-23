@@ -37,7 +37,7 @@ class Config extends \yii\base\Model
         return [
 		    [['commentLink', 'likeLink', 'likeIcon'], 'string'],
 			[['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbsup']],
+			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
         ];
     }
 	
