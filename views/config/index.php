@@ -30,9 +30,9 @@ use yii\helpers\Url;
 	            'both' => Yii::t('FlexThemeModule.admin', 'Text and icon'),
             ]);?>
 		    <?= $form->field($model, 'likeIcon')->radioList([
+		        'thumbsup' => Yii::t('FlexThemeModule.admin', 'Thumbs up'),
 	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
 	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
-	            'thumbsup' => Yii::t('FlexThemeModule.admin', 'Thumbs up'),
 	        ]);?>
 		
         <div class="form-group">
