@@ -5,7 +5,6 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
-use Yii;
 
 ?>
 <div class="panel panel-default">
