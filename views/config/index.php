@@ -8,9 +8,9 @@ use yii\helpers\Url;
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading"><?= Yii::t('FlexThemeModule.base', '<b>Orange Theme</b> Configuration'); ?></div>
+    <div class="panel-heading"><?= Yii::t('FlexThemeModule.base', '<b>Flex Theme</b> Configuration'); ?></div>
     <div class="panel-body">
-	    <?php if (!Yii::$app->view->theme->name == 'FlexTheme'): ?>
+	    <?php if (! Yii::$app->view->theme->name == 'FlexTheme'): ?>
 		    <div class="alert alert-danger">
                 <p>
                     <strong><?= Yii::t('FlexTheme.admin', 'Warning: Flex Theme is not active, settings on this page won\'t have any effect!'); ?><strong><br>
