@@ -12,4 +12,5 @@ return array (
 	'Heart' => 'Herz',
 	'Star' => 'Stern',
 	'Thumbs up' => 'Daumen hoch',
+	'Flexible Theme for HumHub' => 'Flexibles Theme für HumHub',
 );
