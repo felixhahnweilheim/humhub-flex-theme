@@ -23,7 +23,7 @@ if ($icon == 'thumbs_up') {
 
 // additional CSS class
 if ($style == 'text') {
-    $iconContainerClass = '';
+    $likeContainerClass = '';
 } else {
     $likeContainerClass = $icon . '-' . 'container';
 }
