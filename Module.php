@@ -21,7 +21,7 @@ class Module extends \humhub\components\Module
 	}
 	
 	public function getDescription() {
-        return Yii::t('FlexThemeModule.config', 'Flexible Theme for HumHub');
+        return Yii::t('FlexThemeModule.admin', 'Flexible Theme for HumHub');
     }
 	
 	public function enable() {
