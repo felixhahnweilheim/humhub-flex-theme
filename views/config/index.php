@@ -3,6 +3,10 @@
 use humhub\modules\flexTheme\models\ConfigureForm;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\base\Theme;
+use yii\helpers\Url;
+use Yii;
+
 ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.base', '<b>Orange Theme</b> Configuration'); ?></div>
