@@ -10,11 +10,6 @@ return [
     'class' => 'humhub\modules\flexTheme\Module',
     'namespace' => 'humhub\modules\flexTheme',
     'events' => [
-		[
-			'class' => ModuleManager::class,
-			'event' => ModuleManager::EVENT_AFTER_MODULE_ENABLE,
-			'callback' => [Events::class, 'onModuleEnabled']
-		],
 	    	[
 			'class' => AdminMenu::class,
 			'event' => AdminMenu::EVENT_INIT,
