@@ -2,6 +2,7 @@
 
 namespace humhub\modules\flexTheme;
 
+use humhub\libs\DynamicConfig;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use Yii;
 
@@ -18,6 +19,22 @@ class Module extends \humhub\components\Module
     public static function getThemeSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
 	}
+	
+	public function getDescription() {
+        return Yii::t('FlexThemeModule.config', 'Flexible Theme for HumHub');
+    }
+	
+	public function enable() {
+        if (parent::enable()) {
+            $theme = ThemeHelper::getThemeByName('FlexTheme');
+            if ($theme !== null) {
+                $theme->activate();
+                DynamicConfig::rewrite();
+			}
+            return true;
+        }
+        return false;
+    }
 	
 	public function disable() {
     
