@@ -5,3 +5,5 @@ The first really configurable theme for HumHub
 - add module icon
 - add screenshot
 - documentation
+- CSS
+- variables in database
