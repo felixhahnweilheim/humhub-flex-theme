@@ -20,19 +20,19 @@ use yii\helpers\Url;
 	    <?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 		    <?= $form->field($model, 'commentLink')->radioList([
-	            'text' => 'Text link',
-	            'icon' => 'Only icon',
-	            'both' => 'Text and icon'
+	            'text' => Yii::t('FlexThemeModule.admin', 'Text link'),
+	            'icon' => Yii::t('FlexThemeModule.admin', 'Only icon'),
+	            'both' => Yii::t('FlexThemeModule.admin', 'Text and icon'),
             ]);?>
 		    <?= $form->field($model, 'likeLink')->radioList([
-	            'text' => 'Text link',
-	            'icon' => 'Only icon',
-	            'both' => 'Text and icon'
+	            'text' => Yii::t('FlexThemeModule.admin', 'Text link'),
+	            'icon' => Yii::t('FlexThemeModule.admin', 'Only icon'),
+	            'both' => Yii::t('FlexThemeModule.admin', 'Text and icon'),
             ]);?>
 		    <?= $form->field($model, 'likeIcon')->radioList([
-	            'heart' => 'Heart',
-	            'star' => 'Star',
-	            'thumbsup' => 'Thumbs up'
+	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
+	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
+	            'thumbsup' => Yii::t('FlexThemeModule.admin', 'Thumbs up'),
 	        ]);?>
 		
         <div class="form-group">
@@ -43,3 +43,4 @@ use yii\helpers\Url;
 
     </div>
 </div>
+
