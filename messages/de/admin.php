@@ -6,4 +6,10 @@ return array (
 	'Style of Comment Button' => 'Art des "Kommentieren"-Links',
 	'Style of Like Button' => 'Art des "Gefällt mir"-Links',
 	'Like Icon' => 'Icon für "Gefällt mir"',
+	'Text link' => 'Text-Link',
+	'Only icon' => 'Nur Icon',
+	'Text and icon' => 'Text und Icon',
+	'Heart' => 'Herz',
+	'Star' => 'Stern',
+	'Thumbs up' => 'Daumen hoch',
 );
