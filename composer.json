@@ -1,0 +1,12 @@
+{
+  "name": "humhub/flex-theme",
+  "description": "Flex Theme for HumHub",
+  "type": "library",
+  "config": {
+    "process-timeout": 1800,
+    "platform": {
+      "php": "8.0"
+    }
+  },
+  "minimum-stability": "dev"
+}
