@@ -34,6 +34,13 @@ class Config extends \yii\base\Model
 			'verifiedAccounts' => Yii::t('ThemeOrangeModule.base', 'Verified Accounts'),
         ];
     }
+	
+	public function attributeHints()
+    {
+        return [
+			'verifiedAccounts' => Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. "1,21"'),
+	    ];
+	}
 
     public function rules()
     {
