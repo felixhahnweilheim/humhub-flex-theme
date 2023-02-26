@@ -39,7 +39,7 @@ $profileImageUpload = Upload::withName($imageUploadName, ['url' => $imageUploadU
 $profileImageWidth = $container->getProfileImage()->width() - 10;
 $profileImageHeight = $container->getProfileImage()->height() - 10;
 
-$verifiedAccounts = explode(',', Module::getThemeSetting('verifiedAccounts'));
+$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
 ?>
 
 <?= Html::beginTag('div', $options) ?>
