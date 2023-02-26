@@ -23,7 +23,7 @@ use humhub\widgets\TimeAgo;
 
 $container = $model->content->container;
 
-$verifiedAccounts = explode(',', Module::getThemeSetting('verifiedAccounts'));
+$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
 ?>
 
 <div class="stream-entry-icon-list">
