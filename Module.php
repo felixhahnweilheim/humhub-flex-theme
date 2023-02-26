@@ -14,7 +14,9 @@ class Module extends \humhub\components\Module
     /*@var string defines the style of like links (options: icon, text, both)*/
 	public $likeLink = 'text';
     /*@var string defines the like icon (options: heart, thumbs_up, star)*/
-	public $likeIcon = 'thumbsup';
+	public $likeIcon = 'thumbs_up';
+	/*@var array defines IDs of verified accounts*/
+	public $verifiedAccounts = '1';
     
     public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
@@ -39,6 +41,7 @@ class Module extends \humhub\components\Module
 		$module->settings->set('commentLink', $this->commentLink);
 	    $module->settings->set('likeLink', $this->likeLink);
 		$module->settings->set('likeIcon', $this->likeIcon);
+		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
     }
 	
 	public function disable() {

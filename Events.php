@@ -26,6 +26,7 @@ class Events
 		$module->settings->set('commentLink', $module->commentLink);
 	    $module->settings->set('likeLink', $module->likeLink);
 		$module->settings->set('likeIcon', $module->likeIcon);
+	    $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
     }
     
 	public static function onAdminMenuInit($event)
