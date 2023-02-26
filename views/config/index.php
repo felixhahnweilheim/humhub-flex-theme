@@ -34,6 +34,7 @@ use yii\helpers\Url;
 	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
 	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
 	        ]);?>
+		    <?= $form->field($model, 'verifiedAccounts'); ?>
 		
         <div class="form-group">
             <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
@@ -43,4 +44,3 @@ use yii\helpers\Url;
 
     </div>
 </div>
-
