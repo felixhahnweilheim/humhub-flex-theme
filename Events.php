@@ -10,25 +10,6 @@ use yii\helpers\Url;
 
 class Events
 {
-    /*
-     * Callback after Module enabled
-     * @param ModuleEvent $event
-     */
-    public static function onModuleEnabled($event)
-    {
-        /*Activate Flex Theme*/
-        $theme = ThemeHelper::getThemeByName('FlexTheme');
-        if ($theme !== null) {
-            $theme->activate();
-        }
-        /*Add Module settings*/
-		$module = Yii::$app->getModule('flex-theme');
-		$module->settings->set('commentLink', $module->commentLink);
-	    $module->settings->set('likeLink', $module->likeLink);
-		$module->settings->set('likeIcon', $module->likeIcon);
-	    $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
-    }
-    
 	public static function onAdminMenuInit($event)
     {
 		$event->sender->addItem([
