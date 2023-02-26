@@ -22,7 +22,9 @@
  * Note: Inline styles have been retained for legacy theme compatibility (prior to v1.4)
  */
 
+//FlexTheme
 use humhub\modules\flexTheme\Module;
+//FlexTheme end
 use humhub\modules\user\models\User;
 use humhub\modules\content\assets\ContainerHeaderAsset;
 use humhub\modules\file\widgets\Upload;
@@ -39,7 +41,9 @@ $profileImageUpload = Upload::withName($imageUploadName, ['url' => $imageUploadU
 $profileImageWidth = $container->getProfileImage()->width() - 10;
 $profileImageHeight = $container->getProfileImage()->height() - 10;
 
+//FlexTheme
 $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
+//FlexTheme end
 ?>
 
 <?= Html::beginTag('div', $options) ?>
@@ -53,9 +57,11 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
         <!-- show user name and title -->
         <div class="img-profile-data">
             <h1 class="<?= $classPrefix ?>"><?= Html::encode($title) ?>
+<?php //FlexTheme ?>
 				<?php if (($container instanceof User) && in_array($container->id, $verifiedAccounts)): ?>
                     <i class="fa fa-check-circle"></i></h1>
 			    <?php endif; ?>
+<?php //FlexTheme emd ?>
             <h2 class="<?= $classPrefix ?>"><?= Html::encode($subTitle) ?></h2>
         </div>
 
