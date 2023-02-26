@@ -1,6 +1,8 @@
 <?php
 
+//FlexTheme
 use \humhub\modules\flexTheme\Module;
+//FlexTheme end
 use humhub\modules\comment\widgets\CommentLink;
 use humhub\widgets\Button;
 use yii\helpers\Html;
@@ -17,12 +19,14 @@ use \humhub\modules\comment\models\Comment;
 /* @var $comment \humhub\modules\comment\models\Comment */
 /* @var $module \humhub\modules\comment\Module */
 
+//FlexTheme
 $style = Module::getSetting('commentLink');
 if ($style == 'text') {
 	$additionalClass = 'no-icon';
 } else {
 	$additionalClass = '';
 }
+//FlexTheme end
 
 $hasComments = ($commentCount > 0);
 $commentCountSpan = Html::tag('span', ' (' . $commentCount . ')', [
@@ -31,6 +35,7 @@ $commentCountSpan = Html::tag('span', ' (' . $commentCount . ')', [
     'style' => ($hasComments) ? null : 'display:none'
 ]);
 
+//FlexTheme
 /* Html tags */
 $commentIcon = HTML::tag('i', '', ['class' => 'fa fa-comment-o', 'title' => Yii::t('CommentModule.base', "Comment")]);
 $replyIcon = HTML::tag('i', '', ['class' => 'fa fa-comment-o', 'title' => Yii::t('CommentModule.base', "Reply")]);
@@ -57,6 +62,7 @@ if($isNestedComment) {
         $label = $commentLabel;
     }
 }
+//FlexTheme end
 
 if ($mode == CommentLink::MODE_POPUP): ?>
     <?php $url = Url::to(['/comment/comment/show', 'objectModel' => $objectModel, 'objectId' => $objectId, 'mode' => 'popup']); ?>

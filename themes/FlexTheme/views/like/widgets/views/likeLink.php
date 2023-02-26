@@ -1,10 +1,12 @@
 <?php
-
+//FlexTheme
 use \humhub\modules\flexTheme\Module;
+//FlexTheme end
 use yii\helpers\Html;
 
 humhub\modules\like\assets\LikeAsset::register($this);
 
+//FlexTheme
 // get Settings
 $icon = Module::getSetting('likeIcon');
 $style = Module::getSetting('likeLink');
@@ -43,16 +45,19 @@ if ($style == 'icon') {
 ?>
 
 <span class="likeLinkContainer <?= $likeContainerClass ?>" id="likeLinkContainer_<?= $id ?>">
-
+<?php //FlexTheme end ?>
     <?php if (Yii::$app->user->isGuest): ?>
-
+<?php //FlexTheme ?>
         <?= Html::a($likeText, Yii::$app->user->loginUrl, ['data-target' => '#globalModal']); ?>
+<?php //FlexTheme end ?>
     <?php else: ?>
+<?php //FlexTheme ?>
         <a href="#" data-action-click="like.toggleLike" data-action-url="<?= $likeUrl ?>" class="like likeAnchor<?= !$canLike ? ' disabled' : '' ?>" style="<?= (!$currentUserLiked) ? '' : 'display:none'?>" title="<?= Yii::t('LikeModule.base', 'Like') ?>">
-			<?= $likeText ?>
+		    <?= $likeText ?>
         </a>
         <a href="#" data-action-click="like.toggleLike" data-action-url="<?= $unlikeUrl ?>" class="unlike likeAnchor<?= !$canLike ? ' disabled' : '' ?>" style="<?= ($currentUserLiked) ? '' : 'display:none'?>" title="<?= Yii::t('LikeModule.base', 'Unlike') ?>">
-			<?= $unlikeText ?>
+		    <?= $unlikeText ?>
+<?php //FlexTheme end ?>
         </a>
     <?php endif; ?>
 

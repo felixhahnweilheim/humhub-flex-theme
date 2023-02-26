@@ -1,6 +1,8 @@
 <?php
 
+//FlexTheme
 use humhub\modules\flexTheme\Module;
+//FlexTheme end
 use humhub\libs\Html;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\widgets\ArchivedIcon;
@@ -23,7 +25,9 @@ use humhub\widgets\TimeAgo;
 
 $container = $model->content->container;
 
+//FlexTheme
 $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
+//FlexTheme end
 ?>
 
 <div class="stream-entry-icon-list">
@@ -52,9 +56,11 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
 
     <div class="media-heading">
 		<?= $title ?>
+<?php //FlexTheme ?>
 		<?php if (!$renderOptions->isShowAuthorInformationInSubHeadLine($model) && in_array($model->content->createdBy->id, $verifiedAccounts)): ?>
 	        <?= Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account')); ?>
         <?php endif; ?>
+<?php //FlexTheme end ?>
         <?php if ($renderOptions->isShowContainerInformationInTitle($model)) : ?>
             <span class="viaLink">
                 <?= Icon::get('caret-right') ?>
@@ -66,9 +72,11 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
     <div class="media-subheading">
         <?php if ($renderOptions->isShowAuthorInformationInSubHeadLine($model)) : ?>
             <?= Html::containerLink($model->content->createdBy, ['class' => 'wall-entry-container-link']) ?>
-		    <?php if (in_array($model->content->createdBy->id, $verifiedAccounts)): ?>
+<?php //FlexTheme ?>
+            <?php if (in_array($model->content->createdBy->id, $verifiedAccounts)): ?>
 	            <?= Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account')); ?>
             <?php endif; ?>
+<?php //FlexTheme end ?>
         <?php endif ?>
         <?php if ($renderOptions->isShowContainerInformationInSubTitle($model)) : ?>
             <?php if ($renderOptions->isShowAuthorInformationInSubHeadLine($model)) : ?>
