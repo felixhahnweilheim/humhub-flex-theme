@@ -18,13 +18,13 @@ class Module extends \humhub\components\Module
 	/*@var array defines IDs of verified accounts*/
 	public $verifiedAccounts = '1';
 	/* color variables*/
-	public $var_default;
-	public $var_primary;
-	public $var_info;
-	public $var_success;
-	public $var_warning;
-	public $var_danger;
-	public $var_link;
+	public $default;
+	public $primary;
+	public $info;
+	public $success;
+	public $warning;
+	public $danger;
+	public $link;
 	
     
     public static function getSetting(string $setting_name) {
@@ -50,13 +50,13 @@ class Module extends \humhub\components\Module
 		$this->save('likeLink');
 		$this->save('likeIcon');
 		$this->save('verifiedAccounts');
-		$this->save('var_default');
-		$this->save('var_primary');
-		$this->save('var_info');
-		$this->save('var_success');
-		$this->save('var_warning');
-		$this->save('var_danger');
-		$this->save('var_link');
+		$this->save('default');
+		$this->save('primary');
+		$this->save('info');
+		$this->save('success');
+		$this->save('warning');
+		$this->save('danger');
+		$this->save('link');
     }
 	
 	public function save($setting_name) {
