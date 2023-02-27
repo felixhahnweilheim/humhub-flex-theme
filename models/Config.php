@@ -10,8 +10,7 @@ use humhub\modules\flexTheme\Module;
  */
 class Config extends \yii\base\Model
 {
-	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', 'default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
-    public $commentLink;
+	public $commentLink;
     public $likeLink;
     public $likeIcon;
 	public $verifiedAccounts;
@@ -27,10 +26,17 @@ class Config extends \yii\base\Model
     public function init()
     {
 		parent::init();
-	
-		foreach($this->settings as $value) {
-			$this->$value = Yii::$app->getModule('flex-theme')->settings->get($value, Yii::$app->getModule('flex-theme')->$value);
-	    }
+	    $module = Yii::$app->getModule('flex-theme');
+		$this->commentLink = $module->settings->get('commentLink', $module->commentLink);
+		$this->likeLink = $module->settings->get('likeLink', $module->likeLink);
+		$this->likeIcon = $module->settings->get('likeIcon', $module->likeIcon);
+		$this->verifiedAccounts = $module->settings->get('verifiedAccounts', $module->verifiedAccounts);
+		$this->default = $module->settings->get('default', $module->default);
+		$this->primary = $module->settings->get('primary', $module->primary);
+		$this->info = $module->settings->get('info', $module->info);
+		$this->success = $module->settings->get('success', $module->success);
+		$this->danger = $module->settings->get('danger', $module->danger);
+		$this->link = $module->settings->get('link', $module-link);
 	}
     
 	public function attributeLabels()
@@ -72,9 +78,17 @@ class Config extends \yii\base\Model
             return false;
         }
 		
-		foreach($this->settings as $value) {
-			Yii::$app->getModule('flex-theme')>settings->set($value, $this->$value);
-	    }
+        $module = Yii::$app->getModule('flex-theme');
+        $module->settings->set('commentLink', $this->commentLink);
+	    $module->settings->set('likeLink', $this->likeLink);
+		$module->settings->set('likeIcon', $this->likeIcon);
+		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+	    $module->settings->set('default', $module->default);
+		$module->settings->set('primary', $module->primary);
+		$module->settings->set('info', $module->info);
+		$module->settings->set('success', $module->success);
+		$module->settings->set('danger', $module->danger);
+		$module->settings->set('link', $module-link);
         return true;
     }
 }
