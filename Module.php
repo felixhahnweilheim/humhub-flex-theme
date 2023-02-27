@@ -17,6 +17,15 @@ class Module extends \humhub\components\Module
 	public $likeIcon = 'thumbs_up';
 	/*@var array defines IDs of verified accounts*/
 	public $verifiedAccounts = '1';
+	/* color variables*/
+	public $var_default;
+	public $var_primary;
+	public $var_info;
+	public $var_success;
+	public $var_warning;
+	public $var_danger;
+	public $var_link;
+	
     
     public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
@@ -36,13 +45,23 @@ class Module extends \humhub\components\Module
 	        }
         }
 		
-        /*Add Module settings*/
-		$module = Yii::$app->getModule('flex-theme');
-		$module->settings->set('commentLink', $this->commentLink);
-	    $module->settings->set('likeLink', $this->likeLink);
-		$module->settings->set('likeIcon', $this->likeIcon);
-		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+        /*Add Module settings*/		
+		$this->save('commentLink');
+		$this->save('likeLink');
+		$this->save('likeIcon');
+		$this->save('verifiedAccounts');
+		$this->save('var_default');
+		$this->save('var_primary');
+		$this->save('var_info');
+		$this->save('var_success');
+		$this->save('var_warning');
+		$this->save('var_danger');
+		$this->save('var_link');
     }
+	
+	public function save($setting_name) {
+		Yii::$app->getModule('flex-theme')->settings->set($setting_name, $this->$setting_name);
+	}
 	
 	public function disable() {
     
