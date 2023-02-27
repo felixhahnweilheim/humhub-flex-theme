@@ -29,7 +29,7 @@ class Config extends \yii\base\Model
 		parent::init();
 	
 		foreach($this->settings as $value) {
-			$this->$value = Yii::$app->getModule('flex-theme')->settings->get($value, $module->$value);
+			$this->$value = Yii::$app->getModule('flex-theme')->settings->get($value, Yii::$app->getModule('flex-theme')->$value);
 	    }
 	}
     
