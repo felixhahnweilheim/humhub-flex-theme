@@ -10,19 +10,27 @@ use humhub\modules\flexTheme\Module;
  */
 class Config extends \yii\base\Model
 {
+	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', $var_default, $var_primary, $var_info, $var_success, $var_warning, $var_danger, $var_link);
     public $commentLink;
     public $likeLink;
     public $likeIcon;
 	public $verifiedAccounts;
+	/* Color variables */
+	public $var_default;
+	public $var_primary;
+	public $var_info;
+	public $var_success;
+	public $var_warning;
+	public $var_danger;
+	public $var_link;
 	
     public function init()
     {
 		parent::init();
-        $module = Yii::$app->getModule('flex-theme');
-		$this->commentLink = $module->settings->get('commentLink', $module->commentLink);
-		$this->likeLink = $module->settings->get('likeLink', $module->likeLink);
-		$this->likeIcon = $module->settings->get('likeIcon', $module->likeIcon);
-		$this->verifiedAccounts = $module->settings->get('verifiedAccounts', $module->verifiedAccounts);
+	
+		foreach($this->settings as $value) {
+			$this->$value = Yii::$app->getModule('flex-theme')->settings->get($value, $module->$value);
+	    }
 	}
     
 	public function attributeLabels()
@@ -63,12 +71,10 @@ class Config extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
-
-        $module = Yii::$app->getModule('flex-theme');
-        $module->settings->set('commentLink', $this->commentLink);
-	    $module->settings->set('likeLink', $this->likeLink);
-		$module->settings->set('likeIcon', $this->likeIcon);
-		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+		
+		foreach($this->settings as $value) {
+			Yii::$app->getModule('flex-theme')>settings->set($value, $this->$value);
+	    }
         return true;
     }
 }
