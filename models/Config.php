@@ -88,7 +88,7 @@ class Config extends \yii\base\Model
 		$module->settings->set('info', $module->info);
 		$module->settings->set('success', $module->success);
 		$module->settings->set('danger', $module->danger);
-		$module->settings->set('link', $module-link);
+		$module->settings->set('link', $module->link);
         return true;
     }
 }
