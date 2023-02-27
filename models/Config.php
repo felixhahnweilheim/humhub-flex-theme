@@ -10,7 +10,7 @@ use humhub\modules\flexTheme\Module;
  */
 class Config extends \yii\base\Model
 {
-	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', $default, $primary, $info, $success, $warning, $danger, $link);
+	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', 'default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
     public $commentLink;
     public $likeLink;
     public $likeIcon;
