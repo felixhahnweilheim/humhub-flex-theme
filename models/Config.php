@@ -63,12 +63,19 @@ class Config extends \yii\base\Model
 			[['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
 			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
 			['verifiedAccounts', 'validateNumbersString'],
+			[['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'], 'validateHexColor'],
         ];
     }
 	
 	public function validateNumbersString($attribute, $params, $validator) {
 		if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
-                    $this->addError($attribute, 'Invalid Format');
+                    $this->addError($attribute, 'Invalid Format. Must be a list of numbers, seperated by commas.');
+        }
+	}
+		
+	public function validateHexColor($attribute, $params, $validator) {
+		if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
+                    $this->addError($attribute, 'Invalid Format. Must be a color in hexadeximal format, like "#000000" or "#000".');
         }
 	}
 	
@@ -83,12 +90,12 @@ class Config extends \yii\base\Model
 	    $module->settings->set('likeLink', $this->likeLink);
 		$module->settings->set('likeIcon', $this->likeIcon);
 		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
-	    $module->settings->set('default', $module->default);
-		$module->settings->set('primary', $module->primary);
-		$module->settings->set('info', $module->info);
-		$module->settings->set('success', $module->success);
-		$module->settings->set('danger', $module->danger);
-		$module->settings->set('link', $module->link);
+	    $module->settings->set('default', $this->default);
+		$module->settings->set('primary', $this->primary);
+		$module->settings->set('info', $this->info);
+		$module->settings->set('success', $this->success);
+		$module->settings->set('danger', $this->danger);
+		$module->settings->set('link', $this->link);
         return true;
     }
 }
