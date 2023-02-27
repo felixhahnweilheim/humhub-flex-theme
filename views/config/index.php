@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
+$color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
 ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?></div>
@@ -34,7 +35,12 @@ use yii\helpers\Url;
 	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
 	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
 	        ]);?>
+		
 		    <?= $form->field($model, 'verifiedAccounts'); ?>
+		
+	        <?php foreach ($color_vars as $color): ?>
+		        <?= $form->field($model, $color); ?>
+		    <?php endforeach; ?>
 		
         <div class="form-group">
             <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
