@@ -36,7 +36,7 @@ class Config extends \yii\base\Model
 		$this->info = $module->settings->get('info', $module->info);
 		$this->success = $module->settings->get('success', $module->success);
 		$this->danger = $module->settings->get('danger', $module->danger);
-		$this->link = $module->settings->get('link', $module-link);
+		$this->link = $module->settings->get('link', $module->link);
 	}
     
 	public function attributeLabels()
