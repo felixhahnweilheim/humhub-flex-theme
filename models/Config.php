@@ -10,19 +10,19 @@ use humhub\modules\flexTheme\Module;
  */
 class Config extends \yii\base\Model
 {
-	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', $var_default, $var_primary, $var_info, $var_success, $var_warning, $var_danger, $var_link);
+	public $settings = array('commentLink', 'likeLink', 'likeIcon', 'verifiedAccounts', $default, $primary, $info, $success, $warning, $danger, $link);
     public $commentLink;
     public $likeLink;
     public $likeIcon;
 	public $verifiedAccounts;
 	/* Color variables */
-	public $var_default;
-	public $var_primary;
-	public $var_info;
-	public $var_success;
-	public $var_warning;
-	public $var_danger;
-	public $var_link;
+	public $default;
+	public $primary;
+	public $info;
+	public $success;
+	public $warning;
+	public $danger;
+	public $link;
 	
     public function init()
     {
