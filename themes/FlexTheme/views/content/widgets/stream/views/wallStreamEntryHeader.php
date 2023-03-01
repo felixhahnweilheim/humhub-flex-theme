@@ -25,9 +25,6 @@ use humhub\widgets\TimeAgo;
 
 $container = $model->content->container;
 
-//FlexTheme
-$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
-//FlexTheme end
 ?>
 
 <div class="stream-entry-icon-list">
@@ -57,8 +54,8 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
     <div class="media-heading">
 		<?= $title ?>
 <?php //FlexTheme ?>
-		<?php if (!$renderOptions->isShowAuthorInformationInSubHeadLine($model) && in_array($model->content->createdBy->id, $verifiedAccounts)): ?>
-	        <?= Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account')); ?>
+		<?php if (!$renderOptions->isShowAuthorInformationInSubHeadLine($model)): ?>
+		    <?= Module::verifiedIcon($model->content->createdBy) ?>
         <?php endif; ?>
 <?php //FlexTheme end ?>
         <?php if ($renderOptions->isShowContainerInformationInTitle($model)) : ?>
@@ -73,9 +70,7 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
         <?php if ($renderOptions->isShowAuthorInformationInSubHeadLine($model)) : ?>
             <?= Html::containerLink($model->content->createdBy, ['class' => 'wall-entry-container-link']) ?>
 <?php //FlexTheme ?>
-            <?php if (in_array($model->content->createdBy->id, $verifiedAccounts)): ?>
-	            <?= Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account')); ?>
-            <?php endif; ?>
+            <?= Module::verifiedIcon($model->content->createdBy) ?>
 <?php //FlexTheme end ?>
         <?php endif ?>
         <?php if ($renderOptions->isShowContainerInformationInSubTitle($model)) : ?>

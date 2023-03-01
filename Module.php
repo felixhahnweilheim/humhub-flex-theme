@@ -4,6 +4,8 @@ namespace humhub\modules\flexTheme;
 
 use humhub\libs\DynamicConfig;
 use humhub\modules\ui\view\helpers\ThemeHelper;
+use humhub\modules\user\models\User;
+use humhub\modules\ui\icon\widgets\Icon;
 use Yii;
 
 class Module extends \humhub\components\Module
@@ -16,7 +18,7 @@ class Module extends \humhub\components\Module
     /*@var string defines the like icon (options: heart, thumbs_up, star)*/
 	public $likeIcon = 'thumbs_up';
 	/*@var array defines IDs of verified accounts*/
-	public $verifiedAccounts = '1';
+	public $verifiedAccounts = '';
 	/* color variables*/
 	public $default;
 	public $primary;
@@ -25,10 +27,18 @@ class Module extends \humhub\components\Module
 	public $warning;
 	public $danger;
 	public $link;
-	
     
     public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
+	}
+	
+	public static function verifiedIcon($user) {
+		$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
+		
+		if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
+			return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
+		}
+		return false;		
 	}
 	
 	public function getDescription() {
