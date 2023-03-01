@@ -8,7 +8,7 @@ $theme = Yii::$app->view->theme;
 <style>
 :root {
 <?php foreach ($color_vars as $color): ?>
---<?= $color . ':' . (Module::getSetting($color) ??  $theme->variable($color)) . ';'; ?>
+--<?= $color . ':' . (!empty(Module::getSetting($color)) ? Module::getSetting($color) : $theme->variable($color)) . ';'; ?>
 <?php endforeach; ?>
 
 /* TEXT COLOR
