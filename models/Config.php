@@ -59,7 +59,6 @@ class Config extends \yii\base\Model
     public function rules()
     {
         return [
-		    [['commentLink', 'likeLink', 'likeIcon'], 'string'],
 			[['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
 			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
 			['verifiedAccounts', 'validateNumbersString'],
