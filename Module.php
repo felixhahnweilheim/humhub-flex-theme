@@ -19,6 +19,14 @@ class Module extends \humhub\components\Module
 	public $likeIcon = 'thumbs_up';
 	/*@var array defines IDs of verified accounts*/
 	public $verifiedAccounts = '';
+	/* color variables*/
+	public $default;
+	public $primary;
+	public $info;
+	public $success;
+	public $warning;
+	public $danger;
+	public $link;
     
     public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
@@ -52,6 +60,13 @@ class Module extends \humhub\components\Module
 		$this->save('likeLink');
 		$this->save('likeIcon');
 		$this->save('verifiedAccounts');
+		$this->save('default');
+		$this->save('primary');
+		$this->save('info');
+		$this->save('success');
+		$this->save('warning');
+		$this->save('danger');
+		$this->save('link');
     }
 	
 	public function save($setting_name) {

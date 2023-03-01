@@ -1,16 +1,14 @@
 <?php
 //FlexTheme
-$theme = Yii::$app->view->theme;
+use humhub\modules\flexTheme\Module;
 
+$color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+$theme = Yii::$app->view->theme;
 ?>
 <style>
 :root {
---default:<?= $theme->variable('default') . ';'; ?>
---primary:<?= $theme->variable('primary') . ';'; ?>
---info:<?= $theme->variable('info') . ';'; ?>
---success:<?= $theme->variable('success') . ';'; ?>
---warning:<?= $theme->variable('warning') . ';'; ?>
---danger:<?= $theme->variable('danger') . ';'; ?>
---link:<?= $theme->variable('info') . ';'; ?>
+<?php foreach ($color_vars as $color): ?>
+--<?= $color . ':' . (Module::getSetting($color) ??  $theme->variable($color)) . ';'; ?>
+<?php endforeach; ?>
 }
 </style>
