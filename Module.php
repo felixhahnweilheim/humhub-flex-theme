@@ -4,6 +4,8 @@ namespace humhub\modules\flexTheme;
 
 use humhub\libs\DynamicConfig;
 use humhub\modules\ui\view\helpers\ThemeHelper;
+use humhub\modules\user\models\User;
+use humhub\modules\ui\icon\widgets\Icon;
 use Yii;
 
 class Module extends \humhub\components\Module
@@ -16,10 +18,19 @@ class Module extends \humhub\components\Module
     /*@var string defines the like icon (options: heart, thumbs_up, star)*/
 	public $likeIcon = 'thumbs_up';
 	/*@var array defines IDs of verified accounts*/
-	public $verifiedAccounts = '1';
+	public $verifiedAccounts = '';
     
     public static function getSetting(string $setting_name) {
 		return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
+	}
+	
+	public static function verifiedIcon($user) {
+		$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
+		
+		if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
+			return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
+		}
+		return false;		
 	}
 	
 	public function getDescription() {
@@ -36,13 +47,16 @@ class Module extends \humhub\components\Module
 	        }
         }
 		
-        /*Add Module settings*/
-		$module = Yii::$app->getModule('flex-theme');
-		$module->settings->set('commentLink', $this->commentLink);
-	    $module->settings->set('likeLink', $this->likeLink);
-		$module->settings->set('likeIcon', $this->likeIcon);
-		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+        /*Add Module settings*/		
+		$this->save('commentLink');
+		$this->save('likeLink');
+		$this->save('likeIcon');
+		$this->save('verifiedAccounts');
     }
+	
+	public function save($setting_name) {
+		Yii::$app->getModule('flex-theme')->settings->set($setting_name, $this->$setting_name);
+	}
 	
 	public function disable() {
     

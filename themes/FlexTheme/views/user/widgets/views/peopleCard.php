@@ -7,7 +7,6 @@
 
 //FlexTheme
 use humhub\modules\flexTheme\Module;
-use humhub\modules\ui\icon\widgets\Icon;
 //Flex Theme end
 use humhub\libs\Html;
 use humhub\modules\user\models\User;
@@ -21,9 +20,6 @@ use yii\web\View;
 /* @var $this View */
 /* @var $user User */
 
-//FlexTheme
-$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
-//FlexTheme end
 ?>
 
 <div class="card-panel">
@@ -42,10 +38,8 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
     </div>
     <div class="card-body">
         <strong class="card-title"><?= Html::containerLink($user); ?>
-<?php //FlexTheme ?>
-			<?php if (in_array($user->id, $verifiedAccounts)): ?>
-	        <?= Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account')); ?>
-        <?php endif; ?>
+<?php //FlexTheme ?>	
+		<?= Module::verifiedIcon($user) ?>
 <?php //FlexTheme end ?>
 	    </strong>
         <?php if (!empty($user->displayNameSub)) : ?>
