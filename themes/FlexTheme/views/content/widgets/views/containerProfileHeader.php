@@ -41,9 +41,6 @@ $profileImageUpload = Upload::withName($imageUploadName, ['url' => $imageUploadU
 $profileImageWidth = $container->getProfileImage()->width() - 10;
 $profileImageHeight = $container->getProfileImage()->height() - 10;
 
-//FlexTheme
-$verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
-//FlexTheme end
 ?>
 
 <?= Html::beginTag('div', $options) ?>
@@ -58,9 +55,7 @@ $verifiedAccounts = explode(',', Module::getSetting('verifiedAccounts'));
         <div class="img-profile-data">
             <h1 class="<?= $classPrefix ?>"><?= Html::encode($title) ?>
 <?php //FlexTheme ?>
-				<?php if (($container instanceof User) && in_array($container->id, $verifiedAccounts)): ?>
-                    <i class="fa fa-check-circle"></i></h1>
-			    <?php endif; ?>
+				<?= Module::verifiedIcon($container) ?>
 <?php //FlexTheme emd ?>
             <h2 class="<?= $classPrefix ?>"><?= Html::encode($subTitle) ?></h2>
         </div>
