@@ -7,6 +7,7 @@ use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
 use Yii;
+use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
@@ -41,6 +42,10 @@ class Module extends \humhub\components\Module
 		return false;		
 	}
 	
+    public function getConfigUrl() {
+        return Url::to(['/flex-theme/config']);
+    }
+    
 	public function getDescription() {
         return Yii::t('FlexThemeModule.admin', 'Flexible Theme for HumHub');
     }
