@@ -73,7 +73,7 @@ class Config extends \yii\base\Model {
 	
 	public function attributeHints() {
 		
-        $color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+        $color_vars = Module::COLOR_VARS;
 		
 		$hints = array();
 		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
