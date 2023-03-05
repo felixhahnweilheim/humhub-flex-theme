@@ -67,15 +67,23 @@ class Config extends \yii\base\Model {
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
 			'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
 			'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-			'verifiedAccounts' => Yii::t('ThemeOrangeModule.base', 'Verified Accounts'),
+			'verifiedAccounts' => Yii::t('ThemeOrangeModule.admin', 'Verified Accounts'),
         ];
     }
 	
 	public function attributeHints() {
-    
-        return [
-			'verifiedAccounts' => Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>'),
-	    ];
+		
+        $color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+		
+		$hints = array();
+		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
+		foreach ($color_vars as $color) {
+			$value = Yii::$app->view->theme->variable($color);
+			$icon = Icon::get('circle', ['color' => $value ]);
+			$hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
+		}
+		
+		return $hints;
 	}
 
     public function rules() {
