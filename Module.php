@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme;
 
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use Yii;
+use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
@@ -29,6 +30,11 @@ class Module extends \humhub\components\Module
     // Translatable Module Description
     public function getDescription() {
         return Yii::t('FlexThemeModule.admin', 'Flexible Theme for HumHub');
+    }
+    
+    // Link to configuration page
+    public function getConfigUrl() {
+        return Url::to(['/flex-theme/config']);
     }
     
     // Module Activation: Activate Flex Theme
