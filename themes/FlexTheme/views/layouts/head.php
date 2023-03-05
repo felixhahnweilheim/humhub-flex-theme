@@ -1,6 +1,6 @@
 <?php
 //FlexTheme
-use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\models\Config;
 
 $color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
 $theme = Yii::$app->view->theme;
@@ -8,7 +8,7 @@ $theme = Yii::$app->view->theme;
 <style>
 :root {
 <?php foreach ($color_vars as $color): ?>
---<?= $color . ':' . (!empty(Module::getSetting($color)) ? Module::getSetting($color) : $theme->variable($color)) . ';'; ?>
+--<?= $color . ':' . (!empty(Config::getSetting($color)) ? Config::getSetting($color) : $theme->variable($color)) . ';'; ?>
 <?php endforeach; ?>
 
 /* TEXT COLOR
