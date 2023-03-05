@@ -16,7 +16,7 @@ class Module extends \humhub\components\Module
     public $likeLink = 'text';
     /*@var string defines the like icon (options: heart, thumbs_up, star)*/
     public $likeIcon = 'thumbs_up';
-    /*@var array defines IDs of verified accounts*/
+    /*@var string defines IDs of verified accounts*/
     public $verifiedAccounts = '';
     /* color variables*/
     public $default;
