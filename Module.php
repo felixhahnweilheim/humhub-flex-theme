@@ -2,17 +2,32 @@
 
 namespace humhub\modules\flexTheme;
 
-use humhub\libs\DynamicConfig;
 use humhub\modules\ui\view\helpers\ThemeHelper;
-use humhub\modules\user\models\User;
-use humhub\modules\ui\icon\widgets\Icon;
 use Yii;
 
 // to be done : fix/move enable function
 
 class Module extends \humhub\components\Module
 {
-	
+
+    /*Module settings and their default values*/
+    /*@var string defines the style of comment links (options: icon, text, both)*/
+    public $commentLink = 'text';
+    /*@var string defines the style of like links (options: icon, text, both)*/
+    public $likeLink = 'text';
+    /*@var string defines the like icon (options: heart, thumbs_up, star)*/
+    public $likeIcon = 'thumbs_up';
+	/*@var array defines IDs of verified accounts*/
+	public $verifiedAccounts = '';
+	/* color variables*/
+    public $default;
+    public $primary;
+    public $info;
+    public $success;
+    public $warning;
+    public $danger;
+    public $link;
+    
     public function getDescription() {
         return Yii::t('FlexThemeModule.admin', 'Flexible Theme for HumHub');
     }
@@ -24,8 +39,8 @@ class Module extends \humhub\components\Module
             if ($theme !== null) {
                 $theme->activate();
                 DynamicConfig::rewrite();
-	}
-    }
+	        }
+        }
 		
         /*Add Module settings*/		
 		$this->save('commentLink');
