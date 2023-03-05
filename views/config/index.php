@@ -1,12 +1,13 @@
 <?php
 
 use humhub\modules\flexTheme\models\ConfigureForm;
+use humhub\modules\flexTheme\Module;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
-$color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+$color_vars = Module::COLOR_VARS;
 ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?></div>
