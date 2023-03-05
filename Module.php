@@ -39,22 +39,21 @@ class Module extends \humhub\components\Module
     
     // Module Activation: Activate Flex Theme
     public function enable() {
-	// Activate Flex Theme
         if (parent::enable()) {
             $theme = ThemeHelper::getThemeByName('FlexTheme');
             if ($theme !== null) {
                 $theme->activate();
-	    }
+            }
         }	
     }
 	
     // Module Deactivarion: Deselect Flex Theme (activate community theme)
     public function disable() {
         if (Yii::$app->view->theme->name == 'FlexTheme') {
-	    $theme = ThemeHelper::getThemeByName('HumHub');
-	    if ($theme !== null) {
+            $theme = ThemeHelper::getThemeByName('HumHub');
+            if ($theme !== null) {
                 $theme->activate();
-	    }
+            }
         }
 	
         parent::disable();
