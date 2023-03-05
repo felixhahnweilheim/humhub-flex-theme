@@ -1,8 +1,9 @@
 <?php
 //FlexTheme
 use humhub\modules\flexTheme\models\Config;
+use humhub\modules\flexTheme\Module;
 
-$color_vars = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+$color_vars = Module::COLOR_VARS;;
 $theme = Yii::$app->view->theme;
 ?>
 <style>
