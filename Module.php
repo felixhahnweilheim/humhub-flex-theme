@@ -6,9 +6,9 @@ use humhub\modules\ui\view\helpers\ThemeHelper;
 use Yii;
 use yii\helpers\Url;
 
-class Module extends \humhub\components\Module
-{
+class Module extends \humhub\components\Module {
 
+    const COLOR_VARS = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
     /*Module settings and their default values*/
     /*@var string defines the style of comment links (options: icon, text, both)*/
     public $commentLink = 'text';
