@@ -1,6 +1,6 @@
 <?php
 //FlexTheme
-use \humhub\modules\flexTheme\Module;
+use \humhub\modules\flexTheme\models\Config;
 //FlexTheme end
 use yii\helpers\Html;
 
@@ -8,8 +8,8 @@ humhub\modules\like\assets\LikeAsset::register($this);
 
 //FlexTheme
 // get Settings
-$icon = Module::getSetting('likeIcon');
-$style = Module::getSetting('likeLink');
+$icon = Config::getSetting('likeIcon');
+$style = Config::getSetting('likeLink');
 
 // Like icon
 if ($icon == 'thumbs_up') {
