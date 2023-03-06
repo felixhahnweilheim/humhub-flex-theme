@@ -2,7 +2,7 @@
 
 use humhub\modules\flexTheme\models\ConfigureForm;
 use humhub\modules\flexTheme\Module;
-use yii\bootstrap\ActiveForm;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
@@ -21,6 +21,8 @@ $color_vars = Module::COLOR_VARS;
             </div>
 	    <?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
+		
+		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Social Controls')); ?>
 		    <?= $form->field($model, 'commentLink')->radioList([
 	            'text' => Yii::t('FlexThemeModule.admin', 'Text link'),
 	            'icon' => Yii::t('FlexThemeModule.admin', 'Only icon'),
@@ -36,12 +38,15 @@ $color_vars = Module::COLOR_VARS;
 	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
 	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
 	        ]);?>
-		
-		    <?= $form->field($model, 'verifiedAccounts'); ?>
-		
+		    <?= $form->endCollapsibleFields(); ?>
+		    
+		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Colors')); ?>
 	        <?php foreach ($color_vars as $color): ?>
 		        <?= $form->field($model, $color); ?>
 		    <?php endforeach; ?>
+		    <?= $form->endCollapsibleFields(); ?>
+			
+		    <?= $form->field($model, 'verifiedAccounts'); ?>
 		
         <div class="form-group">
             <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
