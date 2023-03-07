@@ -20,6 +20,7 @@ Define varified accounts by entering their user IDs.
 The verified icon (check-circle) is shown in
 - user profiles
 - posts
+- comments
 - people page
 
 ## To Do
