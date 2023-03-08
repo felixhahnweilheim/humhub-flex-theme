@@ -1,8 +1,21 @@
+// Prevnt loading of components that include lighten(), darken() or fade()
+@prev-markdown: true;
+@prev-topbar: true;
+@prev-well: true;
+@prev-media: true;
+@prev-progress: true;
+@prev-button: true;
+@prev-datepicker: true;
+@prev-tags: true;
+@prev-comment: true;
+@prev-nav: true;
+@prev-modules: true;
+
 //
 // Theme color variables
 // --------------------------------------------------
-@import (reference) "../../protected/vendor/npm-asset/bootstrap/less/mixins.less";
-@import (reference) "../../protected/vendor/npm-asset/font-awesome/less/variables.less";
+@import (reference) "../../../../../protected/vendor/npm-asset/bootstrap/less/mixins.less";
+@import (reference) "../../../../../protected/vendor/npm-asset/font-awesome/less/variables.less";
 
 //
 // Colors for buttons status etc.
@@ -15,7 +28,6 @@
 @danger: var(--danger);
 @link: var(--link);
 @isFluid: false;
-
 
 //
 // Text color
