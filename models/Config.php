@@ -133,7 +133,7 @@ class Config extends \yii\base\Model {
 		$module->settings->set('link', $this->link);
         
         
-        $module->settings->set('info_darken-5', $this-info);
+        $module->settings->set('info_darken_5', $this->info);
         
         
         
