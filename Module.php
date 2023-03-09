@@ -9,6 +9,7 @@ use yii\helpers\Url;
 class Module extends \humhub\components\Module {
 
     const COLOR_VARS = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+    const SPECIAL_COLORS = array('default_darken_2', 'default_darken_5', 'default_lighten_2', 'primary_darken_5', 'primary_lighten_5', 'info_darken_5', 'info_lighten_5', 'danger_darken_5', 'danger_lighten_5', 'success_darken_5', 'success_lighten_5', 'warning_darken_2', 'warning_lighten_5', 'link_darken_2', 'link_lighten_5');
     /*Module settings and their default values*/
     /*@var string defines the style of comment links (options: icon, text, both)*/
     public $commentLink = 'text';
@@ -26,6 +27,10 @@ class Module extends \humhub\components\Module {
     public $warning;
     public $danger;
     public $link;
+    
+    
+    public $default_darken_2;public $default_darken_5;public $default_lighten_2;public $primary_darken_5;public $primary_lighten_5;public $info_darken_5;public $info_lighten_5;public $danger_darken_5;public $danger_lighten_5;public $success_darken_5;public $success_lighten_5;public $warning_darken_2;public $warning_lighten_5;public $link_darken_2;public $link_lighten_5;
+    
     
     // Translatable Module Description
     public function getDescription() {
