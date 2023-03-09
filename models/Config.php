@@ -25,6 +25,9 @@ class Config extends \yii\base\Model {
 	public $danger;
 	public $link;
     
+    
+    public $default_darken_2;public $default_darken_5;public $default_lighten_2;public $primary_darken_5;public $primary_lighten_5;public $info_darken_5;public $info_lighten_5;public $danger_darken_5;public $danger_lighten_5;public $success_darken_5;public $success_lighten_5;public $warning_darken_2;public $warning_lighten_5;public $link_darken_2;public $link_lighten_5;
+    
 	public static function getSetting(string $setting_name) {
 	    
 		$module = Yii::$app->getModule('flex-theme');
@@ -128,6 +131,13 @@ class Config extends \yii\base\Model {
 		$module->settings->set('success', $this->success);
 		$module->settings->set('danger', $this->danger);
 		$module->settings->set('link', $this->link);
+        
+        
+        $module->settings->set('info_darken-5', $this-info);
+        
+        
+        
+        
         return true;
     }
 }
