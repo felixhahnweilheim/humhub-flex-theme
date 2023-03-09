@@ -13,6 +13,7 @@ $theme = Yii::$app->view->theme;
 --<?= $color . ':' . (!empty($value) ? $value : $theme->variable($color)) . ';'; ?>
 <?php endforeach; ?>
 
+<?php //TEST ?>
  --<?= 'info_darken_5' . ':' . Config::getSetting('info_darken_5') . ';'; ?>
     
     
