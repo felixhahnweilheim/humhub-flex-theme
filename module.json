@@ -4,7 +4,7 @@
 	"name": "Flex Theme",
 	"description": "Flexible Theme for HumHub",
 	"humhub": {
-		"minVersion": "1.13"
+		"minVersion": "1.14"
 	},
 	"keywords": [
 		"flexible", "configurable"
