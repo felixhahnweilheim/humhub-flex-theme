@@ -1,7 +1,7 @@
 <?php
 
 //FlexTheme
-use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\models\Config;
 //FlexTheme end
 use humhub\libs\Html;
 use humhub\modules\content\components\ContentActiveRecord;
@@ -59,7 +59,7 @@ $container = $model->content->container;
 		<?= $title ?>
 <?php //FlexTheme ?>
 		<?php if (!$renderOptions->isShowAuthorInformationInSubHeadLine($model)): ?>
-		    <?= Module::verifiedIcon($model->content->createdBy) ?>
+		    <?= Config::verifiedIcon($model->content->createdBy) ?>
         <?php endif; ?>
 <?php //FlexTheme end ?>
         <?php if ($renderOptions->isShowContainerInformationInTitle($model)) : ?>
@@ -74,7 +74,7 @@ $container = $model->content->container;
         <?php if ($renderOptions->isShowAuthorInformationInSubHeadLine($model)) : ?>
             <?= Html::containerLink($model->content->createdBy, ['class' => 'wall-entry-container-link']) ?>
 <?php //FlexTheme ?>
-            <?= Module::verifiedIcon($model->content->createdBy) ?>
+            <?= Config::verifiedIcon($model->content->createdBy) ?>
 <?php //FlexTheme end ?>
         <?php endif ?>
         <?php if ($renderOptions->isShowContainerInformationInSubTitle($model)) : ?>

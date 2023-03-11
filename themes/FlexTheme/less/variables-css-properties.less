@@ -1,0 +1,121 @@
+// Prevnt loading of components that include lighten(), darken() or fade()
+@prev-markdown: true;
+@prev-topbar: true;
+@prev-well: true;
+@prev-media: true;
+@prev-progress: true;
+@prev-button: true;
+@prev-datepicker: true;
+@prev-tags: true;
+@prev-comment: true;
+@prev-nav: true;
+@prev-modules: true;
+@prev-login: true;
+
+@default-darken-2: var(--default_darken_2);
+@default-darken-5: var(--default_darken_5);
+@default-lighten-2: var(--default_lighten_2);
+@primary-darken-5: var(--primary_darken_5);
+@primary-lighten-5: var(--primary_lighten-5);
+@info-darken-5: var(--info_darken_5);
+@info-lighten-5: var(--info_lighten_5);
+@danger-darken-5: var(--danger_darken_5);
+@danger-lighten-5: var(--danger_lighten_5);
+@success-darken-5: var(--success_darken_5);
+@success-lighten-5: var(--success_lighten_5);
+@warning-darken-2: var(--warning_darken_2);
+@warning-lighten-5: var(--warning_lighten_5);
+@link-darken-2: var(--link_darken_2);
+@link-lighten-5: var(--link_lighten_5);
+
+//
+// Theme color variables
+// --------------------------------------------------
+@import (reference) "../../../../../protected/vendor/npm-asset/bootstrap/less/mixins.less";
+@import (reference) "../../../../../protected/vendor/npm-asset/font-awesome/less/variables.less";
+
+//
+// Colors for buttons status etc.
+// --------------------------------------------------
+@default: var(--default);
+@primary: var(--primary);
+@info: var(--info);
+@success: var(--success);
+@warning: var(--warning);
+@danger: var(--danger);
+@link: var(--link);
+@isFluid: false;
+
+//
+// Text colors
+// --------------------------------------------------
+
+// Default body text color.
+@text-color-main: #555;
+
+// used for some icons and buttons etc. - former @font2
+@text-color-secondary: #7a7a7a;
+
+// highlighted text like some active links hovered links etc. - former @font3
+@text-color-highlight: #000;
+
+// side information like dates, placeholder, some dropdown headers - former @font4
+@text-color-soft: #555555;
+
+// also side information wall entry links (like/comment), help blocks in forms etc.  - former @font5
+@text-color-soft2: #aeaeae;
+
+// used in gridview summary and installer - former @font1
+@text-color-soft3: #bac2c7;
+
+// used as contrast color for @primary, @info, @success, @warning, @danger backgrounds for buttons etc.
+// Note that @default does not use a contrast color @default is normally combined with @text-color-secondary
+@text-color-contrast: #fff;
+
+
+//
+// Background colors
+// --------------------------------------------------
+
+// main content background color should be in contrast with @text-color-main, @text-color-secondary and other text colors
+@background-color-main: #fff;
+
+// used beside others for tabs - former @background1
+@background-color-secondary: #f7f7f7;
+
+// page background which is also used for other ui components as comment box etc. - former @background2
+@background-color-page: #ededed;
+
+// text highlight
+@background-color-highlight: #fff8e0;
+
+// Additional background colors
+@background3: #d7d7d7;
+@background4: #b2b2b2;
+
+//
+// Bootstrap Alert boxes
+// --------------------------------------------------
+
+// Alert box success (used in forms)
+@background-color-success: #f7fbf4;
+@text-color-success: #84be5e;
+@border-color-success: #97d271;
+
+// Alert box warning (used in forms)
+@background-color-warning: #fffbf7;
+@text-color-warning: #e9b168;
+@border-color-warning: #fdd198;
+
+// Alert box danger (used in forms)
+@background-color-danger: #fff6f6;
+@text-color-danger: #ff8989;
+@border-color-danger: #ff8989;
+
+//
+// Fonts
+// --------------------------------------------------
+
+// Mail Fonts
+@mail-font-family: 'Open Sans', Arial, Tahoma, Helvetica, sans-serif;
+

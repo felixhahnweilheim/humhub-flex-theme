@@ -23,7 +23,7 @@
  */
 
 //FlexTheme
-use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\models\Config;
 //FlexTheme end
 use humhub\modules\user\models\User;
 use humhub\modules\content\assets\ContainerHeaderAsset;
@@ -55,7 +55,7 @@ $profileImageHeight = $container->getProfileImage()->height() - 10;
         <div class="img-profile-data">
             <h1 class="<?= $classPrefix ?>"><?= Html::encode($title) ?>
 <?php //FlexTheme ?>
-				<?= Module::verifiedIcon($container) ?>
+				<?= Config::verifiedIcon($container) ?>
 <?php //FlexTheme emd ?>
             <h2 class="<?= $classPrefix ?>"><?= Html::encode($subTitle) ?></h2>
         </div>

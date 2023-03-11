@@ -1,7 +1,7 @@
 <?php
 
 //FlexTheme
-use \humhub\modules\flexTheme\Module;
+use \humhub\modules\flexTheme\models\Config;
 //FlexTheme end
 use humhub\modules\comment\widgets\CommentLink;
 use humhub\widgets\Button;
@@ -20,7 +20,7 @@ use \humhub\modules\comment\models\Comment;
 /* @var $module \humhub\modules\comment\Module */
 
 //FlexTheme
-$style = Module::getSetting('commentLink');
+$style = Config::getSetting('commentLink');
 if ($style == 'text') {
 	$additionalClass = 'no-icon';
 } else {

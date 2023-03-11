@@ -4,71 +4,138 @@ namespace humhub\modules\flexTheme\models;
 
 use Yii;
 use humhub\modules\flexTheme\Module;
+use humhub\modules\user\models\User;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /**
  * ConfigureForm defines the configurable fields.
  */
-class Config extends \yii\base\Model
-{
-    public $commentLink;
-    public $likeLink;
-    public $likeIcon;
-	public $verifiedAccounts;
+class Config extends \yii\base\Model {
 	
-    public function init()
-    {
+	/*Module settings, see Module.php*/
+	public $commentLink;
+	public $likeLink;
+	public $likeIcon;
+	public $verifiedAccounts;
+	public $default;
+	public $primary;
+	public $info;
+	public $success;
+	public $warning;
+	public $danger;
+	public $link;
+    
+    // Special colors (under development)
+    public $default_darken_2; public $default_darken_5; public $default_lighten_2; public $primary_darken_5; public $primary_lighten_5; public $info_darken_5; public $info_lighten_5; public $danger_darken_5; public $danger_lighten_5; public $success_darken_5; public $success_lighten_5; public $warning_darken_2; public $warning_lighten_5; public $link_darken_2; public $link_lighten_5;
+    
+	public static function getSetting(string $setting_name) {
+	    
+		$module = Yii::$app->getModule('flex-theme');
+		$value = $module->settings->get($setting_name);
+		
+		if (empty($value)) {
+			$value = $module->$setting_name;
+		}
+		
+	    return $value;
+    }
+	
+	public static function verifiedIcon($user) {
+		$verifiedAccounts = explode(',', Config::getSetting('verifiedAccounts'));
+		
+		if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
+			return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
+		}
+		return false;		
+	}
+	
+    public function init() {
+    
 		parent::init();
-        $module = Yii::$app->getModule('flex-theme');
-		$this->commentLink = $module->settings->get('commentLink', $module->commentLink);
-		$this->likeLink = $module->settings->get('likeLink', $module->likeLink);
-		$this->likeIcon = $module->settings->get('likeIcon', $module->likeIcon);
-		$this->verifiedAccounts = $module->settings->get('verifiedAccounts', $module->verifiedAccounts);
+		$this->commentLink = $this->getSetting('commentLink');
+		$this->likeLink = $this->getSetting('likeLink');
+		$this->likeIcon = $this->getSetting('likeIcon');
+		$this->verifiedAccounts = $this->getSetting('verifiedAccounts');
+		$this->default = $this->getSetting('default');
+		$this->primary = $this->getSetting('primary');
+		$this->info = $this->getSetting('info');
+		$this->success = $this->getSetting('success');
+		$this->danger = $this->getSetting('danger');
+		$this->link = $this->getSetting('link');
 	}
     
-	public function attributeLabels()
-    {
+	public function attributeLabels() {
+    
         return [
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
 			'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
 			'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-			'verifiedAccounts' => Yii::t('ThemeOrangeModule.base', 'Verified Accounts'),
+			'verifiedAccounts' => Yii::t('ThemeOrangeModule.admin', 'Verified Accounts'),
         ];
     }
 	
-	public function attributeHints()
-    {
-        return [
-			'verifiedAccounts' => Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. "1,21"'),
-	    ];
+	public function attributeHints() {
+		
+        $color_vars = Module::COLOR_VARS;
+		
+		$hints = array();
+		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
+		foreach ($color_vars as $color) {
+			$value = Yii::$app->view->theme->variable($color);
+			$icon = Icon::get('circle', ['color' => $value ]);
+			$hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
+		}
+		
+		return $hints;
 	}
 
-    public function rules()
-    {
+    public function rules() {
+    
         return [
 		    [['commentLink', 'likeLink', 'likeIcon'], 'string'],
 			[['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
 			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
 			['verifiedAccounts', 'validateNumbersString'],
+			[['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'], 'validateHexColor'],
         ];
     }
 	
 	public function validateNumbersString($attribute, $params, $validator) {
-		if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
-                    $this->addError($attribute, 'Invalid Format');
+		
+        if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
+                    $this->addError($attribute, 'Invalid Format. Must be a list of numbers, seperated by commas.');
+        }
+	}
+		
+	public function validateHexColor($attribute, $params, $validator) {
+		
+        if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
+                    $this->addError($attribute, 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"-');
         }
 	}
 	
-	public function save()
-    {
+	public function save() {
+    
         if(!$this->validate()) {
             return false;
         }
-
+		
         $module = Yii::$app->getModule('flex-theme');
         $module->settings->set('commentLink', $this->commentLink);
 	    $module->settings->set('likeLink', $this->likeLink);
 		$module->settings->set('likeIcon', $this->likeIcon);
 		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+	    $module->settings->set('default', $this->default);
+		$module->settings->set('primary', $this->primary);
+		$module->settings->set('info', $this->info);
+		$module->settings->set('success', $this->success);
+		$module->settings->set('danger', $this->danger);
+		$module->settings->set('link', $this->link);
+        
+        // Test - WIP
+        $module->settings->set('info_darken_5', $this->info);
+        
+        
         return true;
     }
 }

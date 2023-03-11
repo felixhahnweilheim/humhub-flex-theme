@@ -6,7 +6,7 @@
  */
 
 //FlexTheme
-use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\models\Config;
 //Flex Theme end
 use humhub\libs\Html;
 use humhub\modules\user\models\User;
@@ -39,7 +39,7 @@ use yii\web\View;
     <div class="card-body">
         <strong class="card-title"><?= Html::containerLink($user); ?>
 <?php //FlexTheme ?>	
-		<?= Module::verifiedIcon($user) ?>
+		<?= Config::verifiedIcon($user) ?>
 <?php //FlexTheme end ?>
 	    </strong>
         <?php if (!empty($user->displayNameSub)) : ?>
