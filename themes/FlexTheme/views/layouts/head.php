@@ -17,6 +17,7 @@ foreach ($special_colors as $color) {
     $value = Config::getSetting($color);
     echo '--' . $color . ':' . $value . ';';
 }
+?>
     
 /* TEXT COLOR
  * Default body text color.*/
