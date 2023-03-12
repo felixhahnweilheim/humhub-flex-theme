@@ -26,7 +26,7 @@ class Config extends \yii\base\Model {
 	public $link;
     
     // Special colors (under development)
-    public $default_darken_2; public $default_darken_5; public $default_lighten_2; public $primary_darken_5; public $primary_lighten_5; public $info_darken_5; public $info_lighten_5; public $danger_darken_5; public $danger_lighten_5; public $success_darken_5; public $success_lighten_5; public $warning_darken_2; public $warning_lighten_5; public $link_darken_2; public $link_lighten_5;
+    public $default__darken__2; public $default__darken__5; public $default__lighten__2; public $primary__darken__5; public $primary__lighten__5; public $info__darken__5; public $info__lighten__5; public $danger__darken__5; public $danger__lighten__5; public $success__darken__5; public $success__lighten__5; public $warning__darken__2; public $warning__lighten__5; public $link__darken__2; public $link__lighten__5;
     
 	public static function getSetting(string $setting_name) {
 	    
@@ -133,7 +133,7 @@ class Config extends \yii\base\Model {
 		$module->settings->set('link', $this->link);
         
         // Test - WIP
-        $module->settings->set('info_darken_5', $this->info);
+        $module->settings->set('info__darken__5', $this->info);
         
         
         return true;
