@@ -133,9 +133,25 @@ class Config extends \yii\base\Model {
 		$module->settings->set('link', $this->link);
         
         // Test - WIP
-        $module->settings->set('info__darken__5', $this->info);
-        
-        
+        $special_colors = Module::SPECIAL_COLORS;
+		
+		foreach ($special_colors as $color) {
+			list($base_var, $function, $amount) = explode("__", $color);
+			$original_color = $this->$base_var;
+			if (empty($original_color)) {
+				$original_color = Config::getSetting($base_var);
+            }
+			if (empty($original_color)) {
+				$original_color = Yii::$app->view->theme->variable($base_var);
+			}
+			if ($function == 'darken') {
+			    $value = ColorHelper::darken($original_color, $amount);
+			} elseif ($function == 'lighten') {
+				  $value = ColorHelper::lighten($original_color, $amount);
+			}
+			$module->settings->set($color, $value);
+			
+		}
         return true;
     }
 }
