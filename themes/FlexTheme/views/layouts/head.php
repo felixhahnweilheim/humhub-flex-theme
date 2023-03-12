@@ -3,20 +3,20 @@
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\Module;
 
-$color_vars = Module::COLOR_VARS;;
+$color_vars = Module::COLOR_VARS;
+$special_colors = Module::SPECIAL_COLORS;
 $theme = Yii::$app->view->theme;
 ?>
 <style>
 :root {
-<?php foreach ($color_vars as $color): ?>
-<?php $value = Config::getSetting($color); ?>
---<?= $color . ':' . (!empty($value) ? $value : $theme->variable($color)) . ';'; ?>
-<?php endforeach; ?>
-
-<?php //TEST ?>
- --<?= 'info_darken_5' . ':' . Config::getSetting('info_darken_5') . ';'; ?>
-    
-    
+<?php foreach ($color_vars as $color) {
+    $value = Config::getSetting($color);
+    echo '--' . $color . ':' . (!empty($value) ? $value : $theme->variable($color)) . ';';
+}
+foreach ($special_colors as $color) {
+    $value = Config::getSetting($color);
+    echo '--' . $color . ':' . $value . ';';
+}
     
 /* TEXT COLOR
  * Default body text color.*/
