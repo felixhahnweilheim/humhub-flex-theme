@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\models;
 
 use Yii;
 use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
 
