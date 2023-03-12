@@ -4,8 +4,9 @@ namespace humhub\modules\flexTheme\helpers;
 
 class ColorHelper {
 	
-	public static function lighten($color, $percentage) {
+	public static function lighten($color, $amount) {
         
+        $percentage = $amount / 100;
 		$color_parts = ColorHelper::getColorComponents($color);
 		
 		$return = '#';
@@ -20,8 +21,9 @@ class ColorHelper {
 
 	}
 	
-	public static function darken($color, $percentage) {
+	public static function darken($color, $amount) {
 		
+        $percentage = $amount / 100;
 		$color_parts = ColorHelper::getColorComponents($color);
 		
 		$return = '#';
