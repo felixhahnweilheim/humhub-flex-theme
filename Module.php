@@ -2,6 +2,7 @@
 
 namespace humhub\modules\flexTheme;
 
+use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use Yii;
 use yii\helpers\Url;
@@ -48,7 +49,25 @@ class Module extends \humhub\components\Module {
             if ($theme !== null) {
                 $theme->activate();
             }
-        }	
+        }
+        
+        // Save special colors (lightened and darkened colors)
+		$special_colors = Module::SPECIAL_COLORS;
+		
+		foreach ($special_colors as $color) {
+			
+			list($base_var, $function, $amount) = explode("__", $color);
+			$original_color = Yii::$app->view->theme->variable($base_var);
+			
+			if ($function == 'darken') {
+			    $value = ColorHelper::darken($original_color, $amount);
+			} elseif ($function == 'lighten') {
+		        $value = ColorHelper::lighten($original_color, $amount);
+			}
+			
+			Yii::$app->getModule('flex-theme')->settings->set($color, $value);
+			
+		}
     }
 	
     // Module Deactivarion: Deselect Flex Theme (activate community theme)
