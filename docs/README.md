@@ -29,3 +29,7 @@ The verified icon (check-circle) is shown in
 - documentation
 - CSS
 - variables in database
+
+## Rebuild CSS file
+Note: In order to rebuild the css file, you have to edit the core file static/less/humhub.less and remove the line `@import "../css/select2Theme/build.less";` The imported file contains a lighten() function which needs a concrete color, not a CSS variable.
+...
