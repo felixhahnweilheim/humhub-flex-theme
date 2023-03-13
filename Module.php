@@ -57,7 +57,7 @@ class Module extends \humhub\components\Module {
 		foreach ($special_colors as $color) {
 			
 			list($base_var, $function, $amount) = explode("__", $color);
-			$original_color = Yii::$app->view->theme->variable($base_var);
+			$original_color = $theme->variable($base_var);
 			
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
