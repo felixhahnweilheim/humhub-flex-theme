@@ -4,11 +4,17 @@ namespace humhub\modules\flexTheme\helpers;
 
 class ColorHelper {
 	
-	public static function lighten($color, $amount) {
+	public static function lighten($color, $amount, $relative = false) {
         
         $percentage = $amount / 100;
 		$color_parts = ColorHelper::getColorComponents($color);
+		$max = hexdec(max($color_parts));
+		$min = hexdec(min($color_parts));
 		
+		if (!$relative) {
+			$percentage = 2 * 255 * $percentage / ( $max + $min );
+		}
+        
 		$return = '#';
 
         foreach ($color_parts as $color) {
@@ -21,11 +27,17 @@ class ColorHelper {
 
 	}
 	
-	public static function darken($color, $amount) {
+	public static function darken($color, $amount, $relative = false) {
 		
         $percentage = $amount / 100;
 		$color_parts = ColorHelper::getColorComponents($color);
+        $max = hexdec(max($color_parts));
+		$min = hexdec(min($color_parts));
 		
+		if (!$relative) {
+			$percentage = 2 * 255 * $percentage / ( $max + $min );
+		}
+        
 		$return = '#';
 
         foreach ($color_parts as $color) {
