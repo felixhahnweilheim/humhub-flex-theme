@@ -52,7 +52,7 @@ class Module extends \humhub\components\Module {
         'link__lighten__5',
         'background_color_secondary__darken__5',
         'background_color_page__lighten__3',
-        'ackground_color_page__darken__5',
+        'background_color_page__darken__5',
         'background_color_page__darken__8',
         'text_color_secondary__lighten__25',
         'warning__fade__25',
