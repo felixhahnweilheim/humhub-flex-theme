@@ -10,8 +10,8 @@ class ColorHelper {
 		$color_parts = ColorHelper::getColorComponents($color);
 		$max = hexdec(max($color_parts));
 		$min = hexdec(min($color_parts));
-		
-		if (!$relative) {
+        
+		if (!$relative && $max != 0) {
 			$percentage = 2 * 255 * $percentage / ( $max + $min );
 		}
         
@@ -35,6 +35,10 @@ class ColorHelper {
         $max = hexdec(max($color_parts));
 		$min = hexdec(min($color_parts));
 		
+        if ($max = 0) {
+            return '#000000';
+        }
+        
 		if (!$relative) {
 			$percentage = 2 * 255 * $percentage / ( $max + $min );
 		}
