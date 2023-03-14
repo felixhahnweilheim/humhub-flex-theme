@@ -41,6 +41,8 @@ class Config extends \yii\base\Model {
     public $info__darken__5;
     public $info__darken__10;
     public $info__lighten__5;
+    public $info__lighten__8;
+    public $info__lighten__45;
     public $info__lighten__50;
     public $danger__darken__5;
     public $danger__lighten__5;
