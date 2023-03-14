@@ -29,8 +29,31 @@ class Config extends \yii\base\Model {
     public $background_color_secondary;
     
     // Special colors (under development)
-    public $default__darken__2; public $default__darken__5; public $default__lighten__2; public $primary__darken__5; public $primary__lighten__5; public $primary__lighten__8;  $primary__lighten__10; public $primary__lighten__20; public $primary__lighten__25; public $info__darken__5; public $info__lighten__5; public $danger__darken__5; public $danger__lighten__5; public $success__darken__5; public $success__lighten__5; public $warning__darken__2; public $warning__lighten__5; public $link__darken__2; public $link__lighten__5; public $background_color_secondary__darken__5; public $warning__fade__25; public $link__fade__60;
-	
+    public $default__darken__2;
+    public $default__darken__5;
+    public $default__lighten__2;
+    public $primary__darken__5;
+    public $primary__lighten__5;
+    public $primary__lighten__8;
+    public $primary__lighten__10;
+    public $primary__lighten__20;
+    public $primary__lighten__25;
+    public $info__darken__5;
+    public $info__darken__10;
+    public $info__lighten__5;
+    public $info__lighten__50;
+    public $danger__darken__5;
+    public $danger__lighten__5;
+    public $success__darken__5;
+    public $success__lighten__5;
+    public $warning__darken__2;
+    public $warning__lighten__5;
+    public $link__darken__2;
+    public $link__lighten__5;
+    public $background_color_secondary__darken__5;
+    public $warning__fade__25;
+    public $link__fade__60;
+    
     public static function getSetting(string $setting_name) {
 	    
 		$module = Yii::$app->getModule('flex-theme');
