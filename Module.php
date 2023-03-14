@@ -28,6 +28,7 @@ class Module extends \humhub\components\Module {
         'default__darken__5',
         'default__lighten__2',
         'primary__darken__5',
+        'primary__darken__10',
         'primary__lighten__5',
         'primary__lighten__8',
         'primary__lighten__10',
@@ -62,6 +63,7 @@ class Module extends \humhub\components\Module {
     public $default__darken__5;
     public $default__lighten__2;
     public $primary__darken__5;
+    public $primary__darken__10;
     public $primary__lighten__5;
     public $primary__lighten__8;
     public $primary__lighten__10;
