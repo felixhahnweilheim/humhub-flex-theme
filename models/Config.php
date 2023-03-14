@@ -42,6 +42,7 @@ class Config extends \yii\base\Model {
     public $info__darken__10;
     public $info__lighten__5;
     public $info__lighten__8;
+    public $info__lighten__25;
     public $info__lighten__45;
     public $info__lighten__50;
     public $danger__darken__5;
@@ -49,12 +50,15 @@ class Config extends \yii\base\Model {
     public $success__darken__5;
     public $success__lighten__5;
     public $warning__darken__2;
+    public $warning__darken__5;
     public $warning__lighten__5;
     public $link__darken__2;
     public $link__lighten__5;
     public $background_color_secondary__darken__5;
     public $background_color_page__lighten__3;
+    public $background_color_page__darken__5;
     public $background_color_page__darken__8;
+    public $text_color_secondary__lighten__25;
     public $warning__fade__25;
     public $link__fade__60;
     
