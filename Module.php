@@ -130,7 +130,7 @@ class Module extends \humhub\components\Module {
 			list($base_var, $function, $amount) = explode("__", $color);
             
             $theme_var = str_replace('_', '-', $base_var);
-            $original_color = $theme->variable($theme_var);
+            $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
