@@ -44,13 +44,16 @@ class Module extends \humhub\components\Module {
         'danger__darken__5',
         'danger__darken__10',
         'danger__lighten__5',
+        'danger__lighten__20',
         'success__darken__5',
         'success__darken__10',
         'success__lighten__5',
+        'success__lighten__20',
         'warning__darken__2',
         'warning__darken__5',
         'warning__darken__10',
         'warning__lighten__5',
+        'warning__lighten__20',
         'link__darken__2',
         'link__lighten__5',
         'background_color_secondary__darken__5',
@@ -82,13 +85,16 @@ class Module extends \humhub\components\Module {
     public $danger__darken__5;
     public $danger__darken__10;
     public $danger__lighten__5;
+    public $danger__lighten__20;
     public $success__darken__5;
     public $success__darken__10;
     public $success__lighten__5;
+    public $success__lighten__20;
     public $warning__darken__2;
     public $warning__darken__5;
     public $warning__darken__10;
     public $warning__lighten__5;
+    public $warning__lighten__20;
     public $link__darken__2;
     public $link__lighten__5;
     public $background_color_secondary__darken__5;
