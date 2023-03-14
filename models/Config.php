@@ -27,9 +27,9 @@ class Config extends \yii\base\Model {
 	public $link;
     
     // Special colors (under development)
-    public $default__darken__2; public $default__darken__5; public $default__lighten__2; public $primary__darken__5; public $primary__lighten__5; public $primary__lighten__8; public $primary__lighten__10; public $info__darken__5; public $info__lighten__5; public $danger__darken__5; public $danger__lighten__5; public $success__darken__5; public $success__lighten__5; public $warning__darken__2; public $warning__lighten__5; public $link__darken__2; public $link__lighten__5;
-    
-	public static function getSetting(string $setting_name) {
+    public $default__darken__2; public $default__darken__5; public $default__lighten__2; public $primary__darken__5; public $primary__lighten__5; public $primary__lighten__8; public $primary__lighten__10; public $info__darken__5; public $info__lighten__5; public $danger__darken__5; public $danger__lighten__5; public $success__darken__5; public $success__lighten__5; public $warning__darken__2; public $warning__lighten__5; public $link__darken__2; public $link__lighten__5; public $background_color_secondary__darken__5; public $warning__fadeout__75; public $link__fade__60;
+	
+    public static function getSetting(string $setting_name) {
 	    
 		$module = Yii::$app->getModule('flex-theme');
 		$value = $module->settings->get($setting_name);
@@ -149,7 +149,11 @@ class Config extends \yii\base\Model {
 			    $value = ColorHelper::darken($original_color, $amount);
 			} elseif ($function == 'lighten') {
 				  $value = ColorHelper::lighten($original_color, $amount);
-			}
+			} elseif ($function == 'fade') {
+                $value = ColorHelper::fade($original_color, $amount);
+            } elseif ($function == 'fadeout') {
+                $value = ColorHelper::fadeout($original_color, $amount);
+            }
 			$module->settings->set($color, $value);
 			
 		}
