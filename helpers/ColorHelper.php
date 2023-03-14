@@ -54,7 +54,7 @@ class ColorHelper {
     
     public static function fade($color, $amount) {
        
-        $opacity = $amount / 100) * 255;
+        $opacity = ($amount / 100) * 255;
         $opacity = max(min($opacity, 255), 0);
         $opacity = dechex($opacity);
         
