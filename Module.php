@@ -36,6 +36,7 @@ class Module extends \humhub\components\Module {
         'info__darken__10',
         'info__lighten__5',
         'info__lighten__8',
+        'info__lighten__25',
         'info__lighten__45',
         'info__lighten__50',
         'danger__darken__5',
@@ -43,12 +44,15 @@ class Module extends \humhub\components\Module {
         'success__darken__5',
         'success__lighten__5',
         'warning__darken__2',
+        'warning__darken__5',
         'warning__lighten__5',
         'link__darken__2',
         'link__lighten__5',
         'background_color_secondary__darken__5',
         'background_color_page__lighten__3',
+        'ackground_color_page__darken__5',
         'background_color_page__darken__8',
+        'text_color_secondary__lighten__25',
         'warning__fade__25',
         'link__fade__60'
     );
@@ -66,6 +70,7 @@ class Module extends \humhub\components\Module {
     public $info__darken__10;
     public $info__lighten__5;
     public $info__lighten__8;
+    public $info__lighten__25;
     public $info__lighten__45;
     public $info__lighten__50;
     public $danger__darken__5;
@@ -73,12 +78,15 @@ class Module extends \humhub\components\Module {
     public $success__darken__5;
     public $success__lighten__5;
     public $warning__darken__2;
+    public $warning__darken__5;
     public $warning__lighten__5;
     public $link__darken__2;
     public $link__lighten__5;
     public $background_color_secondary__darken__5;
     public $background_color_page__lighten__3;
+    public $background_color_page__darken__5;
     public $background_color_page__darken__8;
+    public $text_color_secondary__lighten__25;
     public $warning__fade__25;
     public $link__fade__60;
     
