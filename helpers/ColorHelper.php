@@ -20,6 +20,7 @@ class ColorHelper {
         foreach ($color_parts as $color) {
             $color   = hexdec($color); // Convert to decimal
             $color   = round( $color + (255 - $color) * $percentage); // Adjust color
+            $color   = max(min($color,255),0); // keep between 0 and 255
             $return .= str_pad(dechex($color), 2, '0', STR_PAD_LEFT); // Make two char hex code
         } 
 
@@ -43,6 +44,7 @@ class ColorHelper {
         foreach ($color_parts as $color) {
             $color   = hexdec($color); // Convert to decimal
             $color   = round( $color * (1 - $percentage)); // Adjust color
+            $color   = max(min($color,255),0); // keep between 0 and 255
             $return .= str_pad(dechex($color), 2, '0', STR_PAD_LEFT); // Make two char hex code
         } 
 
