@@ -5,6 +5,7 @@ namespace humhub\modules\flexTheme\models;
 use Yii;
 use humhub\modules\flexTheme\Module;
 use humhub\modules\flexTheme\helpers\ColorHelper;
+use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
 
@@ -180,7 +181,7 @@ class Config extends \yii\base\Model {
             }
 			if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
-				$original_color = Yii::$app->view->theme->variable($theme_var);
+				$original_color = ThemeHelper::getThemeByName('FlexTheme')->variable($theme_var);
 			}
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
