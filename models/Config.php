@@ -35,6 +35,7 @@ class Config extends \yii\base\Model {
     public $default__darken__5;
     public $default__lighten__2;
     public $primary__darken__5;
+    public $primary__darken__10;
     public $primary__lighten__5;
     public $primary__lighten__8;
     public $primary__lighten__10;
