@@ -154,7 +154,7 @@ class Config extends \yii\base\Model {
 	public function validateHexColor($attribute, $params, $validator) {
 		
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
-                    $this->addError($attribute, 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"-');
+                    $this->addError($attribute, 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"');
         }
 	}
 	
