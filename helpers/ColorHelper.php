@@ -51,6 +51,15 @@ class ColorHelper {
         return $return;
 		
 	}
+    
+    public static function fade($color, $amount) {
+       
+        $opacity = $amount / 100) * 255;
+        $opacity = max(min($opacity, 255), 0);
+        $opacity = dechex($opacity);
+        
+        return $color . $opacity;
+    }
 	
 	public static function getColorComponents($color) {
 		
