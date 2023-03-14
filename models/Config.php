@@ -145,7 +145,8 @@ class Config extends \yii\base\Model {
 				$original_color = Config::getSetting($base_var);
             }
 			if (empty($original_color)) {
-				$original_color = Yii::$app->view->theme->variable($base_var);
+                $theme_var = str_replace('_', '-', $base_var);
+				$original_color = Yii::$app->view->theme->variable($theme_var);
 			}
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
