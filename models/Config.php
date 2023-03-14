@@ -51,6 +51,8 @@ class Config extends \yii\base\Model {
     public $link__darken__2;
     public $link__lighten__5;
     public $background_color_secondary__darken__5;
+    public $background_color_page__lighten__3;
+    public $background_color_page__darken__8;
     public $warning__fade__25;
     public $link__fade__60;
     
