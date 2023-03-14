@@ -35,7 +35,7 @@ class ColorHelper {
         $max = hexdec(max($color_parts));
 		$min = hexdec(min($color_parts));
 		
-        if ($max = 0) {
+        if ($max == 0) {
             return '#000000';
         }
         
