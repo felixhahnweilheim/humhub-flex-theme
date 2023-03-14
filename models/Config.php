@@ -27,6 +27,8 @@ class Config extends \yii\base\Model {
 	public $link;
     
     public $background_color_secondary;
+    public $background_color_page;
+    public $text_color_secondary;
     
     // Special colors (under development)
     public $default__darken__2;
