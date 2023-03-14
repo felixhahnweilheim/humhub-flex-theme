@@ -16,3 +16,64 @@
 .verified {
     color: var(--info);
 }
+
+/*
+ * Wall Entry Controls, esp. comment and like links
+ */
+.wall-entry-controls {
+    color: transparent;
+    padding: 5px 10px 0px 0px;
+    line-height: 2;
+}
+
+    /* colors for heart and star container */
+ .wall-entry-controls .heart-container a {
+	color: #ab0909 !important;
+    }
+.wall-entry-controls .star-container a {
+	color: #e0b30a !important;
+    }
+    
+    /* Font Sizes */
+.wall-entry-controls i {
+	font-size: 16px;
+    }
+.wall-entry-controls a {
+	font-size: 13px;
+    }
+
+    /* Hover */
+.wall-entry-controls  .no-icon a:hover, .comment-label:hover, .reply-label:hover, .comment-count.no-icon:hover {
+            color: var(--primary) !important;
+}
+.wall-entry-controls .heart-container a:hover i {
+		text-shadow:0 0 2px #bb1919;
+    }
+.wall-entry-controls .star-container a:hover i {
+		text-shadow:0 0 2px #f0c31a;
+    }
+.wall-entry-controls .thumbs_up-container a:hover i {
+		text-shadow:0 0 2px var(--link);
+    }
+.wall-entry-controls > a:nth-child(-n+2):hover i {
+		text-shadow:0 0 2px var(--link);
+    }
+.wall-entry-controls > a:nth-child(n+3):hover {
+		color: var(--primary) !important;
+    }
+}
+/* Font-sizes under comments */
+.comment-container .wall-entry-controls i {
+        font-size: 14px;
+    }
+.comment-container .wall-entry-controls a {
+        font-size: 12px;
+    }
+/*Distance for text when icon and text are shown*/
+.comment-label-both, .reply-label-both, .unlike-label-both, .like-label-both {
+    margin-left: 5px;
+}
+
+.wall-entry-footer > div > .wall-entry-controls {
+	border-top: 1px solid var(--background-color-secondary);
+}
