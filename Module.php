@@ -35,6 +35,8 @@ class Module extends \humhub\components\Module {
         'info__darken__5',
         'info__darken__10',
         'info__lighten__5',
+        'info__lighten__8',
+        'info__lighten__45',
         'info__lighten__50',
         'danger__darken__5',
         'danger__lighten__5',
@@ -63,6 +65,8 @@ class Module extends \humhub\components\Module {
     public $info__darken__5;
     public $info__darken__10;
     public $info__lighten__5;
+    public $info__lighten__8;
+    public $info__lighten__45;
     public $info__lighten__50;
     public $danger__darken__5;
     public $danger__lighten__5;
