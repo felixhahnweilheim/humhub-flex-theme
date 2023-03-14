@@ -59,7 +59,9 @@ class Module extends \humhub\components\Module {
 		foreach ($special_colors as $color) {
 			
 			list($base_var, $function, $amount) = explode("__", $color);
-			$original_color = $theme->variable($base_var);
+            
+            $theme_var = str_replace('_', '-', $base_var);
+            $original_color = $theme->variable($theme_var);
 			
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
