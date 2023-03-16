@@ -14,11 +14,13 @@ use humhub\modules\ui\icon\widgets\Icon;
  */
 class Config extends \yii\base\Model {
 	
-	/*Module settings, see Module.php*/
+    // Module settings, see Module.php
 	public $commentLink;
 	public $likeLink;
 	public $likeIcon;
 	public $verifiedAccounts;
+    
+    // Configurable Colors
 	public $default;
 	public $primary;
 	public $info;
@@ -27,11 +29,12 @@ class Config extends \yii\base\Model {
 	public $danger;
 	public $link;
     
+    // not yet configurable
     public $background_color_secondary;
     public $background_color_page;
     public $text_color_secondary;
     
-    // Special colors (under development)
+    // Special colors
     public $default__darken__2;
     public $default__darken__5;
     public $default__lighten__2;
@@ -69,7 +72,6 @@ class Config extends \yii\base\Model {
     public $background_color_page__darken__5;
     public $background_color_page__darken__8;
     public $text_color_secondary__lighten__25;
-    public $warning__fade__25;
     public $link__fade__60;
     
     public static function getSetting(string $setting_name) {
@@ -80,12 +82,14 @@ class Config extends \yii\base\Model {
 		if (empty($value)) {
 			$value = $module->$setting_name;
 		}
-		
+        
+		// Note: $value can still be empty if there is no default in Module.php
 	    return $value;
     }
 	
 	public static function verifiedIcon($user) {
-		$verifiedAccounts = explode(',', Config::getSetting('verifiedAccounts'));
+		
+        $verifiedAccounts = explode(',', Config::getSetting('verifiedAccounts'));
 		
 		if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
 			return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
@@ -109,7 +113,8 @@ class Config extends \yii\base\Model {
 	}
     
 	public function attributeLabels() {
-    
+        
+        // Note: the attribute name in uppercase is used as fallback
         return [
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
 			'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
@@ -120,12 +125,14 @@ class Config extends \yii\base\Model {
 	
 	public function attributeHints() {
 		
-        $color_vars = Module::COLOR_VARS;
+        $main_colors = Module::MAIN_COLORS;
 		
 		$hints = array();
+        
 		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
-		foreach ($color_vars as $color) {
-			$value = Yii::$app->view->theme->variable($color);
+        
+		foreach ($main_colors as $color) {
+			$value = ThemeHelper::getThemeByName('HumHub')->variable($color);
 			$icon = Icon::get('circle', ['color' => $value ]);
 			$hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
 		}
@@ -147,14 +154,14 @@ class Config extends \yii\base\Model {
 	public function validateNumbersString($attribute, $params, $validator) {
 		
         if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
-                    $this->addError($attribute, 'Invalid Format. Must be a list of numbers, seperated by commas.');
+                    $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a list of numbers, seperated by commas.'));
         }
 	}
 		
 	public function validateHexColor($attribute, $params, $validator) {
 		
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
-                    $this->addError($attribute, 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"');
+                    $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
         }
 	}
 	
@@ -171,7 +178,7 @@ class Config extends \yii\base\Model {
 		$module->settings->set('likeIcon', $this->likeIcon);
 		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
         
-        $main_colors = Module::COLOR_VARS;
+        $main_colors = Module::MAIN_COLORS;
 		foreach ($main_colors as $key) {
 			$module->settings->set($key, $this->$key);
 		}
@@ -180,20 +187,30 @@ class Config extends \yii\base\Model {
         foreach ($special_colors as $color) {
             
 			list($base_var, $function, $amount) = explode("__", $color);
-			$original_color = $this->$base_var;
-			if (empty($original_color)) {
+			
+            $original_color = $this->$base_var;
+		
+            if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
 				$original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			}
             
 			if ($function == 'darken') {
-			    $value = ColorHelper::darken($original_color, $amount);
-			} elseif ($function == 'lighten') {
-				  $value = ColorHelper::lighten($original_color, $amount);
-			} elseif ($function == 'fade') {
+			  
+                $value = ColorHelper::darken($original_color, $amount);
+			
+            } elseif ($function == 'lighten') {
+				 
+                $value = ColorHelper::lighten($original_color, $amount);
+			
+            } elseif ($function == 'fade') {
+                
                 $value = ColorHelper::fade($original_color, $amount);
+           
             } elseif ($function == 'fadeout') {
+              
                 $value = ColorHelper::fadeout($original_color, $amount);
+           
             }
 			$module->settings->set($color, $value);
 			
