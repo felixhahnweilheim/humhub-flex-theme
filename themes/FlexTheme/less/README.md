@@ -1,17 +1,18 @@
 ## How CSS of this theme works
 
-`build.less` imports `variables-css-properties.less` instead of a normal `variables.less`.
-It does not contain concrete colors but CSS variables like `var(--default)`.
+The variables.less file defines CSS variables like `var(--default)` instead of concrete colors.  
+The concrete values are defined in the HTML head, like `<style>:root {--default:#00ff00; ... }</style>`.
 
-The concrete values for those variables are defined in the HTML head which makes dynamic changes possible.
+This makes it possible to switch colors without changes to the theme.css.
 
-Note: In order to rebuild the css file,
-you have to edit the core file `static/less/humhub.less`
-and comment out the line `@import "../css/select2Theme/build.less"`.
-The imported file contains a lighten() function which needs a concrete color, not a CSS variable. ...
+My plan is to use this behavior later also for a dark mode.
+ 
+### Replaced LESS functions
 
-All other core less files that include darken, lighten or fade are excluded by `@prev-...`
+HumHub uses LESS functions as lighten(), darken() or fade(). Those do not work when color variables contain CSS variables instead of concrete colors.  
+That's why the import of some files is prevented via `@prev-...` in variables.less.  
+Those files are replaced and the lightened, darkened and faded colors are replaced by variables like `info-darken-5`.
 
-The lightend and darkened colors are replaced by variables like `info-darken-5`.
+The calculation of those is done via `helpers/ColorHelper`.
 
-The calculation of those is done via `helpers/ColorHelper`
+When the module is enabled those "special color variables" are calculated using the colors of the Community Theme as base.
