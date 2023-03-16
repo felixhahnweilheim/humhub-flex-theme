@@ -112,8 +112,13 @@
 // page background which is also used for other ui components as comment box etc. - former @background2
 @background-color-page: #ededed;
 
-// text highlight
-@background-color-highlight: #fff8e0;
+// Informative highlighting color
+// (e.g. Comment Permalink, Shared Item, Calendar CurDay, Wiki Active Page Nav, Mail Module Speech Bubble)
+@background-color-highlight: #bbe5ef; // originally calculated via desaturate and spin
+
+// Informative highlighting soft color
+// (e.g. Wiki Active Category)
+@background-color-highlight-soft: #f2f9fb; // originally calculated via desaturate and spin
 
 // Additional background colors
 @background3: #d7d7d7;
@@ -145,3 +150,40 @@
 // Mail Fonts
 @mail-font-family: 'Open Sans', Arial, Tahoma, Helvetica, sans-serif;
 
+// CSS Variables (the configurable colors are added via HTML head, not here)
+:root {
+  // Text colors
+  --text-color-main: @text-color-main;
+  --text-color-secondary: @text-color-secondary;
+  --text-color-highlight: @text-color-highlight;
+  --text-color-soft: @text-color-soft;
+  --text-color-soft2: @text-color-soft2;
+  --text-color-soft3: @text-color-soft3;
+  --text-color-contrast: @text-color-contrast;
+
+  // Background colors
+  --background-color-main: @background-color-main;
+  --background-color-secondary: @background-color-secondary;
+  --background-color-page: @background-color-page;
+  --background-color-highlight: @background-color-highlight;
+  --background-color-highlight-soft: @background-color-highlight-soft;
+  --background3: @background3;
+  --background4: @background4;
+
+  // Bootstrap Alert boxes
+  // Success
+  --background-color-success: @background-color-success;
+  --text-color-success: @text-color-success;
+  --border-color-success: @border-color-success;
+  // Warning
+  --background-color-warning: @background-color-warning;
+  --text-color-warning: @text-color-warning;
+  --border-color-warning: @border-color-warning;
+  // Danger
+  --background-color-danger: @background-color-danger;
+  --text-color-danger: @text-color-danger;
+  --border-color-danger: @border-color-danger;
+
+  // Fonts
+  --mail-font-family: @mail-font-family;
+}
