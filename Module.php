@@ -9,7 +9,18 @@ use yii\helpers\Url;
 
 class Module extends \humhub\components\Module {
 
-    const COLOR_VARS = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+    // Module settings and their default values
+    // @var string defines the style of comment links (options: icon, text, both)
+    public $commentLink = 'text';
+    // @var string defines the style of like links (options: icon, text, both)
+    public $likeLink = 'text';
+    // @var string defines the like icon (options: heart, thumbs_up, star)
+    public $likeIcon = 'thumbs_up';
+    // @var string defines IDs of verified accounts
+    public $verifiedAccounts = '';
+    
+    // Configurable Colors
+    const MAIN_COLORS = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
     public $default;
     public $primary;
     public $info;
@@ -18,6 +29,7 @@ class Module extends \humhub\components\Module {
     public $danger;
     public $link;
     
+    // not yet configurable but needed for lightened/darkened colors
     public $background_color_secondary;
     public $background_color_page;
     public $text_color_secondary;
@@ -61,10 +73,8 @@ class Module extends \humhub\components\Module {
         'background_color_page__darken__5',
         'background_color_page__darken__8',
         'text_color_secondary__lighten__25',
-        'warning__fade__25',
         'link__fade__60'
     );
-    
     public $default__darken__2;
     public $default__darken__5;
     public $default__lighten__2;
@@ -102,18 +112,7 @@ class Module extends \humhub\components\Module {
     public $background_color_page__darken__5;
     public $background_color_page__darken__8;
     public $text_color_secondary__lighten__25;
-    public $warning__fade__25;
     public $link__fade__60;
-    
-    /*Module settings and their default values*/
-    /*@var string defines the style of comment links (options: icon, text, both)*/
-    public $commentLink = 'text';
-    /*@var string defines the style of like links (options: icon, text, both)*/
-    public $likeLink = 'text';
-    /*@var string defines the like icon (options: heart, thumbs_up, star)*/
-    public $likeIcon = 'thumbs_up';
-    /*@var string defines IDs of verified accounts*/
-    public $verifiedAccounts = '';
     
     // Translatable Module Description
     public function getDescription() {
@@ -125,8 +124,10 @@ class Module extends \humhub\components\Module {
         return Url::to(['/flex-theme/config']);
     }
     
-    // Module Activation: Activate Flex Theme
+    // Module Activation
     public function enable() {
+        
+        // Activate Flex Theme
         if (parent::enable()) {
             $theme = ThemeHelper::getThemeByName('FlexTheme');
             if ($theme !== null) {
@@ -134,7 +135,7 @@ class Module extends \humhub\components\Module {
             }
         }
         
-        // Save special colors (lightened and darkened colors)
+        // Save special colors (lightened, darkened, faded colors)
 		$special_colors = Module::SPECIAL_COLORS;
 		
 		foreach ($special_colors as $color) {
@@ -159,7 +160,7 @@ class Module extends \humhub\components\Module {
 		}
     }
 	
-    // Module Deactivarion: Deselect Flex Theme (activate community theme)
+    // Module Deactivation: Deselect Flex Theme (activate community theme)
     public function disable() {
         if (Yii::$app->view->theme->name == 'FlexTheme') {
             $theme = ThemeHelper::getThemeByName('HumHub');
