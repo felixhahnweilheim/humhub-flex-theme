@@ -1,6 +1,13 @@
-# FlexTheme for HumHub
+# FlexTheme for HumHub (under development)
 
 The first free configurable theme for HumHub
+
+**Version: 0.1.0** (for HumHub 1.14)
+
+**Author:** Felix Hahn, info@hahn-felix.de - self-learned
+
+## Installation
+see [INSTALLATION.md](INSTALLATION.md)
 
 ## Features
 
