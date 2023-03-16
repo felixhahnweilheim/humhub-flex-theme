@@ -16,6 +16,8 @@ see [INSTALLATION.md](INSTALLATION.md)
 Define your custom colors.
 Currently the 7 main colors are configurable. But I am planning to make nearly all color variables configurable.
 
+[Details for Developpers](../themes/FlexTheme/less/README.md)
+
 ### Verified Accounts
 
 Define varified accounts by entering their user IDs.
