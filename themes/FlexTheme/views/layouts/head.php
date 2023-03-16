@@ -4,13 +4,13 @@ use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\Module;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 
-$color_vars = Module::COLOR_VARS;
+$main_colors = Module::MAIN_COLORS;
 $special_colors = Module::SPECIAL_COLORS;
 $base_theme = ThemeHelper::getThemeByName('HumHub');
 ?>
 <style>
 :root {
-<?php foreach ($color_vars as $key) {
+<?php foreach ($main_colors as $key) {
     $value = Config::getSetting($key);
 	if (empty($value)) {
 	    $value = $base_theme->variable($key);
