@@ -2,16 +2,20 @@
 //FlexTheme
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\Module;
+use humhub\modules\ui\view\helpers\ThemeHelper;
 
 $color_vars = Module::COLOR_VARS;
 $special_colors = Module::SPECIAL_COLORS;
-$theme = Yii::$app->view->theme;
+$base_theme = ThemeHelper::getThemeByName('HumHub');
 ?>
 <style>
 :root {
-<?php foreach ($color_vars as $color) {
-    $value = Config::getSetting($color);
-    echo '--' . $color . ':' . (!empty($value) ? $value : $theme->variable($color)) . ';';
+<?php foreach ($color_vars as $key) {
+    $value = Config::getSetting($key);
+	if (empty($value)) {
+	    $value = $base_theme->variable($key);
+	}
+    echo '--' . $key . ':' . $value . ';';
 }
 foreach ($special_colors as $color) {
     $value = Config::getSetting($color);
