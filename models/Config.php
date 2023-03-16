@@ -165,30 +165,27 @@ class Config extends \yii\base\Model {
         }
 		
         $module = Yii::$app->getModule('flex-theme');
+        
         $module->settings->set('commentLink', $this->commentLink);
 	    $module->settings->set('likeLink', $this->likeLink);
 		$module->settings->set('likeIcon', $this->likeIcon);
 		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
-	    $module->settings->set('default', $this->default);
-		$module->settings->set('primary', $this->primary);
-		$module->settings->set('info', $this->info);
-		$module->settings->set('success', $this->success);
-		$module->settings->set('danger', $this->danger);
-		$module->settings->set('link', $this->link);
         
-        // Test - WIP
+        $main_colors = Module::COLOR_VARS;
+		foreach ($main_colors as $key) {
+			$module->settings->set($key, $this->$key);
+		}
+        
         $special_colors = Module::SPECIAL_COLORS;
-		
-		foreach ($special_colors as $color) {
+        foreach ($special_colors as $color) {
+            
 			list($base_var, $function, $amount) = explode("__", $color);
 			$original_color = $this->$base_var;
 			if (empty($original_color)) {
-				$original_color = Config::getSetting($base_var);
-            }
-			if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
-				$original_color = ThemeHelper::getThemeByName('FlexTheme')->variable($theme_var);
+				$original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			}
+            
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
 			} elseif ($function == 'lighten') {
