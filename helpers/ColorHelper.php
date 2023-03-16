@@ -79,18 +79,20 @@ class ColorHelper {
     
     public static function fade($color, $amount) {
        
+        // $amount is expected to be between 0 and 100
         $opacity = ($amount / 100) * 255;
-        $opacity = max(min($opacity, 255), 0);
-        $opacity = dechex($opacity);
+        $opacity = max(min($opacity, 255), 0); // keep between 0 and 255
+        $opacity = str_pad(dechex($opacity), 2, '0', STR_PAD_LEFT); // make 2 char hex code
         
+        // return RGBA as hex code
         return $color . $opacity;
     }
 	
-	public static function getColorComponents($color) {
+	protected static function getColorComponents($color) {
 		
 		// Remove leading '#'
 		$hexstr = ltrim($color, '#');
-		// if colors has just 3 digits
+		// if color has just 3 digits
         if (strlen($hexstr) == 3) {
             $hexstr = $hexstr[0] . $hexstr[0] . $hexstr[1] . $hexstr[1] . $hexstr[2] . $hexstr[2];
         }
