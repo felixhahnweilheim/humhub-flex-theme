@@ -9,11 +9,15 @@ The first free configurable theme for HumHub
 ## Installation
 see [INSTALLATION.md](INSTALLATION.md)
 
+## Donate
+
+Please consider a donation: https://github.com/sponsors/felixhahnweilheim
+
 ## Features
 
 ### Colors (under development)
 
-Define your custom colors.
+**Define your custom colors!**  
 Currently the 7 main colors are configurable. But I am planning to make nearly all color variables configurable.
 
 [Details for Developpers](../themes/FlexTheme/less/README.md)
@@ -38,8 +42,6 @@ Choose between the text "Comment" / "Reply" (default) and the comment icon or bo
 Similar to Comment Link. But for the icon you can decide between thumbs up (default), heart and star.
 
 ## To Do
-- more testing
 - add module icon
 - add screenshots
-- improve documentation
 - add translations
