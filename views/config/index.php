@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
-$color_vars = Module::COLOR_VARS;
+$color_vars = Module::MAIN_COLORS;
 ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?></div>
