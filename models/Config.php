@@ -125,7 +125,7 @@ class Config extends \yii\base\Model {
 		$hints = array();
 		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
 		foreach ($color_vars as $color) {
-			$value = Yii::$app->view->theme->variable($color);
+			$value = ThemeHelper::getThemeByName('HumHub')->variable($color);
 			$icon = Icon::get('circle', ['color' => $value ]);
 			$hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
 		}
