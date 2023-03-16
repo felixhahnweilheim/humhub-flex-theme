@@ -1,9 +1,7 @@
 name: PHP Codeception Tests - master
 
 on:
-  push:
-  schedule:
-    - cron: "0 0 * * 0"
+  pull_request
 
 jobs:
   tests:
