@@ -187,7 +187,7 @@ class Config extends \yii\base\Model {
             }
 			if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
-				$original_color = ThemeHelper::getThemeByName('FlexTheme')->variable($theme_var);
+				$original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			}
 			if ($function == 'darken') {
 			    $value = ColorHelper::darken($original_color, $amount);
