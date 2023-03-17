@@ -191,8 +191,8 @@ class Config extends \yii\base\Model {
             
             // Save color values as theme variables
             Yii::$app->settings->set(
-                'theme.var.FlexTheme.' . $color,
-                $this->$color
+                'theme.var.FlexTheme.' . $key,
+                $this->$key
             );
 		}
         
