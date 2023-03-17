@@ -173,28 +173,45 @@ class Config extends \yii\base\Model {
 		
         $module = Yii::$app->getModule('flex-theme');
         
+        // Save configuration for Social Controls and Verified Accounts
         $module->settings->set('commentLink', $this->commentLink);
 	    $module->settings->set('likeLink', $this->likeLink);
 		$module->settings->set('likeIcon', $this->likeIcon);
 		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
         
+        // Save color values
         $main_colors = Module::MAIN_COLORS;
 		foreach ($main_colors as $key) {
-			$module->settings->set($key, $this->$key);
+            
+            // Save as module settings
+			$module->settings->set(
+                $key,
+                $this->$key
+            );
+            
+            // Save color values as theme variables
+            Yii::$app->settings->set(
+                'theme.var.FlexTheme.' . $color,
+                $this->$color
+            );
 		}
         
+        // Calculate and save lightened, darkened and faded colors
         $special_colors = Module::SPECIAL_COLORS;
+       
         foreach ($special_colors as $color) {
             
+            // split color names into base color, manipulation function and amount of manipulation
 			list($base_var, $function, $amount) = explode("__", $color);
 			
+            // Get value of base color
             $original_color = $this->$base_var;
-		
             if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
 				$original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			}
             
+            // Calculate color value with ColorHelper functions
 			if ($function == 'darken') {
 			  
                 $value = ColorHelper::darken($original_color, $amount);
@@ -212,6 +229,8 @@ class Config extends \yii\base\Model {
                 $value = ColorHelper::fadeout($original_color, $amount);
            
             }
+            
+            // Save calculated value
 			$module->settings->set($color, $value);
 			
 		}
