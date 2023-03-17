@@ -3,6 +3,7 @@
 use humhub\modules\flexTheme\models\ConfigureForm;
 use humhub\modules\flexTheme\Module;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\ui\form\widgets\ColorPicker;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
