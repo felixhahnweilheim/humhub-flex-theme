@@ -20,14 +20,14 @@ class Module extends \humhub\components\Module {
     public $verifiedAccounts = '';
     
     // Configurable Colors
-    const MAIN_COLORS = array('default', 'primary', 'info', 'success', 'warning', 'danger', 'link');
+    const MAIN_COLORS = array('default', 'primary', 'info', 'link', 'success', 'warning', 'danger');
     public $default;
     public $primary;
     public $info;
+    public $link;
     public $success;
     public $warning;
     public $danger;
-    public $link;
     
     // not yet configurable but needed for lightened/darkened colors
     public $background_color_secondary;
