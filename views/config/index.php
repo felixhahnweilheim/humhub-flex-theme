@@ -42,7 +42,18 @@ $color_vars = Module::MAIN_COLORS;
 		    
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Colors')); ?>
 	        <?php foreach ($color_vars as $color): ?>
-		        <?= $form->field($model, $color); ?>
+		        <?= '<div id="' . $color . '-field">' ?>
+			        <?= $form->field($model, $color)->widget(ColorPicker::class, ['container' => $color . '-field'])->label(false)->hint(false) ?>
+                    <?= $form->field($model, $color, ['template' => '
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                            {label}
+                        </div>
+                        {error}{hint}'
+                    ]) ?>
+	            <?= '</div>' ?>
 		    <?php endforeach; ?>
 		    <?= $form->endCollapsibleFields(); ?>
 			
