@@ -11,7 +11,7 @@ class ColorisAsset extends AssetBundle
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_BEGIN];
     public $sourcePath = '@flex-theme/resources';
-	  public $css = [
+	public $css = [
 		    'css/coloris.min.css'
 	  ];
     public $js = [
