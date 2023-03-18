@@ -7,6 +7,8 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
+\humhub\modules\flexTheme\assets\MainAsset::register($this);
+
 $color_vars = Module::MAIN_COLORS;
 ?>
 <div class="panel panel-default">
@@ -59,10 +61,6 @@ $color_vars = Module::MAIN_COLORS;
 
     </div>
 </div>
-
-// WIP: replace with local file
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
-<script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 
 <script type="text/javascript">
     Coloris({
