@@ -48,7 +48,6 @@ $color_vars = Module::MAIN_COLORS;
 				     <?= $form->field($model, $color); ?>
 			    <?php endforeach; ?>
 			  </div>
-		    <?php endforeach; ?>
 		    <?= $form->endCollapsibleFields(); ?>
 			
 		    <?= $form->field($model, 'verifiedAccounts'); ?>
