@@ -3,7 +3,6 @@
 use humhub\modules\flexTheme\models\ConfigureForm;
 use humhub\modules\flexTheme\Module;
 use humhub\modules\ui\form\widgets\ActiveForm;
-use humhub\modules\ui\form\widgets\ColorPicker;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
@@ -42,19 +41,11 @@ $color_vars = Module::MAIN_COLORS;
 		    <?= $form->endCollapsibleFields(); ?>
 		    
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Colors')); ?>
-	        <?php foreach ($color_vars as $color): ?>
-		        <?= '<div id="' . $color . '-field">' ?>
-			        <?= $form->field($model, $color)->widget(ColorPicker::class, ['container' => $color . '-field'])->label(false)->hint(false) ?>
-                    <?= $form->field($model, $color, ['template' => '
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i></i>
-                            </span>
-                            {label}
-                        </div>
-                        {error}{hint}'
-                    ]) ?>
-	            <?= '</div>' ?>
+	          <div class="color-fields">    
+		        <?php foreach ($color_vars as $color): ?>
+				     <?= $form->field($model, $color); ?>
+			    <?php endforeach; ?>
+			  </div>
 		    <?php endforeach; ?>
 		    <?= $form->endCollapsibleFields(); ?>
 			
@@ -68,3 +59,34 @@ $color_vars = Module::MAIN_COLORS;
 
     </div>
 </div>
+
+// WIP: replace with local file
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+<script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+
+<script type="text/javascript">
+    Coloris({
+      el: '.color-fields .form-control',
+      alpha: false,
+      clearButton: true,
+      swatches: [
+        '#264653',
+        '#2a9d8f',
+        '#e9c46a',
+        '#f4a261',
+        '#e76f51',
+        '#d62828',
+        '#023e8a',
+        '#0077b6',
+        '#0096c7',
+        '#00b4d8',
+        '#48cae4'
+      ]
+    });
+</script>
+
+<style type="text/css">
+	.color-fields .form-group {min-width: 150px; float:left; margin-right: 20px;}
+    .color-fields label  {display: block}
+    .color-fields .clr-field {width: 115px}
+</style>
