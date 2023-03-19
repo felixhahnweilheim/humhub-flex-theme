@@ -4,11 +4,14 @@ namespace humhub\modules\flexTheme;
 
 use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
+use humhub\libs\DynamicConfig;
 use Yii;
 use yii\helpers\Url;
 
 class Module extends \humhub\components\Module {
 
+    const FLEX_THEME_NAME = 'FlexTheme';
+	
     // Module settings and their default values
     // @var string defines the style of comment links (options: icon, text, both)
     public $commentLink = 'text';
@@ -126,49 +129,67 @@ class Module extends \humhub\components\Module {
     
     // Module Activation
     public function enable() {
-        
-        // Activate Flex Theme
         if (parent::enable()) {
-            $theme = ThemeHelper::getThemeByName('FlexTheme');
-            if ($theme !== null) {
-                $theme->activate();
+            $this->enableTheme();
+            return true;
+        }
+        return false;
+    }
+	
+    private function enableTheme() {
+        
+        // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
+        // Already a theme based theme is active
+        foreach (ThemeHelper::getThemeTree(Yii::$app->view->theme) as $theme) {
+            if ($theme->name === self::FLEX_THEME_NAME) {
+                return;
             }
+        }
+
+        $theme = ThemeHelper::getThemeByName(self::FLEX_THEME_NAME);
+        if ($theme !== null) {
+            $theme->activate();
+            DynamicConfig::rewrite();
         }
         
         // Save special colors (lightened, darkened, faded colors)
-		$special_colors = Module::SPECIAL_COLORS;
+        $special_colors = Module::SPECIAL_COLORS;
 		
-		foreach ($special_colors as $color) {
+        foreach ($special_colors as $color) {
 			
-			list($base_var, $function, $amount) = explode("__", $color);
+            list($base_var, $function, $amount) = explode("__", $color);
             
             $theme_var = str_replace('_', '-', $base_var);
             $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
 			
-			if ($function == 'darken') {
-			    $value = ColorHelper::darken($original_color, $amount);
-			} elseif ($function == 'lighten') {
-		        $value = ColorHelper::lighten($original_color, $amount);
-			} elseif ($function == 'fade') {
+            if ($function == 'darken') {
+                $value = ColorHelper::darken($original_color, $amount);
+            } elseif ($function == 'lighten') {
+                $value = ColorHelper::lighten($original_color, $amount);
+            } elseif ($function == 'fade') {
                 $value = ColorHelper::fade($original_color, $amount);
             } elseif ($function == 'fadeout') {
                 $value = ColorHelper::fadeout($original_color, $amount);
             }
 			
-			Yii::$app->getModule('flex-theme')->settings->set($color, $value);
-			
-		}
+            Yii::$app->getModule('flex-theme')->settings->set($color, $value);
+        }
     }
 	
-    // Module Deactivation: Deselect Flex Theme (activate community theme)
+    // Module Deactivation
     public function disable() {
-        if (Yii::$app->view->theme->name == 'FlexTheme') {
-            $theme = ThemeHelper::getThemeByName('HumHub');
-            if ($theme !== null) {
-                $theme->activate();
+        $this->disableTheme();
+        parent::disable();
+    }
+	
+    // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
+    private function disableTheme() {
+        foreach (ThemeHelper::getThemeTree(Yii::$app->view->theme) as $theme) {
+            if ($theme->name === self::FLEX_THEME_NAME) {
+                $ceTheme = ThemeHelper::getThemeByName('HumHub');
+                $ceTheme->activate();
+                break;
             }
         }
-	
-        parent::disable();
     }
 }
