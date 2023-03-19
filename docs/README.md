@@ -42,7 +42,6 @@ Choose between the text "Comment" / "Reply" (default) and the comment icon or bo
 Similar to Comment Link. But for the icon you can decide between thumbs up (default), heart and star.
 
 ## To Do
-- add color values as theme variable to database (needed for colors in e-mails)
 - add module icon
 - add screenshots
 - add translations
