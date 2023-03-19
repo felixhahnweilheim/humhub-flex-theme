@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
-\humhub\modules\flexTheme\assets\MainAsset::register($this);
+\humhub\modules\flexTheme\assets\ColorisAsset::register($this);
 
 $color_vars = Module::MAIN_COLORS;
 ?>
