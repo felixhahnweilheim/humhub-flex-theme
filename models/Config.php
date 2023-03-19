@@ -185,26 +185,29 @@ class Config extends \yii\base\Model {
         $main_colors = Module::MAIN_COLORS;
         foreach ($main_colors as $key) {
             
-            // Save as module settings
-            $module->settings->set(
-                $key,
-                $this->$key
-            );
+            $value = $this->$key;
             
-            // Save color values as theme variables
-            Yii::$app->settings->set(
-                'theme.var.FlexTheme.' . $key,
-                $this->$key
-            );
+            // Save as module settings (value can be emtpy)
+            $module->settings->set($key, $value);
+            
+            // Save color values as theme variables (take community theme's color if value is empty)
+            if (empty($value)) {
+                $theme_var = str_replace('_', '-', $key);
+                $value = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
+            }
+            $theme_key = 'theme.var.FlexTheme.' . $key;
+            Yii::$app->settings->set($theme_key, $value);
         }
         
         // Calculate and save lightened, darkened and faded colors
         $special_colors = Module::SPECIAL_COLORS;
        
-        foreach ($special_colors as $color) {
+        foreach ($special_colors as $key) {
+            
+            $value = '';
             
             // split color names into base color, manipulation function and amount of manipulation
-            list($base_var, $function, $amount) = explode("__", $color);
+            list($base_var, $function, $amount) = explode("__", $key);
 			
             // Get value of base color
             $original_color = $this->$base_var;
@@ -233,7 +236,7 @@ class Config extends \yii\base\Model {
             }
             
             // Save calculated value
-            $module->settings->set($color, $value);
+            $module->settings->set($key, $value);
 			
         }
         return true;
