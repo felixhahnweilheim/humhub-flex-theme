@@ -13,7 +13,7 @@ class Events
 	public static function onAdminMenuInit($event)
     {
 		$event->sender->addItem([
-            'label' =>  Yii::t('FlexThemeModule.base', 'Flex Theme Configuration'),
+            'label' =>  Yii::t('FlexThemeModule.base', 'Flex Theme'),
             'url' => Url::to(['/flex-theme/config']),
             'group' => 'manage',
             'icon' => '<i class="fa fa-eye"></i>',
