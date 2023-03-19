@@ -176,26 +176,26 @@ class Config extends \yii\base\Model {
         $module = Yii::$app->getModule('flex-theme');
         
         // Save configuration for Social Controls and Verified Accounts
-         $module->settings->set('commentLink', $this->commentLink);
-         $module->settings->set('likeLink', $this->likeLink);
-         $module->settings->set('likeIcon', $this->likeIcon);
-         $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+        $module->settings->set('commentLink', $this->commentLink);
+        $module->settings->set('likeLink', $this->likeLink);
+        $module->settings->set('likeIcon', $this->likeIcon);
+        $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
         
-         // Save color values
-         $main_colors = Module::MAIN_COLORS;
-         foreach ($main_colors as $key) {
+        // Save color values
+        $main_colors = Module::MAIN_COLORS;
+        foreach ($main_colors as $key) {
             
-             // Save as module settings
-             $module->settings->set(
-                 $key,
-                 $this->$key
-             );
+            // Save as module settings
+            $module->settings->set(
+                $key,
+                $this->$key
+            );
             
-             // Save color values as theme variables
-             Yii::$app->settings->set(
-                 'theme.var.FlexTheme.' . $key,
-                 $this->$key
-             );
+            // Save color values as theme variables
+            Yii::$app->settings->set(
+                'theme.var.FlexTheme.' . $key,
+                $this->$key
+            );
         }
         
         // Calculate and save lightened, darkened and faded colors
