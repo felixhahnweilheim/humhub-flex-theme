@@ -182,7 +182,20 @@ class Config extends \yii\base\Model {
         $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
         
         // Save color values
+        self::saveMainColors();
+        
+        // Calculate and save lightened, darkened and faded colors
+        self::saveSpecialColors();
+
+        return true;
+    }
+    
+    public function saveMainColors() {
+        
+        $module = Yii::$app->getModule('flex-theme');
+        
         $main_colors = Module::MAIN_COLORS;
+       
         foreach ($main_colors as $key) {
             
             $value = $this->$key;
@@ -198,13 +211,15 @@ class Config extends \yii\base\Model {
             $theme_key = 'theme.var.FlexTheme.' . $key;
             Yii::$app->settings->set($theme_key, $value);
         }
+    }
+    
+    public function saveSpecialColors() {
         
-        // Calculate and save lightened, darkened and faded colors
+        $module = Yii::$app->getModule('flex-theme');
+        
         $special_colors = Module::SPECIAL_COLORS;
        
         foreach ($special_colors as $key) {
-            
-            $value = '';
             
             // split color names into base color, manipulation function and amount of manipulation
             list($base_var, $function, $amount) = explode("__", $key);
@@ -233,12 +248,12 @@ class Config extends \yii\base\Model {
               
                 $value = ColorHelper::fadeout($original_color, $amount);
            
+            } else {
+                $value = '';
             }
             
             // Save calculated value
             $module->settings->set($key, $value);
-			
         }
-        return true;
     }
 }
