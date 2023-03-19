@@ -15,19 +15,19 @@ use humhub\modules\ui\icon\widgets\Icon;
 class Config extends \yii\base\Model {
 	
     // Module settings, see Module.php
-	public $commentLink;
-	public $likeLink;
-	public $likeIcon;
-	public $verifiedAccounts;
+    public $commentLink;
+    public $likeLink;
+    public $likeIcon;
+    public $verifiedAccounts;
     
     // Configurable Colors
-	public $default;
-	public $primary;
-	public $info;
-	public $success;
-	public $warning;
-	public $danger;
-	public $link;
+    public $default;
+    public $primary;
+    public $info;
+    public $link;
+    public $success;
+    public $warning;
+    public $danger;
     
     // not yet configurable
     public $background_color_secondary;
@@ -76,96 +76,98 @@ class Config extends \yii\base\Model {
     
     public static function getSetting(string $setting_name) {
 	    
-		$module = Yii::$app->getModule('flex-theme');
-		$value = $module->settings->get($setting_name);
+        $module = Yii::$app->getModule('flex-theme');
+        $value = $module->settings->get($setting_name);
 		
-		if (empty($value)) {
-			$value = $module->$setting_name;
-		}
+        if (empty($value)) {
+            $value = $module->$setting_name;
+        }
         
-		// Note: $value can still be empty if there is no default in Module.php
-	    return $value;
+        // Note: $value can still be empty if there is no default in Module.php (or file configuration)
+        return $value;
     }
 	
-	public static function verifiedIcon($user) {
+    public static function verifiedIcon($user) {
 		
-        $verifiedAccounts = explode(',', Config::getSetting('verifiedAccounts'));
+    $verifiedAccounts = explode(',', Config::getSetting('verifiedAccounts'));
 		
-		if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
-			return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
-		}
-		return false;		
-	}
+        if (($user instanceof User) && in_array($user->id, $verifiedAccounts)) {
+            return Icon::get('check-circle', ['htmlOptions' => ['class' => 'verified']])->tooltip(Yii::t('FlexThemeModule.base', 'Verified Account'));
+        }
+        return false;		
+    }
 	
     public function init() {
     
-		parent::init();
-		$this->commentLink = $this->getSetting('commentLink');
-		$this->likeLink = $this->getSetting('likeLink');
-		$this->likeIcon = $this->getSetting('likeIcon');
-		$this->verifiedAccounts = $this->getSetting('verifiedAccounts');
-		$this->default = $this->getSetting('default');
-		$this->primary = $this->getSetting('primary');
-		$this->info = $this->getSetting('info');
-		$this->success = $this->getSetting('success');
-		$this->danger = $this->getSetting('danger');
-		$this->link = $this->getSetting('link');
-	}
+        parent::init();
+        $this->commentLink = $this->getSetting('commentLink');
+        $this->likeLink = $this->getSetting('likeLink');
+        $this->likeIcon = $this->getSetting('likeIcon');
+        $this->verifiedAccounts = $this->getSetting('verifiedAccounts');
+        $this->default = $this->getSetting('default');
+        $this->primary = $this->getSetting('primary');
+        $this->info = $this->getSetting('info');
+        $this->link = $this->getSetting('link');
+        $this->success = $this->getSetting('success');
+        $this->warning = $this->getSetting('warning');
+        $this->danger = $this->getSetting('danger');
+		
+    }
     
-	public function attributeLabels() {
+    public function attributeLabels() {
         
         // Note: the attribute name in uppercase is used as fallback
         return [
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
-			'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
-			'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-			'verifiedAccounts' => Yii::t('ThemeOrangeModule.admin', 'Verified Accounts'),
+            'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
+            'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
+            'verifiedAccounts' => Yii::t('ThemeOrangeModule.admin', 'Verified Accounts'),
         ];
     }
 	
-	public function attributeHints() {
+    public function attributeHints() {
 		
         $main_colors = Module::MAIN_COLORS;
 		
-		$hints = array();
+        $hints = array();
         
-		$hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
+        $hints['verifiedAccounts'] = Yii::t('FlexThemeModule.admin.php', 'Enter the user IDs seperated by comma, e.g. <code>1,21</code>');
         
-		foreach ($main_colors as $color) {
-			$value = ThemeHelper::getThemeByName('HumHub')->variable($color);
-			$icon = Icon::get('circle', ['color' => $value ]);
-			$hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
-		}
+        foreach ($main_colors as $color) {
+            $value = ThemeHelper::getThemeByName('HumHub')->variable($color);
+            $icon = Icon::get('circle', ['color' => $value ]);
+            $hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
+        }
 		
-		return $hints;
-	}
+        return $hints;
+    }
 
     public function rules() {
     
         return [
-		    [['commentLink', 'likeLink', 'likeIcon'], 'string'],
-			[['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-			['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
-			['verifiedAccounts', 'validateNumbersString'],
-			[['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'], 'validateHexColor'],
+            [['commentLink', 'likeLink', 'likeIcon'], 'string'],
+            [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
+            ['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
+            ['verifiedAccounts', 'validateNumbersString'],
+            [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor'],
         ];
     }
 	
-	public function validateNumbersString($attribute, $params, $validator) {
+    public function validateNumbersString($attribute, $params, $validator) {
 		
         if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
-                    $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a list of numbers, seperated by commas.'));
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a list of numbers, seperated by commas.'));
         }
-	}
+    }
 		
-	public function validateHexColor($attribute, $params, $validator) {
+    public function validateHexColor($attribute, $params, $validator) {
 		
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
-                    $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
         }
-	}
+    }
 	
-	public function save() {
+    public function save() {
     
         if(!$this->validate()) {
             return false;
@@ -173,29 +175,64 @@ class Config extends \yii\base\Model {
 		
         $module = Yii::$app->getModule('flex-theme');
         
+        // Save configuration for Social Controls and Verified Accounts
         $module->settings->set('commentLink', $this->commentLink);
-	    $module->settings->set('likeLink', $this->likeLink);
-		$module->settings->set('likeIcon', $this->likeIcon);
-		$module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+        $module->settings->set('likeLink', $this->likeLink);
+        $module->settings->set('likeIcon', $this->likeIcon);
+        $module->settings->set('verifiedAccounts', $this->verifiedAccounts);
+        
+        // Save color values
+        self::saveMainColors();
+        
+        // Calculate and save lightened, darkened and faded colors
+        self::saveSpecialColors();
+
+        return true;
+    }
+    
+    public function saveMainColors() {
+        
+        $module = Yii::$app->getModule('flex-theme');
         
         $main_colors = Module::MAIN_COLORS;
-		foreach ($main_colors as $key) {
-			$module->settings->set($key, $this->$key);
-		}
+       
+        foreach ($main_colors as $key) {
+            
+            $value = $this->$key;
+            
+            // Save as module settings (value can be emtpy)
+            $module->settings->set($key, $value);
+            
+            // Save color values as theme variables (take community theme's color if value is empty)
+            if (empty($value)) {
+                $theme_var = str_replace('_', '-', $key);
+                $value = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
+            }
+            $theme_key = 'theme.var.FlexTheme.' . $key;
+            Yii::$app->settings->set($theme_key, $value);
+        }
+    }
+    
+    public function saveSpecialColors() {
+        
+        $module = Yii::$app->getModule('flex-theme');
         
         $special_colors = Module::SPECIAL_COLORS;
-        foreach ($special_colors as $color) {
+       
+        foreach ($special_colors as $key) {
             
-			list($base_var, $function, $amount) = explode("__", $color);
+            // split color names into base color, manipulation function and amount of manipulation
+            list($base_var, $function, $amount) = explode("__", $key);
 			
+            // Get value of base color
             $original_color = $this->$base_var;
-		
             if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
-				$original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
-			}
+                $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
+            }
             
-			if ($function == 'darken') {
+            // Calculate color value with ColorHelper functions
+            if ($function == 'darken') {
 			  
                 $value = ColorHelper::darken($original_color, $amount);
 			
@@ -211,10 +248,12 @@ class Config extends \yii\base\Model {
               
                 $value = ColorHelper::fadeout($original_color, $amount);
            
+            } else {
+                $value = '';
             }
-			$module->settings->set($color, $value);
-			
-		}
-        return true;
+            
+            // Save calculated value
+            $module->settings->set($key, $value);
+        }
     }
 }
