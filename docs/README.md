@@ -7,7 +7,7 @@ The first free configurable theme for HumHub
 **Author:** Felix Hahn, info@hahn-felix.de - self-learned
 
 ## Installation
-see [INSTALLATION.md](INSTALLATION.md)
+see [INSTALLATION.md](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/docs/INSTALLATION.md)
 
 ## Donate
 
@@ -20,7 +20,7 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 **Define your custom colors!**  
 Currently the 7 main colors are configurable. But I am planning to make nearly all color variables configurable.
 
-[Details for Developpers](../themes/FlexTheme/less/README.md)
+[Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
 
 ### Verified Accounts
 
