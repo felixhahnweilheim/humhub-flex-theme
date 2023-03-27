@@ -10,6 +10,8 @@ use yii\helpers\Url;
 
 class Module extends \humhub\components\Module {
 
+    public $resourcesPath = 'resources';
+    
     const FLEX_THEME_NAME = 'FlexTheme';
 	
     // Module settings and their default values
