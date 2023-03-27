@@ -1,17 +1,19 @@
 {
-	"id": "flex-theme",
-	"version": "0.1.0",
-	"name": "Flex Theme",
-	"description": "Flexible Theme for HumHub",
-	"humhub": {
-		"minVersion": "1.14"
-	},
-	"keywords": [
-		"flexible", "configurable"
-	],
-	"screenshots": [],
-  "homepage": "https://github.com/felixhahnweilheim/humhub-flex-theme",
-	"authors": [
+    "id": "flex-theme",
+    "version": "0.1.0",
+    "name": "Flex Theme",
+    "description": "Flexible Theme for HumHub",
+    "humhub": {
+        "minVersion": "1.14"
+    },
+    "keywords": [
+        "flexible", "configurable"
+    ],
+    "screenshots": [
+        "resources/screenshot_settings.png"
+    ],
+    "homepage": "https://github.com/felixhahnweilheim/humhub-flex-theme",
+    "authors": [
         {
             "name": "Felix Hahn",
             "email": "info@hahn-felix.de",
