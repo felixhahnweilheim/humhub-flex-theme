@@ -136,7 +136,7 @@ class Config extends \yii\base\Model {
         foreach ($main_colors as $color) {
             $value = ThemeHelper::getThemeByName('HumHub')->variable($color);
             $icon = Icon::get('circle', ['color' => $value ]);
-            $hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default') . ': ' . '<code>' . $value . '</code> ' . $icon;
+            $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . $value . '</code> ' . $icon;
         }
 		
         return $hints;
