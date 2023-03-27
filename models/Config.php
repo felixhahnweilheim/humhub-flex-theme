@@ -136,7 +136,7 @@ class Config extends \yii\base\Model {
         foreach ($main_colors as $color) {
             $value = ThemeHelper::getThemeByName('HumHub')->variable($color);
             $icon = Icon::get('circle', ['color' => $value ]);
-            $hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default: ') . '<code>' . $value . '</code> ' . $icon;
+            $hints[$color] = Yii::t('FlexThemeModule.admin.php', 'Default') . ': ' . '<code>' . $value . '</code> ' . $icon;
         }
 		
         return $hints;
@@ -156,14 +156,14 @@ class Config extends \yii\base\Model {
     public function validateNumbersString($attribute, $params, $validator) {
 		
         if (!preg_match("/^[0-9, ]*+$/", $this->$attribute)) {
-            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a list of numbers, seperated by commas.'));
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format') . '.' . Yii::t('FlexThemeModule.admin.php', 'Must be a list of numbers, seperated by commas.'));
         }
     }
 		
     public function validateHexColor($attribute, $params, $validator) {
 		
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
-            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format. Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin.php', 'Invalid Format') . '.' . Yii::t('FlexThemeModule.admin.php', 'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
         }
     }
 	

@@ -24,7 +24,7 @@ $color_vars = Module::MAIN_COLORS;
 	    <?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 		
-		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Social Controls')); ?>
+		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Like and Comment links')); ?>
 		    <?= $form->field($model, 'commentLink')->radioList([
 	            'text' => Yii::t('FlexThemeModule.admin', 'Text link'),
 	            'icon' => Yii::t('FlexThemeModule.admin', 'Only icon'),
@@ -42,7 +42,7 @@ $color_vars = Module::MAIN_COLORS;
 	        ]);?>
 		    <?= $form->endCollapsibleFields(); ?>
 		    
-		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Colors')); ?>
+		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
 	          <div class="color-fields">    
 		        <?php foreach ($color_vars as $color): ?>
 				     <?= $form->field($model, $color); ?>
