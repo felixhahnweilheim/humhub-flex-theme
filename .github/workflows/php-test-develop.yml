@@ -1,0 +1,18 @@
+name: PHP Codeception Tests - master
+
+on:
+  push:
+    branches:
+      - 'devlop'
+    paths-ignore:
+      - 'docs/**'
+      - '.github/**'
+      - '.*'
+
+jobs:
+  tests:
+    uses: humhub/actions/.github/workflows/module-tests-master.yml@main
+    with:
+      module-id: flex-theme
+      use-rest-module: true
+      install-composer: true
