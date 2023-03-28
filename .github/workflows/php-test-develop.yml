@@ -6,7 +6,6 @@ on:
       - 'devlop'
     paths-ignore:
       - 'docs/**'
-      - 'tests/**'
       - '.github/**'
       - '.*'
 
