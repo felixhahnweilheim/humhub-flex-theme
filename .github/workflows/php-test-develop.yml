@@ -1,9 +1,9 @@
-name: PHP Codeception Tests - master
+name: PHP Codeception Tests - develop
 
 on:
   push:
     branches:
-      - 'devlop'
+      - 'develop'
     paths-ignore:
       - 'docs/**'
       - '.github/**'
