@@ -10,6 +10,7 @@ class SettingsCest
         $I->amOnRoute(['/flex-theme/config']);
         $I->waitForText('Flex Theme Configuration');
         $I->selectOption('#config-commentlink', 'icon');
+        $I->selectOption('#config-likelink', 'icon');
         $I->click('Save');
 
         $I->seeSuccess();
