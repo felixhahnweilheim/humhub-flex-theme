@@ -1,6 +1,5 @@
 <?php
 
-use humhub\modules\flexTheme\models\ConfigureForm;
 use humhub\modules\flexTheme\Module;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use yii\helpers\Html;
