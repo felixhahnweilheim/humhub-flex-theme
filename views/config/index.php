@@ -22,7 +22,7 @@ $color_vars = Module::MAIN_COLORS;
             </div>
 	    <?php endif; ?>
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
-		
+
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Like and Comment links')); ?>
 		    <?= $form->field($model, 'commentLink')->radioList([
 	            'text' => Yii::t('FlexThemeModule.admin', 'Text link'),
@@ -40,17 +40,15 @@ $color_vars = Module::MAIN_COLORS;
 	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
 	        ]);?>
 		    <?= $form->endCollapsibleFields(); ?>
-		    
+
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
-	          <div class="color-fields">    
+	          <div class="color-fields">
 		        <?php foreach ($color_vars as $color): ?>
 				     <?= $form->field($model, $color); ?>
 			    <?php endforeach; ?>
 			  </div>
 		    <?= $form->endCollapsibleFields(); ?>
-			
-		    <?= $form->field($model, 'verifiedAccounts'); ?>
-		
+
         <div class="form-group">
             <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
         </div>

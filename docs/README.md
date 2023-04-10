@@ -2,7 +2,7 @@
 
 The first free configurable theme for HumHub
 
-**Version: 0.1.0** (for HumHub 1.14)
+**Version: 0.2.0** (for HumHub 1.14)
 
 **Author:** Felix Hahn, info@hahn-felix.de - self-learned
 
@@ -21,15 +21,6 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 Currently the 7 main colors are configurable. But I am planning to make nearly all color variables configurable.
 
 [Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
-
-### Verified Accounts
-
-Define varified accounts by entering their user IDs.
-The verified icon (check-circle) is shown in
-- user profiles
-- posts
-- comments
-- people page
 
 ### Social Controls
 
