@@ -15,10 +15,7 @@ return array (
     'Heart' => 'Herz',
     'Star' => 'Stern',
     'Main Colors' => 'Haupt-Farben',
-    'Verified Accounts' => 'Verifizierte Accounts',
-    'Enter the user IDs seperated by comma, e.g. <code>1,21</code>' => 'Geben Sie die Benutzer-IDs durch Kommas getrennt ein, z.B. <code>1,21</code>',
     'Default' => 'Standard',
     'Invalid Format' => 'Ungültiges Format',
-    'Must be a list of numbers, seperated by commas.' => 'Es muss eine Liste von Zahlen, getrennt durch Kommas, sein.',
     'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"' => 'Es muss eine Farbe in hexadezimaler Schreibweise sein, wie "#00aaff" oder "#FA0"',
 );
