@@ -1,11 +1,10 @@
 <?php
 //FlexTheme
 use humhub\modules\flexTheme\models\Config;
-use humhub\modules\flexTheme\Module;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 
-$main_colors = Module::MAIN_COLORS;
-$special_colors = Module::SPECIAL_COLORS;
+$main_colors = Config::MAIN_COLORS;
+$special_colors = Config::SPECIAL_COLORS;
 $base_theme = ThemeHelper::getThemeByName('HumHub');
 ?>
 <style>
@@ -22,7 +21,7 @@ foreach ($special_colors as $color) {
     echo '--' . $color . ':' . $value . ';';
 }
 ?>
-    
+
 /* TEXT COLOR
  * Default body text color.*/
 --text-color-main: #555;

@@ -1,6 +1,6 @@
 <?php
 
-use humhub\modules\flexTheme\Module;
+use humhub\modules\flexTheme\models\Config;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\base\Theme;
@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 \humhub\modules\flexTheme\assets\ColorisAsset::register($this);
 
-$color_vars = Module::MAIN_COLORS;
+$color_vars = Config::MAIN_COLORS;
 ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?></div>
