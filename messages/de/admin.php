@@ -17,6 +17,5 @@ return array (
     'Main Colors' => 'Haupt-Farben',
     'Default' => 'Standard',
     'Invalid Format' => 'Ungültiges Format',
-    'Must be a list of numbers, seperated by commas.' => 'Es muss eine Liste von Zahlen, getrennt durch Kommas, sein.',
     'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"' => 'Es muss eine Farbe in hexadezimaler Schreibweise sein, wie "#00aaff" oder "#FA0"',
 );
