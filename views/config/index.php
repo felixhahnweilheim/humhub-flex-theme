@@ -2,11 +2,10 @@
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use kartik\widgets\ColorInput;
 use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
-
-\humhub\modules\flexTheme\assets\ColorisAsset::register($this);
 
 $color_vars = Config::MAIN_COLORS;
 ?>
@@ -44,7 +43,7 @@ $color_vars = Config::MAIN_COLORS;
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
 	          <div class="color-fields">
 		        <?php foreach ($color_vars as $color): ?>
-				     <?= $form->field($model, $color); ?>
+				     <?= $form->field($model, $color)->widget(ColorInput::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select color ...')]]); ?>
 			    <?php endforeach; ?>
 			  </div>
 		    <?= $form->endCollapsibleFields(); ?>
@@ -57,30 +56,3 @@ $color_vars = Config::MAIN_COLORS;
 
     </div>
 </div>
-
-<script type="text/javascript">
-    Coloris({
-      el: '.color-fields .form-control',
-      alpha: false,
-      clearButton: true,
-      swatches: [
-        '#264653',
-        '#2a9d8f',
-        '#e9c46a',
-        '#f4a261',
-        '#e76f51',
-        '#d62828',
-        '#023e8a',
-        '#0077b6',
-        '#0096c7',
-        '#00b4d8',
-        '#48cae4'
-      ]
-    });
-</script>
-
-<style type="text/css">
-	.color-fields .form-group {min-width: 150px; float:left; margin-right: 20px;}
-    .color-fields label  {display: block}
-    .color-fields .clr-field {width: 115px}
-</style>
