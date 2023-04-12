@@ -58,7 +58,8 @@ class Module extends \humhub\components\Module {
         }
 
         // Save special colors (lightened, darkened, faded colors)
-        Config::saveSpecialColors();
+        $model = new Config();
+        $model->saveSpecialColors();
     }
 
     // Module Deactivation
