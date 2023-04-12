@@ -1,6 +1,7 @@
 <?php
 //FlexTheme
 use \humhub\modules\flexTheme\models\Config;
+use humhub\modules\ui\icon\widgets\Icon;
 //FlexTheme end
 use yii\helpers\Html;
 
@@ -8,26 +9,15 @@ humhub\modules\like\assets\LikeAsset::register($this);
 
 //FlexTheme
 // get Settings
-$icon = Config::getSetting('likeIcon');
+$iconEmpty = Icon::get(Config::getSetting('likeIcon'));
+$iconFull = Icon::get(Config::getSetting('likeIconFull'));
 $style = Config::getSetting('likeLink');
-
-// Like icon
-if ($icon == 'thumbs_up') {
-    $iconEmpty = '<i class="fa fa-thumbs-o-up"></i>';
-    $iconFull = '<i class="fa fa-thumbs-up"></i>';
-} elseif ($icon == 'heart') {
-    $iconEmpty = '<i class="fa fa-heart-o"></i>';
-    $iconFull = '<i class="fa fa-heart"></i>';
-} elseif ($icon == 'star') {
-    $iconEmpty = '<i class="fa fa-star-o"></i>';
-    $iconFull = '<i class="fa fa-star"></i>';
-}
 
 // additional CSS class
 if ($style == 'text') {
     $likeContainerClass = 'no-icon';
 } else {
-    $likeContainerClass = $icon . '-' . 'container';
+    $likeContainerClass = Html::encode($iconEmpty) . '-' . 'container';
 }
 
 // Like and Unlike Link

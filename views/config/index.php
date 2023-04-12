@@ -2,6 +2,7 @@
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\ui\form\widgets\IconPicker;
 use kartik\widgets\ColorInput;
 use yii\helpers\Html;
 use yii\base\Theme;
@@ -33,12 +34,9 @@ $color_vars = Config::MAIN_COLORS;
 	            'icon' => Yii::t('FlexThemeModule.admin', 'Only icon'),
 	            'both' => Yii::t('FlexThemeModule.admin', 'Text and icon'),
             ]);?>
-		    <?= $form->field($model, 'likeIcon')->radioList([
-		        'thumbs_up' => Yii::t('FlexThemeModule.admin', 'Thumbs up'),
-	            'heart' => Yii::t('FlexThemeModule.admin', 'Heart'),
-	            'star' => Yii::t('FlexThemeModule.admin', 'Star'),
-	        ]);?>
-		    <?= $form->endCollapsibleFields(); ?>
+            <?= $form->field($model, 'likeIcon')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('VerifiedModule.base', 'Select icon ...')]]); ?>
+            <?= $form->field($model, 'likeIconFull')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('VerifiedModule.base', 'Select icon ...')]]); ?>
+            <?= $form->endCollapsibleFields(); ?>
 
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
 	          <div class="color-fields">

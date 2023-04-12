@@ -19,8 +19,10 @@ class Module extends \humhub\components\Module {
     public $commentLink = 'text';
     // @var string defines the style of like links (options: icon, text, both)
     public $likeLink = 'text';
-    // @var string defines the like icon (options: heart, thumbs_up, star)
-    public $likeIcon = 'thumbs_up';
+    // @var string defines the like icon
+    public $likeIcon = 'thumbs-up';
+    // @var string defines the unlike icon (already liked content)
+    public $likeIconFull = 'thumbs-o-up';
 
     // Translatable Module Description
     public function getDescription() {

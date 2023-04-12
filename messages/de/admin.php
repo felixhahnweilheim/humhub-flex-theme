@@ -16,6 +16,7 @@ return array (
     'Star' => 'Stern',
     'Main Colors' => 'Haupt-Farben',
     'Default' => 'Standard',
+    'Select icon ...' => 'Icon wählen ...',
     'Select color ...' => 'Farbe wählen ...',
     'Invalid Format' => 'Ungültiges Format',
     'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"' => 'Es muss eine Farbe in hexadezimaler Schreibweise sein, wie "#00aaff" oder "#FA0"',

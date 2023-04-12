@@ -19,6 +19,7 @@ class Config extends \yii\base\Model
     public $commentLink;
     public $likeLink;
     public $likeIcon;
+    public $likeIconFull;
 
     // Configurable Colors
     const MAIN_COLORS = array('default', 'primary', 'info', 'link', 'success', 'warning', 'danger');
@@ -156,7 +157,8 @@ class Config extends \yii\base\Model
         return [
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
             'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
-            'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon')
+            'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
+            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)')
         ];
     }
 
@@ -178,9 +180,8 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon'], 'string'],
+            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-            ['likeIcon', 'in', 'range' => ['heart', 'star', 'thumbs_up']],
             [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
         ];
     }
@@ -204,6 +205,7 @@ class Config extends \yii\base\Model
         $module->settings->set('commentLink', $this->commentLink);
         $module->settings->set('likeLink', $this->likeLink);
         $module->settings->set('likeIcon', $this->likeIcon);
+        $module->settings->set('likeIconFull', $this->likeIconFull);
 
         // Save color values
         self::saveMainColors();
