@@ -15,11 +15,12 @@ use yii\base\UnknownPropertyException;
  */
 class Config extends \yii\base\Model
 {
-    // Module settings, see Module.php
+    // Module settings
     public $commentLink;
     public $likeLink;
     public $likeIcon;
     public $likeIconFull;
+    public $likeIconColor;
 
     // Configurable Colors
     const MAIN_COLORS = array('default', 'primary', 'info', 'link', 'success', 'warning', 'danger');
@@ -120,19 +121,8 @@ class Config extends \yii\base\Model
 
     public static function getSetting(string $setting_name) {
 
-        $module = Yii::$app->getModule('flex-theme');
-        $value = $module->settings->get($setting_name);
-
-        if (empty($value)) {
-            // try to get default value from module class (only some variables are defined there
-            try {
-                $value = $module->$setting_name;
-			} catch(UnknownPropertyException $e) {
-            }
-        }
-
-        // Note: $value can still be empty if there is no default in the module class
-        return $value;
+        // Note: return can be empty
+        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
 
     public function init() {
@@ -142,6 +132,8 @@ class Config extends \yii\base\Model
         $this->commentLink = $this->getSetting('commentLink');
         $this->likeLink = $this->getSetting('likeLink');
         $this->likeIcon = $this->getSetting('likeIcon');
+        $this->likeIconFull = $this->getSetting('likeIconFull');
+        $this->likeIconColor = $this->getSetting('likeIconColor');
         $this->default = $this->getSetting('default');
         $this->primary = $this->getSetting('primary');
         $this->info = $this->getSetting('info');
@@ -158,7 +150,8 @@ class Config extends \yii\base\Model
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
             'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
             'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)')
+            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
+            'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon')
         ];
     }
 
@@ -182,7 +175,10 @@ class Config extends \yii\base\Model
         return [
             [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-            [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
+            [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
+                return $this->likeLink == 'both' || $this->likeLink == 'icon';
+            }],
+            [['likeIconColor', 'default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
         ];
     }
 
@@ -206,6 +202,7 @@ class Config extends \yii\base\Model
         $module->settings->set('likeLink', $this->likeLink);
         $module->settings->set('likeIcon', $this->likeIcon);
         $module->settings->set('likeIconFull', $this->likeIconFull);
+        $module->settings->set('likeIconColor', $this->likeIconColor);
 
         // Save color values
         self::saveMainColors();

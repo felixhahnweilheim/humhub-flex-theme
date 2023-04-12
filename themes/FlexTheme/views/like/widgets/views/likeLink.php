@@ -8,17 +8,15 @@ use yii\helpers\Html;
 humhub\modules\like\assets\LikeAsset::register($this);
 
 //FlexTheme
-// get Settings
-$iconEmpty = Icon::get(Config::getSetting('likeIcon'));
-$iconFull = Icon::get(Config::getSetting('likeIconFull'));
+// get Icon
+$color = Config::getSetting('likeIconColor');
+$iconEmpty = Icon::get(Config::getSetting('likeIcon'), ['color' => $color]);
+$iconFull = Icon::get(Config::getSetting('likeIconFull'), ['color' => $color]);
+// get style setting
 $style = Config::getSetting('likeLink');
 
 // additional CSS class
-if ($style == 'text') {
-    $likeContainerClass = 'no-icon';
-} else {
-    $likeContainerClass = Html::encode($iconEmpty) . '-' . 'container';
-}
+$likeContainerClass = Html::encode($iconEmpty) . '-' . 'container';
 
 // Like and Unlike Link
 if ($style == 'icon') {
@@ -28,10 +26,10 @@ if ($style == 'icon') {
 	$likeText = $iconEmpty . HTML::tag('span', Yii::t('LikeModule.base', 'Like'), ['class' => 'like-label-both']);
 	$unlikeText = $iconFull . HTML::tag('span', Yii::t('LikeModule.base', 'Unlike'), ['class' => 'unlike-label-both']);
 } else {
+    $likeContainerClass = 'no-icon';
     $likeText = Yii::t('LikeModule.base', 'Like');
     $unlikeText = Yii::t('LikeModule.base', 'Unlike');
 }
-
 ?>
 
 <span class="likeLinkContainer <?= $likeContainerClass ?>" id="likeLinkContainer_<?= $id ?>">
