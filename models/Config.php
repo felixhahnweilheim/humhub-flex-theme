@@ -15,7 +15,7 @@ use yii\base\UnknownPropertyException;
  */
 class Config extends \yii\base\Model
 {
-    // Module settings, see Module.php
+    // Module settings
     public $commentLink;
     public $likeLink;
     public $likeIcon;
@@ -121,19 +121,8 @@ class Config extends \yii\base\Model
 
     public static function getSetting(string $setting_name) {
 
-        $module = Yii::$app->getModule('flex-theme');
-        $value = $module->settings->get($setting_name);
-
-        if (empty($value)) {
-            // try to get default value from module class (only some variables are defined there
-            try {
-                $value = $module->$setting_name;
-			} catch(UnknownPropertyException $e) {
-            }
-        }
-
-        // Note: $value can still be empty if there is no default in the module class
-        return $value;
+        // Note: return can be empty
+        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
 
     public function init() {
@@ -184,8 +173,11 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'], 'string'],
+            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
+            [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
+                return $this->likeLink == 'both' || $this->likeLink == 'icon';
+            }],
             [['likeIconColor', 'default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
         ];
     }

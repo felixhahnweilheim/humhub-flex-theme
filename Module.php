@@ -14,18 +14,6 @@ class Module extends \humhub\components\Module {
 
     const FLEX_THEME_NAME = 'FlexTheme';
 
-	// Module settings with default values
-    // @var string defines the style of comment links (options: icon, text, both)
-    public $commentLink = 'text';
-    // @var string defines the style of like links (options: icon, text, both)
-    public $likeLink = 'text';
-    // @var string defines the like icon
-    public $likeIcon = 'thumbs-o-up';
-    // @var string defines the unlike icon (already liked content)
-    public $likeIconFull = 'thumbs-up';
-    // @var string defines color of like icon
-    public $likeIconColor = '#21a1b3';
-
     // Translatable Module Description
     public function getDescription() {
         return Yii::t('FlexThemeModule.admin', 'Flexible Theme for HumHub');
