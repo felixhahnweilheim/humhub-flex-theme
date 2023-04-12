@@ -20,6 +20,7 @@ class Config extends \yii\base\Model
     public $likeLink;
     public $likeIcon;
     public $likeIconFull;
+    public $likeIconColor;
 
     // Configurable Colors
     const MAIN_COLORS = array('default', 'primary', 'info', 'link', 'success', 'warning', 'danger');
@@ -142,6 +143,8 @@ class Config extends \yii\base\Model
         $this->commentLink = $this->getSetting('commentLink');
         $this->likeLink = $this->getSetting('likeLink');
         $this->likeIcon = $this->getSetting('likeIcon');
+        $this->likeIconFull = $this->getSetting('likeIconFull');
+        $this->likeIconColor = $this->getSetting('likeIconFull');
         $this->default = $this->getSetting('default');
         $this->primary = $this->getSetting('primary');
         $this->info = $this->getSetting('info');
@@ -158,7 +161,8 @@ class Config extends \yii\base\Model
             'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
             'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
             'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)')
+            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
+            'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon')
         ];
     }
 
@@ -180,9 +184,9 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
+            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-            [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
+            [['likeIconColor', 'default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
         ];
     }
 
@@ -206,6 +210,7 @@ class Config extends \yii\base\Model
         $module->settings->set('likeLink', $this->likeLink);
         $module->settings->set('likeIcon', $this->likeIcon);
         $module->settings->set('likeIconFull', $this->likeIconFull);
+        $module->settings->set('likeIconColor', $this->likeIconColor);
 
         // Save color values
         self::saveMainColors();

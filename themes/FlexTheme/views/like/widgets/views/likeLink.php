@@ -9,8 +9,9 @@ humhub\modules\like\assets\LikeAsset::register($this);
 
 //FlexTheme
 // get Settings
-$iconEmpty = Icon::get(Config::getSetting('likeIcon'));
-$iconFull = Icon::get(Config::getSetting('likeIconFull'));
+$color = Config::getSetting('likeIconColor');
+$iconEmpty = Icon::get(Config::getSetting('likeIcon'), ['color' => $color]);
+$iconFull = Icon::get(Config::getSetting('likeIconFull'), ['color' => $color]);
 $style = Config::getSetting('likeLink');
 
 // additional CSS class

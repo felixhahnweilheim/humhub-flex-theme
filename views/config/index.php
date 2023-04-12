@@ -36,6 +36,7 @@ $color_vars = Config::MAIN_COLORS;
             ]);?>
             <?= $form->field($model, 'likeIcon')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('VerifiedModule.base', 'Select icon ...')]]); ?>
             <?= $form->field($model, 'likeIconFull')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('VerifiedModule.base', 'Select icon ...')]]); ?>
+            <?= $form->field($model, 'iconColor')->widget(ColorInput::class, ['options' => ['placeholder' => \Yii::t('VerifiedModule.base', 'Select color ...')]]); ?>
             <?= $form->endCollapsibleFields(); ?>
 
 		    <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
