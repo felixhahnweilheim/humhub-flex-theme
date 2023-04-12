@@ -144,7 +144,7 @@ class Config extends \yii\base\Model
         $this->likeLink = $this->getSetting('likeLink');
         $this->likeIcon = $this->getSetting('likeIcon');
         $this->likeIconFull = $this->getSetting('likeIconFull');
-        $this->likeIconColor = $this->getSetting('likeIconFull');
+        $this->likeIconColor = $this->getSetting('likeIconColor');
         $this->default = $this->getSetting('default');
         $this->primary = $this->getSetting('primary');
         $this->info = $this->getSetting('info');
