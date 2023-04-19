@@ -8,7 +8,7 @@ class SettingsCest
     {
         $I->amAdmin();
         $I->amOnRoute(['/flex-theme/config']);
-        $I->waitForText('Flex Theme Configuration');
+        $I->waitForText('Flex Theme');
         $I->selectOption('#config-commentlink', 'icon');
         $I->selectOption('#config-likelink', 'icon');
         $I->selectOption('#config-likeicon', 'heart');
