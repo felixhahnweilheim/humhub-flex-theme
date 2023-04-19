@@ -12,7 +12,7 @@ use yii\helpers\Url;
 $color_vars = Module::MAIN_COLORS;
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?></div>
+    <div class="panel-heading"><?= Yii::t('FlexThemeModule.admin', '<strong>Flex Theme</strong> Configuration'); ?></div>
     <div class="panel-body">
 	    <?php if (Yii::$app->view->theme->name != 'FlexTheme'): ?>
 		    <div class="alert alert-danger">
