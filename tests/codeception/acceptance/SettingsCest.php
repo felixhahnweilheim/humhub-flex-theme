@@ -7,7 +7,6 @@ class SettingsCest
     public function testSettings(AcceptanceTester $I)
     {
         $I->amAdmin();
-        $I->enableModule(1, 'flex-theme');
         $I->amOnRoute(['/flex-theme/config']);
         $I->waitForText('Flex Theme');
         $I->selectOption('#config-commentlink', 'icon');
