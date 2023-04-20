@@ -5,23 +5,10 @@ namespace humhub\modules\flexTheme\models;
 use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
-use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
 
-use yii\base\UnknownPropertyException;
-
-/**
- * ConfigureForm defines the configurable fields.
- */
-class Config extends \yii\base\Model
+class ColorSettings extends \yii\base\Model
 {
-    // Module settings
-    public $commentLink;
-    public $likeLink;
-    public $likeIcon;
-    public $likeIconFull;
-    public $likeIconColor;
-
     // Configurable Colors
     const MAIN_COLORS = array('default', 'primary', 'info', 'link', 'success', 'warning', 'danger');
     public $default;
@@ -119,40 +106,37 @@ class Config extends \yii\base\Model
     public $text_color_secondary__lighten__25;
     public $link__fade__60;
 
-    public static function getSetting(string $setting_name) {
+    public static function getColors() {
 
-        // Note: return can be empty
-        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
+        $module = Yii::$app->getModule('flex-theme');
+		$base_theme = ThemeHelper::getThemeByName('HumHub');
+		$colors = array_merge(self::MAIN_COLORS, self::SPECIAL_COLORS);
+
+        foreach ($colors as $color) {
+            $value = $module->settings->get($color);
+
+            if (empty($value)) {
+	            $value = $base_theme->variable($color);
+	        }
+            $result[$color] = $value;
+        }
+
+        return $result;
     }
 
     public function init() {
 
         parent::init();
 
-        $this->commentLink = $this->getSetting('commentLink');
-        $this->likeLink = $this->getSetting('likeLink');
-        $this->likeIcon = $this->getSetting('likeIcon');
-        $this->likeIconFull = $this->getSetting('likeIconFull');
-        $this->likeIconColor = $this->getSetting('likeIconColor');
-        $this->default = $this->getSetting('default');
-        $this->primary = $this->getSetting('primary');
-        $this->info = $this->getSetting('info');
-        $this->link = $this->getSetting('link');
-        $this->success = $this->getSetting('success');
-        $this->warning = $this->getSetting('warning');
-        $this->danger = $this->getSetting('danger');
-    }
+        $module = Yii::$app->getModule('flex-theme');
 
-    public function attributeLabels() {
-
-        // Note: the attribute name in uppercase is used as fallback
-        return [
-            'commentLink' => Yii::t('FlexThemeModule.admin', 'Style of Comment Button'),
-            'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
-            'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
-            'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
-            'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon')
-        ];
+        $this->default = $module->settings->get('default');
+        $this->primary = $module->settings->get('primary');
+        $this->info = $module->settings->get('info');
+        $this->link = $module->settings->get('link');
+        $this->success = $module->settings->get('success');
+        $this->warning = $module->settings->get('warning');
+        $this->danger = $module->settings->get('danger');
     }
 
     public function attributeHints() {
@@ -173,12 +157,7 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
-            [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-            [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
-                return $this->likeLink == 'both' || $this->likeLink == 'icon';
-            }],
-            [['likeIconColor', 'default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
+            [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'], 'validateHexColor']
         ];
     }
 
@@ -194,15 +173,6 @@ class Config extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
-
-        $module = Yii::$app->getModule('flex-theme');
-
-        // Save configuration for Social Controls and Verified Accounts
-        $module->settings->set('commentLink', $this->commentLink);
-        $module->settings->set('likeLink', $this->likeLink);
-        $module->settings->set('likeIcon', $this->likeIcon);
-        $module->settings->set('likeIconFull', $this->likeIconFull);
-        $module->settings->set('likeIconColor', $this->likeIconColor);
 
         // Save color values
         self::saveMainColors();

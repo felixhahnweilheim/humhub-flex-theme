@@ -16,4 +16,3 @@ jobs:
       module-id: flex-theme
       use-rest-module: true
       install-composer: true
-      
