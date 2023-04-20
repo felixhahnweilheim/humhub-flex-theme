@@ -3,6 +3,7 @@
 - Enh: use color and icon pickers
 - Remove default values for configuration and drop support for file configuration
 - Remove verified icon (use https://marketplace.humhub.com/module/verified/description instead)
+- Enh: split settings form into general and colors
 
 ## 0.1.0 (unreleased)
 First release
