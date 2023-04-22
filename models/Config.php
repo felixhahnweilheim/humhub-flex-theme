@@ -32,10 +32,10 @@ class Config extends \yii\base\Model
 
         parent::init();
 
-        $settings = Yii::$app->getModule('flex-theme')->settings
+        $settings = Yii::$app->getModule('flex-theme')->settings;
 
-        $this->commentLink = $settings->get('commentLink');
-        $this->likeLink = $settings->get('likeLink');
+        $this->commentLink = $settings->get('commentLink', 'text');
+        $this->likeLink = $settings->get('likeLink', 'text');
         $this->likeIcon = $settings->get('likeIcon', 'thumbs-o-up');
         $this->likeIconFull = $settings->get('likeIconFull', 'thumbs-up');
         $this->likeIconColor = $settings->get('likeIconColor');
