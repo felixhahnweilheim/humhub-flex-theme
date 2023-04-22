@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
-$color_vars = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLOR);
+$color_vars = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLORS);
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
