@@ -10,8 +10,8 @@ My plan is to use this behavior later also for a dark mode.
 ### Replaced LESS functions
 
 HumHub uses LESS functions as lighten(), darken() or fade(). Those do not work when color variables contain CSS variables instead of concrete colors.  
-That's why the import of some files is prevented via `@prev-...` in variables.less.  
-Those files are replaced and the lightened, darkened and faded colors are replaced by variables like `info-darken-5`.
+That's why the import of some files is prevented via `@prev-...` in css-vars.less.  
+Those files are replaced and the lightened, darkened and faded colors are replaced by LESS variables like `info-darken-5`.
 
 The calculation of those is done via `helpers/ColorHelper`.
 
