@@ -13,7 +13,6 @@ class ConfigController extends \humhub\modules\admin\components\Controller
     {
         parent::init();
 
-        $this->appendPageTitle(Yii::t('FlexThemeModule.base', '<strong>Flex Theme</strong> Configuration'));
         $this->subLayout = '@flex-theme/views/layouts/admin';
     }
 
