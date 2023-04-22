@@ -1,6 +1,6 @@
 ## How CSS of this theme works
 
-The variables.less file defines CSS variables like `var(--default)` instead of concrete colors.  
+The css-vars.less file defines CSS variables like `var(--default)` instead of concrete colors.  
 The concrete values are defined in the HTML head, like `<style>:root {--default:#00ff00; ... }</style>`.
 
 This makes it possible to switch colors without changes to the theme.css.
