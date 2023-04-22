@@ -32,11 +32,13 @@ class Config extends \yii\base\Model
 
         parent::init();
 
-        $this->commentLink = $this->getSetting('commentLink');
-        $this->likeLink = $this->getSetting('likeLink');
-        $this->likeIcon = $this->getSetting('likeIcon', 'thumbs-o-up');
-        $this->likeIconFull = $this->getSetting('likeIconFull', 'thumbs-up');
-        $this->likeIconColor = $this->getSetting('likeIconColor');
+        $settings = Yii::$app->getModule('flex-theme')->settings
+
+        $this->commentLink = $settings->get('commentLink');
+        $this->likeLink = $settings->get('likeLink');
+        $this->likeIcon = $settings->get('likeIcon', 'thumbs-o-up');
+        $this->likeIconFull = $settings->get('likeIconFull', 'thumbs-up');
+        $this->likeIconColor = $settings->get('likeIconColor');
     }
 
     public function attributeLabels() {
