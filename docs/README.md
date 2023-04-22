@@ -18,7 +18,7 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 ### Colors (under development)
 
 **Define your custom colors!**  
-Currently the 7 main colors are configurable. But I am planning to make nearly all color variables configurable.
+Currently the 7 main colors and the text colors are configurable. Background colors will be added soon.
 
 [Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
 
