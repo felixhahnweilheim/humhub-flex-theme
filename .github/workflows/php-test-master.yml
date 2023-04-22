@@ -9,6 +9,7 @@ on:
       - 'tests/**'
       - '.github/**'
       - '.*'
+      - '*.md'
 
 jobs:
   tests:
