@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\base\Theme;
 use yii\helpers\Url;
 
-$color_vars = Config::MAIN_COLORS;
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
