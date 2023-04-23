@@ -104,25 +104,25 @@
 // --------------------------------------------------
 
 // main content background color should be in contrast with @text-color-main, @text-color-secondary and other text colors
-@background-color-main: #fff;
+@background-color-main: var(--background_color_main);
 
 // used beside others for tabs - former @background1
-@background-color-secondary: #f7f7f7;
+@background-color-secondary: var(--background_color_secondary);
 
 // page background which is also used for other ui components as comment box etc. - former @background2
-@background-color-page: #ededed;
+@background-color-page: var(--background_color_page);
 
 // Informative highlighting color
 // (e.g. Comment Permalink, Shared Item, Calendar CurDay, Wiki Active Page Nav, Mail Module Speech Bubble)
-@background-color-highlight: #daf0f3; // originally lighten(desaturate(spin(@info, 4), 6), 42)
+@background-color-highlight: var(--background_color_highlight); // originally lighten(desaturate(spin(@info, 4), 6), 42)
 
 // Informative highlighting soft color
 // (e.g. Wiki Active Category)
-@background-color-highlight-soft: #f2f9fb; // originally lighten(desaturate(spin(@info, 6), 16), 55)
+@background-color-highlight-soft: var(--background_color_highlight_soft); // originally lighten(desaturate(spin(@info, 6), 16), 55)
 
 // Additional background colors
-@background3: #d7d7d7;
-@background4: #b2b2b2;
+@background3: var(--background3);
+@background4: var(--background4);
 
 //
 // Bootstrap Alert boxes
