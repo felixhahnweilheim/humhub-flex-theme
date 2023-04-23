@@ -80,13 +80,6 @@ class ColorSettings extends \yii\base\Model
     public $text_color_secondary__lighten__25;
     public $link__fade__60;
 
-    const ALL_COLORS = array(
-        'default', 'primary', 'info', 'link', 'success', 'warning', 'danger',
-        'text_color_main', 'text_color_secondary', 'text_color_highlight', 'text_color_soft', 'text_color_soft2', 'text_color_soft3', 'text_color_contrast',
-        'background_color_main', 'background_color_secondary', 'background_color_page', 'background_color_highlight', 'background_color_highlight_soft', 'background3', 'background4',  'default__darken__2',
-        'default__darken__2','default__darken__5','default__lighten__2','primary__darken__5','primary__darken__10','primary__lighten__5','primary__lighten__8','primary__lighten__10','primary__lighten__20','primary__lighten__25','info__darken__5','info__darken__10','info__lighten__5','info__lighten__8','info__lighten__25','info__lighten__45','info__lighten__50','danger__darken__5','danger__darken__10','danger__lighten__5','danger__lighten__20','success__darken__5','success__darken__10','success__lighten__5','success__lighten__20','warning__darken__2','warning__darken__5','warning__darken__10','warning__lighten__5','warning__lighten__20','link__darken__2','link__lighten__5','background_color_secondary__darken__5','background_color_page__lighten__3','background_color_page__darken__5','background_color_page__darken__8','text_color_secondary__lighten__25','link__fade__60'
-    );
-
     public static function getColors()
     {
         $module = Yii::$app->getModule('flex-theme');
