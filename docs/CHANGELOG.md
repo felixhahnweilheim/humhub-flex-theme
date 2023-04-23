@@ -5,6 +5,7 @@
 - Remove verified icon (use https://marketplace.humhub.com/module/verified/description instead)
 - Enh: split settings form into general and colors
 - Enh: text colors
+- Enh: background colors
 
 ## 0.1.0 (unreleased)
 First release
