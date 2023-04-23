@@ -18,7 +18,8 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 ### Colors (under development)
 
 **Define your custom colors!**  
-Currently the 7 main colors and the text colors are configurable. Background colors will be added soon.
+You can configure nearly all colors (main colors, text colors, background colors).  
+Please note: This still needs more testing and some colors that are hard-coded in HumHub can't be changed.
 
 [Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
 
@@ -30,7 +31,7 @@ Choose between the text "Comment" / "Reply" (default) and the comment icon or bo
 
 **Like Link**
 
-Similar to Comment Link. But for the icon you can decide between thumbs up (default), heart and star.
+Similar to Comment Link. But for the icon you can choose your own from the list of FontAwesome icons.
 
 ## Translations
 - German
