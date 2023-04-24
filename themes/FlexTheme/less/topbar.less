@@ -56,7 +56,7 @@
     background-color: @primary;
     top: 0;
     z-index: 1030;
-    color: white;
+    color: @background-color-main;
 
 
     a.navbar-brand {
@@ -146,7 +146,7 @@
             top: 1px;
             margin-left: -10px;
             border-top-width: 0;
-            border-bottom-color: #fff;
+            border-bottom-color: @background-color-main;
             z-index: 1035;
         }
 
@@ -187,11 +187,11 @@
                 }
 
                 i.accepted {
-                    color: #5cb85c;
+                    color: @success;
                 }
 
                 i.declined {
-                    color: #d9534f;
+                    color: @danger;
                 }
             }
 
@@ -218,13 +218,13 @@
             }
             &:active {
                 border-color: @text-color-secondary;
-                background: white;
+                background: @background-color-main;
             }
         }
     }
 
     a {
-        color: white;
+        color: @background-color-main;
     }
 
     .caret {
@@ -291,7 +291,7 @@
 
 #topbar-second {
     top: 50px;
-    background-color: #fff;
+    background-color: @background-color-main;
     z-index: 1029;
     background-image: none;
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
@@ -371,8 +371,8 @@
     }
 
     .nav > li > ul > li > a {
-        border-left: 3px solid #fff;
-        background-color: #fff;
+        border-left: 3px solid @background-color-main;
+        background-color: @background-color-main;
         color: @text-color-highlight;
     }
 
@@ -384,7 +384,7 @@
 
     .nav > li > a#space-menu {
         padding-right: 13px;
-        border-right: 1px solid #ededed;
+        border-right: 1px solid @background-color-page;
     }
 
     .nav > li > a#search-menu {
