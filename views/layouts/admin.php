@@ -1,7 +1,7 @@
 <?php $this->beginContent('@admin/views/layouts/main.php') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-         <?= Yii::t('FlexThemeModule.admin', '<b>Flex Theme</b> Configuration'); ?>
+         <?= Yii::t('FlexThemeModule.admin', '<strong>Flex Theme</strong> Configuration'); ?>
     </div>
     <?php if (Yii::$app->view->theme->name != 'FlexTheme'): ?>
 		    <div class="alert alert-danger">
