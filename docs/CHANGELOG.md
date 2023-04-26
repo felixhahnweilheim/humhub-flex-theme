@@ -1,4 +1,4 @@
-## 0.2.0 (under development)
+## 0.2.0 (26 april 2023)
 - Enh: make like icon color configurable
 - Enh: use color and icon pickers
 - drop support for file configuration
@@ -7,5 +7,5 @@
 - Enh: text colors
 - Enh: background colors
 
-## 0.1.0 (unreleased)
+## 0.1.0 (27 march 2023)
 First release
