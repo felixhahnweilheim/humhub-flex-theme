@@ -10,11 +10,20 @@ on:
       - '.github/**'
       - '.*'
       - '*.md'
+  pull_request:
+    branches:
+      - 'main'
+    paths-ignore:
+      - 'docs/**'
+      - 'tests/**'
+      - '.github/**'
+      - '.*'
+      - '*.md'
 
 jobs:
   tests:
     uses: humhub/actions/.github/workflows/module-tests-master.yml@main
     with:
       module-id: flex-theme
-      use-rest-module: true
+      use-rest-module: false
       install-composer: true
