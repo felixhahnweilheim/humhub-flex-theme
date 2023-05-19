@@ -22,7 +22,14 @@ class AdvancedSettings extends \yii\base\Model
 
     public function attributeLabels()
     {
-        $hints['settingsJson'] = 'Settings JSON';
+        $labels['settingsJson'] = 'Settings JSON';
+
+        return $labels;
+    }
+
+    public function attributeHints()
+    {
+        $hints['settingsJson'] = '<b>' . Yii::t('FlexThemeModule.admin', 'WARNING') . '</b>' . ': ' . Yii::t('FlexThemeModule.admin', 'Your settings will be overwritten!');
 
         return $hints;
     }
@@ -39,6 +46,10 @@ class AdvancedSettings extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
+        $settings = json_decode($this->settingsJson);
+
+        $base = $settings['base'];
+        $colors = $settings['colors'];
 
         return true;
     }
