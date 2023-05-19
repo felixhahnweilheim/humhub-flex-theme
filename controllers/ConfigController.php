@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\controllers;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
+use humhub\modules\flexTheme\models\AdvancedSettings;
 use Yii;
 
 class ConfigController extends \humhub\modules\admin\components\Controller
@@ -36,5 +37,15 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         }
 
         return $this->render('colors', ['model' => $form]);
+    }
+
+    public function actionAdvanced()
+    {
+        $form = new AdvancedSettings();
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            $this->view->saved();
+        }
+
+        return $this->render('advanced', ['model' => $form]);
     }
 }

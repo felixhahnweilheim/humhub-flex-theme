@@ -46,6 +46,16 @@ class AdminMenu extends TabMenu
             ])
         ]));
 
+        $this->addEntry(new MenuLink([
+            'label' => Yii::t('FlexThemeModule.admin', 'Advanced'),
+            'url' => ['/flex-theme/config/advanced'],
+            'sortOrder' => 300,
+            'isActive' => MenuLink::isActiveState('flex-theme', 'config', 'advanced'),
+            'isVisible' => Yii::$app->user->can([
+                ManageSettings::class
+            ])
+        ]));
+
         parent::init();
     }
 }
