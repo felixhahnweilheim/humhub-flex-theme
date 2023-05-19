@@ -15,7 +15,7 @@ class AdvancedSettings extends \yii\base\Model
 
         $settings = Yii::$app->getModule('flex-theme')->settings;
 
-        $this->settingsJson = 'TEST';
+        $this->settingsJson = self::getSettingsAsJSON();
     }
 
     public function attributeHints()
@@ -39,5 +39,15 @@ class AdvancedSettings extends \yii\base\Model
         }
 
         return true;
+    }
+
+    protected function getSettingsAsJSON()
+    {
+        return json_encode(self::getSettingsArray());
+    }
+
+    protected function getSettingsArray()
+    {
+        $settings = [];
     }
 }
