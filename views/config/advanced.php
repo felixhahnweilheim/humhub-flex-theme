@@ -10,7 +10,7 @@ use yii\helpers\Html;
         <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 
             <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Import/Export')); ?>
-		        <?= $form->field($model, 'settingsJson'); ?>
+		        <?= $form->field($model, 'settingsJson')->textarea(['rows' => '12']); ?>
             <?= $form->endCollapsibleFields(); ?>
 
         <div class="form-group">
