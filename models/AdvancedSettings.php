@@ -15,12 +15,12 @@ class AdvancedSettings extends \yii\base\Model
 
         $settings = Yii::$app->getModule('flex-theme')->settings;
 
-        $this->settingsJson = self::getSettingsAsJSON();
+        $this->settingsJson = json_encode(self::getSettingsArray());
     }
 
-    public function attributeHints()
+    public function attributeLabels()
     {
-        $hints = array();
+        $hints['settingsJson'] = 'Settings JSON';
 
         return $hints;
     }
@@ -41,13 +41,18 @@ class AdvancedSettings extends \yii\base\Model
         return true;
     }
 
-    protected function getSettingsAsJSON()
-    {
-        return json_encode(self::getSettingsArray());
-    }
-
     protected function getSettingsArray()
     {
         $settings = [];
+
+        $module = Yii::$app->getModule('flex-theme');
+
+        $base_settings = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'];
+
+        foreach( $base_settings as $setting) {
+             $settings[$setting] = $module->settings->get($setting);
+        }
+
+        return $settings;
     }
 }
