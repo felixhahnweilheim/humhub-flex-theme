@@ -2,6 +2,7 @@
 
 namespace humhub\modules\flexTheme\models;
 
+use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
 
 use Yii;
@@ -17,7 +18,7 @@ class AdvancedSettings extends \yii\base\Model
 
         $settings = Yii::$app->getModule('flex-theme')->settings;
 
-        $this->settingsJson = json_encode(self::getSettingsArray());
+        $this->settingsJson = json_encode(self::getSettingsArray(), JSON_PRETTY_PRINT);
     }
 
     public function attributeLabels()
@@ -37,8 +38,15 @@ class AdvancedSettings extends \yii\base\Model
     public function rules()
     {
         return [
-            [['settingsJson'], 'string']
+            [['settingsJson'], 'isValidJSON']
 		];
+    }
+
+    public function isValidJSON($attribute, $params, $validator)
+    {
+        if(json_decode($this->$attribute) === null) {
+            $this->addError($attribute, 'JSON could not be converted.');
+        }
     }
 
     public function save()
@@ -48,8 +56,22 @@ class AdvancedSettings extends \yii\base\Model
         }
         $settings = json_decode($this->settingsJson);
 
-        $base = $settings['base'];
-        $colors = $settings['colors'];
+        $base = $settings->base;
+        $colors = $settings->colors;
+
+        // Save base settings
+        $config = new Config();
+        foreach($base as $key => $value) {
+            $config->$key = $value;
+        }
+        $config->save();
+
+        // Save color settings
+        $colorSettings = new colorSettings();
+        foreach($colors as $key => $value) {
+            $colorSettings->$key = $value;
+        }
+        $colorSettings->save();
 
         return true;
     }
