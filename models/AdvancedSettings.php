@@ -50,22 +50,28 @@ class AdvancedSettings extends \yii\base\Model
 
         $module = Yii::$app->getModule('flex-theme');
 
+        // Get base settings
         $base_names = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'];
         foreach( $base_names as $setting) {
             $value = $module->settings->get($setting);
+
+            // exclude empty settings
             if(!empty($value)) {
                 $base[$setting] = $value;
             }
         }
 
+        // Get color settings
         $color_names = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLORS, ColorSettings::BACKGROUND_COLORS);
         foreach( $color_names as $color) {
             $value = $module->settings->get($color);
+
+            // exclude empty settings
             if(!empty($value)) {
                 $colors[$color] = $value;
             }
         }
 
-        return [$base, $colors];
+        return ['base' => $base, 'colors' => $colors];
     }
 }
