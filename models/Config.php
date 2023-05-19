@@ -56,7 +56,7 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
+            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
             [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
