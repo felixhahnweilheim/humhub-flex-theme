@@ -2,6 +2,8 @@
 
 namespace humhub\modules\flexTheme\models;
 
+use humhub\modules\flexTheme\models\ColorSettings;
+
 use Yii;
 
 class AdvancedSettings extends \yii\base\Model
@@ -43,16 +45,27 @@ class AdvancedSettings extends \yii\base\Model
 
     protected function getSettingsArray()
     {
-        $settings = [];
+        $base = [];
+        $colors = [];
 
         $module = Yii::$app->getModule('flex-theme');
 
-        $base_settings = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'];
-
-        foreach( $base_settings as $setting) {
-             $settings[$setting] = $module->settings->get($setting);
+        $base_names = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'];
+        foreach( $base_names as $setting) {
+            $value = $module->settings->get($setting);
+            if(!empty($value)) {
+                $base[$setting] = $value;
+            }
         }
 
-        return $settings;
+        $color_names = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLORS, ColorSettings::BACKGROUND_COLORS);
+        foreach( $color_names as $color) {
+            $value = $module->settings->get($color);
+            if(!empty($value)) {
+                $colors[$color] = $value;
+            }
+        }
+
+        return [$base, $colors];
     }
 }
