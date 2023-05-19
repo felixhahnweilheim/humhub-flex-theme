@@ -61,16 +61,12 @@ class AdvancedSettings extends \yii\base\Model
 
         // Save base settings
         $config = new Config();
-        foreach($base as $key => $value) {
-            $config->$key = $value;
-        }
+        $config->setAttributes($base);
         $config->save();
 
         // Save color settings
         $colorSettings = new colorSettings();
-        foreach($colors as $key => $value) {
-            $colorSettings->$key = $value;
-        }
+        $colorSettings->setAttributes($colors);
         $colorSettings->save();
 
         return true;
