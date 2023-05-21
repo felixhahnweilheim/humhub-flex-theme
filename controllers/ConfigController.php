@@ -48,16 +48,21 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         if(!empty(Yii::$app->request->post())) {
             $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
 
-            if ( $config->load($data) && $colorSettings->load($data)) {
-                // Check validation
-                if ($config->validate() && $colorSettings->validate()) {
-                    $config->save();
-                    $colorSettings->save();
-                    $this->view->saved();
-                } else {
-                    // @todo Throw error
-                    return $this->render('advanced', ['model' => $form]);
-                }
+            $config->load($data);
+            $colorSettings->load($data);
+
+            // Check validation
+            if (!$config->validate()) {
+                $form->addError('settingsJson', Yii::t('FlexThemeModule', 'There seem to be invalid values!') . ' (Config)');
+                return $this->render('advanced', ['model' => $form]);
+            }
+            if (!$colorSettings->validate()) {
+                $form->addError('settingsJson', Yii::t('FlexThemeModule', 'There seem to be invalid values!') . ' (ColorSettings)');
+			    return $this->render('advanced', ['model' => $form]);
+            }
+            // Save
+            if ($config->save() && $colorSettings->save() && $form->save()) {
+                $this->view->saved();
             }
         }
 
