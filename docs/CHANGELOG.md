@@ -1,3 +1,6 @@
+## TBA
+- Fix: save likeIconColor
+
 ## 0.2.0 (26 april 2023)
 - Enh: make like icon color configurable
 - Enh: use color and icon pickers
