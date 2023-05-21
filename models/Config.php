@@ -56,12 +56,20 @@ class Config extends \yii\base\Model
     public function rules() {
 
         return [
-            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'], 'string'],
+            [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
             [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
-            }]
+            }],
+            [['likeIconColor'], 'validateHexColor']
         ];
+    }
+
+    public function validateHexColor($attribute, $params, $validator)
+    {
+        if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'Invalid Format') . '. ' . Yii::t('FlexThemeModule.admin', 'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
+        }
     }
 
     public function save() {
