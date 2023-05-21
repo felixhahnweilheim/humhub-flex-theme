@@ -61,7 +61,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save
-            if ($config->save() && $colorSettings->save() && $form->save()) {
+            if ($config->save() && $colorSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
                 $this->view->saved();
             }
         }

@@ -54,20 +54,6 @@ class AdvancedSettings extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
-        $settings = json_decode($this->settingsJson);
-
-        $base = $settings->base;
-        $colors = $settings->colors;
-
-        // Save base settings
-        $config = new Config();
-        $config->setAttributes($base);
-        $config->save();
-
-        // Save color settings
-        $colorSettings = new colorSettings();
-        $colorSettings->setAttributes($colors);
-        $colorSettings->save();
 
         return true;
     }
