@@ -42,8 +42,23 @@ class ConfigController extends \humhub\modules\admin\components\Controller
     public function actionAdvanced()
     {
         $form = new AdvancedSettings();
-        if ($form->load(Yii::$app->request->post()) && $form->save()) {
-            $this->view->saved();
+        $config = new Config();
+        $colorSettings = new ColorSettings();
+
+        if(!empty(Yii::$app->request->post())) {
+            $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
+
+            if ( $config->load($data) && $colorSettings->load($data)) {
+                // Check validation
+                if ($config->validate() && $colorSettings->validate()) {
+                    $config->save();
+                    $colorSettings->save();
+                    $this->view->saved();
+                } else {
+                    // @todo Throw error
+                    return $this->render('advanced', ['model' => $form]);
+                }
+            }
         }
 
         return $this->render('advanced', ['model' => $form]);
