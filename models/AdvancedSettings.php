@@ -45,7 +45,7 @@ class AdvancedSettings extends \yii\base\Model
     public function isValidJSON($attribute, $params, $validator)
     {
         if(json_decode($this->$attribute) === null) {
-            $this->addError($attribute, 'JSON could not be converted.');
+            $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'JSON could not be converted!'));
         }
     }
 
