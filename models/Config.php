@@ -21,6 +21,7 @@ class Config extends \yii\base\Model
     public $likeIcon;
     public $likeIconFull;
     public $likeIconColor;
+    public $showTopicMenu;
 
     public static function getSetting(string $setting_name) {
 
@@ -39,6 +40,7 @@ class Config extends \yii\base\Model
         $this->likeIcon = $settings->get('likeIcon', 'thumbs-o-up');
         $this->likeIconFull = $settings->get('likeIconFull', 'thumbs-up');
         $this->likeIconColor = $settings->get('likeIconColor');
+        $this->showTopicMenu = $settings->get('showTopicMenu');
     }
 
     public function attributeLabels() {
@@ -49,7 +51,8 @@ class Config extends \yii\base\Model
             'likeLink' => Yii::t('FlexThemeModule.admin', 'Style of Like Button'),
             'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
             'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
-            'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon')
+            'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon'),
+            'showTopicMenu' => Yii::t('FlexThemeModule.admin', 'Show topic menu in user profiles and spaces.')
         ];
     }
 
@@ -61,7 +64,8 @@ class Config extends \yii\base\Model
             [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
             }],
-            [['likeIconColor'], 'validateHexColor']
+            [['likeIconColor'], 'validateHexColor'],
+            [['showTopicMenu'], 'boolean']
         ];
     }
 
@@ -86,6 +90,7 @@ class Config extends \yii\base\Model
         $module->settings->set('likeIcon', $this->likeIcon);
         $module->settings->set('likeIconFull', $this->likeIconFull);
         $module->settings->set('likeIconColor', $this->likeIconColor);
+        $module->settings->set('showTopicMenu', $this->showTopicMenu);
 
         return true;
     }

@@ -33,6 +33,10 @@ Choose between the text "Comment" / "Reply" (default) and the comment icon or bo
 
 Similar to Comment Link. But for the icon you can choose your own from the list of FontAwesome icons.
 
+### Topic menu in spaces and profiles
+
+A topic list can be shown in the left sidebar of spaces and user profiles. (This can be turned of in the module settings.)
+
 ### Import / Export
 
 The module settings can be exported and imported in JSON format.

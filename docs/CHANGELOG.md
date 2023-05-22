@@ -1,6 +1,7 @@
 ## TBA
 - Fix: save likeIconColor
 - Enh: Import/Export (JSON)
+- Enh: Show topic menu in spaces and user profiles (optional)
 
 ## 0.2.0 (26 april 2023)
 - Enh: make like icon color configurable
