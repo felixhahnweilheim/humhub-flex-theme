@@ -2,7 +2,7 @@
 
 The first free configurable theme for HumHub
 
-**Version: 0.2.0** (for HumHub 1.14)
+**Version: 0.2.1** (for HumHub 1.14)
 
 **Author:** Felix Hahn, info@hahn-felix.de - self-learned
 
@@ -15,7 +15,7 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 
 ## Features
 
-### Colors (under development)
+### Colors
 
 **Define your custom colors!**  
 You can configure nearly all colors (main colors, text colors, background colors).  
@@ -33,5 +33,10 @@ Choose between the text "Comment" / "Reply" (default) and the comment icon or bo
 
 Similar to Comment Link. But for the icon you can choose your own from the list of FontAwesome icons.
 
+### Import / Export
+
+The module settings can be exported and imported in JSON format.
+
 ## Translations
-- German
+
+This module is fully translatable. But as long as adminstrators understand English, the translations don't seem too important to me.
