@@ -14,7 +14,7 @@ class Events
 	public static function onAdminMenuInit($event)
     {
 		$event->sender->addItem([
-            'label' =>  Yii::t('FlexThemeModule.base', 'Flex Theme'),
+            'label' =>  Yii::t('FlexThemeModule.admin', 'Flex Theme'),
             'url' => Url::to(['/flex-theme/config']),
             'group' => 'manage',
             'icon' => Icon::get('paint-brush'),
