@@ -25,6 +25,7 @@ use yii\helpers\Url;
         <?= $form->field($model, 'likeIcon')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select icon ...')]]); ?>
         <?= $form->field($model, 'likeIconFull')->widget(IconPicker::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select icon ...')]]); ?>
         <?= $form->field($model, 'likeIconColor')->widget(ColorInput::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select color ...')]]); ?>
+        <strong><?= Yii::t('FlexThemeModule.admin', 'Topic Menu') ?></strong>
         <?= $form->field($model, 'showTopicMenu')->checkbox(); ?>
 
     <div class="form-group">
