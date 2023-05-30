@@ -1,4 +1,4 @@
-# FlexTheme for HumHub (under development)
+# FlexTheme for HumHub
 
 The first free configurable theme for HumHub
 
