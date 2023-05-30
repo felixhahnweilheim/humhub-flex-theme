@@ -172,14 +172,6 @@ class ColorSettings extends \yii\base\Model
 
             // Save as module settings (value can be emtpy)
             $settings->set($color, $value);
-
-            // Save color values as theme variables (take community theme's color if value is empty)
-            if (empty($value)) {
-                $theme_var = str_replace('_', '-', $color);
-                $value = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
-            }
-            $theme_key = 'theme.var.FlexTheme.' . $color;
-            Yii::$app->settings->set($theme_key, $value);
         }
     }
 
