@@ -95,11 +95,11 @@ class DarkMode extends \yii\base\Model
         $result = [];
 
         $module = Yii::$app->getModule('flex-theme');
-        $base_theme = ThemeHelper::getThemeByName('HumHub');
         $all_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS, self::SPECIAL_COLORS);
 
         foreach ($all_colors as $color) {
             $value = $module->settings->get('dark_' . $color);
+            // Exclude empty colors (fallback: light theme)
             if (!empty($value)) {
                 $result[$color] = $value;
             }
@@ -135,7 +135,7 @@ class DarkMode extends \yii\base\Model
         $hints = [];
 
         $hints['darkModeEnabled'] = Yii::t('FlexThemeModule.admin', 'Dark Mode will only be active when the user\'s browser is in dark mode.') . '<br/>' .
-             '<strong>' . Yii::t('FlexThemeModule.admin', 'Note') . ':</strong> ' . Yii::t('FlexThemeModule.admin', 'You have to define all colors below.');
+             '<strong>' . Yii::t('FlexThemeModule.admin', 'Note') . ':</strong> ' . Yii::t('FlexThemeModule.admin', 'Please define all colors below, at least text and Background colors.');
 
         $base_theme = ThemeHelper::getThemeByName('HumHub');
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
@@ -212,13 +212,13 @@ class DarkMode extends \yii\base\Model
 
             // Get value of base color
             $original_color = $this->$base_var;
+            // Special colors should be empty if base color is not defined (colors of the light mode will be used)
             if (empty($original_color)) {
-                $theme_var = str_replace('_', '-', $base_var);
-                $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
-            }
 
-            // Calculate color value with ColorHelper functions
-            if ($function == 'darken') {
+                $value = '';
+
+            // if base color is defined calculate color value with ColorHelper functions
+            } elseif ($function == 'darken') {
 
                 $value = ColorHelper::darken($original_color, $amount);
 

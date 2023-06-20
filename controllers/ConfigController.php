@@ -56,12 +56,14 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new AdvancedSettings();
         $config = new Config();
         $colorSettings = new ColorSettings();
+        $darkModeSettings = new DarkMode();
 
         if(!empty(Yii::$app->request->post())) {
             $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
 
             $config->load($data);
             $colorSettings->load($data);
+            $darkModeSettings->load($data);
 
             // Check validation
             if (!$config->validate()) {
@@ -73,7 +75,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save
-            if ($config->save() && $colorSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
+            if ($config->save() && $colorSettings->save() && $darkModeSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
                 $this->view->saved();
             }
         }
