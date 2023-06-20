@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\controllers;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
+use humhub\modules\flexTheme\models\DarkMode;
 use humhub\modules\flexTheme\models\AdvancedSettings;
 use Yii;
 
@@ -37,6 +38,17 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         }
 
         return $this->render('colors', ['model' => $form]);
+    }
+
+    public function actionDarkMode()
+    {
+        $form = new DarkMode();
+
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            $this->view->saved();
+        }
+
+        return $this->render('dark-mode', ['model' => $form]);
     }
 
     public function actionAdvanced()
