@@ -85,6 +85,11 @@ class DarkMode extends \yii\base\Model
     public $text_color_secondary__lighten__25;
     public $link__fade__60;
 
+    public static function isEnabled()
+    {
+        return (bool) Yii::$app->getModule('flex-theme')->settings->get('darkModeEnabled');
+    }
+
     public static function getColors()
     {
         $module = Yii::$app->getModule('flex-theme');
@@ -93,11 +98,9 @@ class DarkMode extends \yii\base\Model
 
         foreach ($all_colors as $color) {
             $value = $module->settings->get('dark_' . $color);
-
-            if (empty($value)) {
-	            $value = $this->$color;
-	        }
-            $result[$color] = $value;
+            if (!empty($value)) {
+                $result[$color] = $value;
+            }
         }
 
         return $result;
@@ -165,6 +168,8 @@ class DarkMode extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
+
+        Yii::$app->getModule('flex-theme')->settings->set('darkModeEnabled', $this->darkModeEnabled);
 
         // Save color values
         self::saveColors();

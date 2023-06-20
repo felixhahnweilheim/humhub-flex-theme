@@ -1,3 +1,7 @@
+## TBA
+- Add Dark Mode
+- Enh: use CSS variables as theme variables in database
+
 ## 0.2.1 (22 may 2023)
 - Fix: save likeIconColor
 - Enh: Import/Export (JSON)
