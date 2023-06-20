@@ -74,6 +74,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (ColorSettings)');
 			    return $this->render('advanced', ['model' => $form]);
             }
+            if (!darkModeSettings->validate()) {
+                $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (DarkModeSettings)');
+			    return $this->render('advanced', ['model' => $form]);
+            }
             // Save
             if ($config->save() && $colorSettings->save() && $darkModeSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
                 $this->view->saved();
