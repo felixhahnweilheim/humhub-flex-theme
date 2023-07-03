@@ -2,7 +2,7 @@
 
 The first free configurable theme for HumHub
 
-**Version: 0.2.1** (for HumHub 1.14)
+**Version: 0.2.2** (for HumHub 1.14)
 
 **Author:** Felix Hahn, info@hahn-felix.de - self-learned
 
