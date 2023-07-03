@@ -125,7 +125,7 @@ class DarkMode extends \yii\base\Model
 
     public function attributeLabels()
     {
-        $labels['darkModeEnabled'] = Yii::t('FlexThemeModule.admin', 'Enable Dark Mode');
+        $labels['darkModeEnabled'] = Yii::t('FlexThemeModule.admin', 'Enable Dark Mode') . Yii::t('FlexThemeModule.admin', ' (experimental)');
 
         return $labels;
     }
