@@ -2,7 +2,7 @@
 
 The first free configurable theme for HumHub
 
-**Version: 0.2.1** (for HumHub 1.14)
+**Version: 0.2.2** (for HumHub 1.14)
 
 **Author:** Felix Hahn, info@hahn-felix.de - self-learned
 
@@ -22,6 +22,10 @@ You can configure nearly all colors (main colors, text colors, background colors
 Please note: This still needs more testing and some colors that are hard-coded in HumHub can't be changed.
 
 [Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
+
+### Dark Mode (experimental)
+The dark mode is disabled by default because it is still experimental.
+You should define all colors for it to work properly. There is no dark mode button because the theme uses your browser's dark mode.
 
 ### Social Controls
 

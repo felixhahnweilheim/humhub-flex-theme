@@ -7,8 +7,13 @@ use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\ui\icon\widgets\Icon;
 
-class ColorSettings extends \yii\base\Model
+class DarkMode extends \yii\base\Model
 {
+    /*
+     * Dark Mode disabled by default
+     */
+    public $darkModeEnabled;
+
     // Main Colors (configurable)
     const MAIN_COLORS = ['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'];
     public $default;
@@ -80,20 +85,24 @@ class ColorSettings extends \yii\base\Model
     public $text_color_secondary__lighten__25;
     public $link__fade__60;
 
+    public static function isEnabled()
+    {
+        return (bool) Yii::$app->getModule('flex-theme')->settings->get('darkModeEnabled');
+    }
+
     public static function getColors()
     {
+        $result = [];
+
         $module = Yii::$app->getModule('flex-theme');
-		$base_theme = ThemeHelper::getThemeByName('HumHub');
         $all_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS, self::SPECIAL_COLORS);
 
         foreach ($all_colors as $color) {
-            $value = $module->settings->get($color);
-
-            if (empty($value)) {
-                $theme_var = str_replace('_', '-', $color);
-	            $value = $base_theme->variable($theme_var);
-	        }
-            $result[$color] = $value;
+            $value = $module->settings->get('dark_' . $color);
+            // Exclude empty colors (fallback: light theme)
+            if (!empty($value)) {
+                $result[$color] = $value;
+            }
         }
 
         return $result;
@@ -104,25 +113,38 @@ class ColorSettings extends \yii\base\Model
         parent::init();
 
         $settings = Yii::$app->getModule('flex-theme')->settings;
+
+        $this->darkModeEnabled = $settings->get('darkModeEnabled', false);
+
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
 
         foreach($configurable_colors as $color) {
-            $this->$color = $settings->get($color);
+            $this->$color = $settings->get('dark_' . $color);
         }
+    }
+
+    public function attributeLabels()
+    {
+        $labels['darkModeEnabled'] = Yii::t('FlexThemeModule.admin', 'Enable Dark Mode') . Yii::t('FlexThemeModule.admin', ' (experimental)');
+
+        return $labels;
     }
 
     public function attributeHints()
     {
         $hints = [];
 
+        $hints['darkModeEnabled'] = Yii::t('FlexThemeModule.admin', 'Dark Mode will only be active when the user\'s browser is in dark mode.') . '<br/>' .
+             '<strong>' . Yii::t('FlexThemeModule.admin', 'Note') . ':</strong> ' . Yii::t('FlexThemeModule.admin', 'Please define all colors below, at least text and Background colors.');
+
         $base_theme = ThemeHelper::getThemeByName('HumHub');
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
 
         foreach ($configurable_colors as $color) {
             $theme_var = str_replace('_', '-', $color);
-	        $default_value = $base_theme->variable($theme_var);
+            $default_value = $base_theme->variable($theme_var);
             $icon = Icon::get('circle', ['color' => $default_value ]);
-            $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . $default_value . '</code> ' . $icon;
+            $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default (Light Theme)') . ': ' . '<code>' . $default_value . '</code> ' . $icon;
         }
 
         return $hints;
@@ -131,8 +153,8 @@ class ColorSettings extends \yii\base\Model
     public function rules()
     {
         return [
-            [[
-                'default', 'primary', 'info', 'link', 'success', 'warning', 'danger',
+            [['darkModeEnabled'], 'boolean'],
+            [['default', 'primary', 'info', 'link', 'success', 'warning', 'danger',
                 'text_color_main', 'text_color_secondary', 'text_color_highlight', 'text_color_soft', 'text_color_soft2', 'text_color_soft3', 'text_color_contrast',
                 'background_color_main', 'background_color_secondary', 'background_color_page', 'background_color_highlight', 'background_color_highlight_soft', 'background3', 'background4'
                 ], 'validateHexColor']
@@ -151,6 +173,8 @@ class ColorSettings extends \yii\base\Model
         if(!$this->validate()) {
             return false;
         }
+
+        Yii::$app->getModule('flex-theme')->settings->set('darkModeEnabled', $this->darkModeEnabled);
 
         // Save color values
         self::saveColors();
@@ -171,7 +195,7 @@ class ColorSettings extends \yii\base\Model
             $value = $this->$color;
 
             // Save as module settings (value can be emtpy)
-            $settings->set($color, $value);
+            $settings->set('dark_' . $color, $value);
         }
     }
 
@@ -188,13 +212,13 @@ class ColorSettings extends \yii\base\Model
 
             // Get value of base color
             $original_color = $this->$base_var;
+            // Special colors should be empty if base color is not defined (colors of the light mode will be used)
             if (empty($original_color)) {
-                $theme_var = str_replace('_', '-', $base_var);
-                $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
-            }
 
-            // Calculate color value with ColorHelper functions
-            if ($function == 'darken') {
+                $value = '';
+
+            // if base color is defined calculate color value with ColorHelper functions
+            } elseif ($function == 'darken') {
 
                 $value = ColorHelper::darken($original_color, $amount);
 
@@ -215,7 +239,7 @@ class ColorSettings extends \yii\base\Model
             }
 
             // Save calculated value
-            $module->settings->set($color, $value);
+            $module->settings->set('dark_' . $color, $value);
         }
     }
 }
