@@ -1,5 +1,5 @@
-## TBA
-- Add Dark Mode
+## 0.2.2 (3 july 2023)
+- Add Dark Mode (experimental)
 - Enh: use CSS variables as theme variables in database
 
 ## 0.2.1 (22 may 2023)
