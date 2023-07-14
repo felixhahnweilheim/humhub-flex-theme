@@ -1,3 +1,6 @@
+## TBA
+- remove menu item from AdminMenu (configuration is still available via Modules page)
+
 ## 0.2.2 (3 july 2023)
 - Add Dark Mode (experimental)
 - Enh: use CSS variables as theme variables in database
