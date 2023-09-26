@@ -34,7 +34,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new ColorSettings();
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            Yii::$app->assetManager->clear();
+            Yii::$app->view->theme->variables->flushCache();
             $this->view->saved();
+            return $this->redirect(['/flex-theme/config/colors']);
         }
 
         return $this->render('colors', ['model' => $form]);
