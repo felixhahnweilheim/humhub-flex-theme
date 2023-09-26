@@ -12,6 +12,6 @@ class BaseAsset extends AssetBundle
     public $publishOptions = [
         'forceCopy' => false
     ];
-    public $sourcePath = '@flexTheme/themes/FlexTheme';
+    public $sourcePath = '@flex-theme/themes/FlexTheme';
     public $css = ['css/variables.css'];
 }
