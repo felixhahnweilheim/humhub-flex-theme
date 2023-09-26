@@ -232,7 +232,7 @@ class ColorSettings extends \yii\base\Model
               $vars = $vars .  '--' . $key . ':' . $value . ';';
         }
 
-        $content = ':root {' . $content . '}}';
+        $content = ':root {' . $vars . '}';
 
         $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
 
