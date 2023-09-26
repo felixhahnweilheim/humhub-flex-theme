@@ -158,6 +158,9 @@ class ColorSettings extends \yii\base\Model
         // Calculate and save lightened, darkened and faded colors
         self::saveSpecialColors();
 
+        // Save colors to file
+        self::saveColorsToFile();
+
         return true;
     }
 
@@ -217,5 +220,22 @@ class ColorSettings extends \yii\base\Model
             // Save calculated value
             $module->settings->set($color, $value);
         }
+    }
+
+    public function saveColorsToFile()
+    {
+        $colors = self::getColors();
+
+        $vars = '';
+
+        foreach($colors as $key => $value) {
+              $vars = $vars .  '--' . $key . ':' . $value . ';';
+        }
+
+        $content = ':root {' . $content . '}}';
+
+        $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
+
+        file_put_contents($filename, $content);
     }
 }
