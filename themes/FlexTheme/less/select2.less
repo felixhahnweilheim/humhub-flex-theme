@@ -1,7 +1,3 @@
-@import "../../../../../protected/vendor/bower-asset/bootstrap/less/variables";
-@import "../../../../../protected/vendor/bower-asset/bootstrap/less/mixins";
-
-
 /*! Select2 humhub Theme v0.1.0-beta.4 | MIT License | github.com/select2/select2-humhub-theme */
 
 //
@@ -26,10 +22,6 @@
 @dropdown-arrow-color: @input-color-placeholder;
 @dropdown-box-shadow: 0 6px 12px rgba(0,0,0,.175);
 @clear-selection-color: @dropdown-arrow-color;
-
-
-
-
 
 //
 // Mixins
@@ -95,33 +87,6 @@
         outline: 0;
 
         &::placeholder {
-            color: @input-color-placeholder;
-            font-weight: normal;
-        }
-
-        &::-webkit-input-placeholder {
-            color: @input-color-placeholder;
-            font-weight: normal;
-        }
-
-        /* Firefox 18- */
-        &:-moz-placeholder {
-            color: @input-color-placeholder;
-            font-weight: normal;
-        }
-
-        /**
-         * Firefox 19+
-         *
-         * @see http://stackoverflow.com/questions/24236240/color-for-styled-placeholder-text-is-muted-in-firefox
-         */
-        &::-moz-placeholder {
-            color: @input-color-placeholder;
-            font-weight: normal;
-            opacity: 1;
-        }
-
-        &:-ms-input-placeholder {
             color: @input-color-placeholder;
             font-weight: normal;
         }
@@ -291,9 +256,12 @@
             cursor: @cursor-disabled;
         }
 
-        .select2-selection,
+       .select2-selection {
+
+           background-color: @input-bg-disabled;
+        }
         .select2-selection--multiple .select2-selection__choice {
-            background-color: @input-bg-disabled;
+            background-color: @btn-link-disabled-color;
         }
 
         .select2-selection__clear,
@@ -301,10 +269,6 @@
             display: none;
         }
     }
-
-
-
-
 
     /*------------------------------------*\
             #DROPDOWN
@@ -332,10 +296,6 @@
         max-height: 400px;
         overflow-y: auto;
     }
-
-
-
-
 
     /*------------------------------------*\
             #SINGLE SELECT2
@@ -380,10 +340,6 @@
             color: @input-color-placeholder;
         }
     }
-
-
-
-
 
     /*------------------------------------*\
         #MULTIPLE SELECT2
@@ -489,10 +445,6 @@
             margin-top: @padding-base-vertical;
         }
     }
-
-
-
-
 
     /**
      * Address humhub control sizing classes
@@ -610,10 +562,6 @@
         }
     }
 
-
-
-
-
     /*------------------------------------*\
         #RTL SUPPORT
     \*------------------------------------*/
@@ -672,10 +620,6 @@
         }
     }
 }
-
-
-
-
 
 /*------------------------------------*\
     #ADDITIONAL GOODIES
