@@ -48,7 +48,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new DarkMode();
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            Yii::$app->assetManager->clear();
+            Yii::$app->view->theme->variables->flushCache();
             $this->view->saved();
+            return $this->redirect(['/flex-theme/config/dark-mode']);
         }
 
         return $this->render('dark-mode', ['model' => $form]);
@@ -83,7 +86,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             }
             // Save
             if ($config->save() && $colorSettings->save() && $darkModeSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
+                Yii::$app->assetManager->clear();
+                Yii::$app->view->theme->variables->flushCache();
                 $this->view->saved();
+                return $this->redirect(['/flex-theme/config/advanced']);
             }
         }
 

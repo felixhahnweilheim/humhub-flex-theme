@@ -12,8 +12,6 @@ $background_colors = DarkMode::BACKGROUND_COLORS;
 <div class="panel-body">
     <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
 
-        <?= $form->field($model, 'darkModeEnabled')->checkbox(); ?>
-
         <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
             <?php foreach ($main_colors as $color): ?>
                 <?= $form->field($model, $color)->widget(ColorInput::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select color ...')]]); ?>
