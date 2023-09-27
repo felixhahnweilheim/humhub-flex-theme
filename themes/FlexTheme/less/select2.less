@@ -11,7 +11,8 @@
 @form-control-default-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 
 // @see https://github.com/twbs/humhub-sass/blob/master/assets/stylesheets/humhub/mixins/_forms.scss#L43
-@form-control-focus-box-shadow: @form-control-default-box-shadow, 0 0 8px rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), 0.6);
+//Workaround for FlexTheme
+@form-control-focus-box-shadow: @form-control-default-box-shadow, 0 0 8px @default;
 
 // @see https://github.com/twbs/humhub-sass/blob/master/assets/stylesheets/humhub/_forms.scss#L128
 @form-control-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
