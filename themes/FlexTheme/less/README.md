@@ -4,8 +4,6 @@ The variables.less file defines CSS variables like `var(--default)` instead of c
 The concrete values are defined in the HTML head, like `<style>:root {--default:#00ff00; ... }</style>`.
 
 This makes it possible to switch colors without changes to the theme.css.
-
-My plan is to use this behavior later also for a dark mode.
  
 ### Replaced LESS functions
 
