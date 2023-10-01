@@ -1,10 +1,15 @@
 <?php
 use yii\helpers\Url;
 
-$darkModeUrl = Url::toRoute('/marketplace/browse?keyword=dark-mode&categoryId=0&tags=');
+$darkModeUrl = Url::toRoute('/marketplace/browse?keyword=dark-mode&tags=');
+$darkModeName = Yii::t('FlexThemeModule.admin', 'Dark Mode'),
+$link = '<a href=' . $darkModeUrl . '>' . $darkMode '</a>';
 ?>
 <div class="panel-body">
     <div class="alert alert-info">
-        <p>Please use the module <a href="<?= $darkModeUrl ?>">Dark Mode"</a> and use "HumHub (dark)" as dark theme.</p>
+        <p><?= Yii::t('FlexThemeModule.admin', 'Please use the module {darkmode} as dark theme.', [
+            'darkmode' => $link,
+        ]) ?>
+        </p>
     </div>
 </div>
