@@ -6,7 +6,6 @@ use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\libs\DynamicConfig;
 
 class ColorSettings extends \yii\base\Model
 {
