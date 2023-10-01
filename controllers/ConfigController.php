@@ -45,16 +45,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 
     public function actionDarkMode()
     {
-        $form = new DarkMode();
-
-        if ($form->load(Yii::$app->request->post()) && $form->save()) {
-            Yii::$app->assetManager->clear();
-            Yii::$app->view->theme->variables->flushCache();
-            $this->view->saved();
-            return $this->redirect(['/flex-theme/config/dark-mode']);
-        }
-
-        return $this->render('dark-mode', ['model' => $form]);
+        return $this->render('dark-mode');
     }
 
     public function actionAdvanced()
@@ -78,10 +69,6 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             }
             if (!$colorSettings->validate()) {
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (ColorSettings)');
-			    return $this->render('advanced', ['model' => $form]);
-            }
-            if (!$darkModeSettings->validate()) {
-                $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (DarkModeSettings)');
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save
