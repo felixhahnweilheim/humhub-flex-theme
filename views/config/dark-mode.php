@@ -3,7 +3,7 @@ use yii\helpers\Url;
 
 $darkModeUrl = Url::toRoute('/marketplace/browse?keyword=dark-mode&tags=');
 $darkModeName = Yii::t('FlexThemeModule.admin', 'Dark Mode');
-$link = '<a href=' . $darkModeUrl . '>' . $darkMode '</a>';
+$link = '<a href=' . $darkModeUrl . '>' . $darkMode . '</a>';
 ?>
 <div class="panel-body">
     <div class="alert alert-info">
