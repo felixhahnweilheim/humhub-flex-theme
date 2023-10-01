@@ -236,7 +236,9 @@ class DarkMode extends \yii\base\Model
         $vars = '';
 
         foreach($colors as $key => $value) {
-              $vars = $vars .  '--' . $key . ':' . $value . ';';
+            if (!empty($value)) {
+                $vars = $vars .  '--' . $key . ':' . $value . ';';
+            }
         }
 
         $content = ':root {' . $vars . '}';
