@@ -243,6 +243,9 @@ class DarkMode extends \yii\base\Model
 
         $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/dark.css');
 
+        $baseDarkFile = Yii::getAlias('@flex-theme/themes/FlexTheme/css/dark-base.css');
+        $content .= file_get_contents($baseDarkFile);
+
         file_put_contents($filename, $content);
     }
 }
