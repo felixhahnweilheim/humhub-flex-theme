@@ -87,6 +87,6 @@ class AdvancedSettings extends \yii\base\Model
             }
         }
 
-        return ['Config' => $config, 'ColorSettings' => $colors, 'DarkMode' => $darkMode];
+        return ['Config' => $config, 'ColorSettings' => $colors];
     }
 }
