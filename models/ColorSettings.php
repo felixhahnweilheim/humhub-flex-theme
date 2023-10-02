@@ -80,7 +80,7 @@ class ColorSettings extends \yii\base\Model
     public $text_color_secondary__lighten__25;
     public $link__fade__60;
 
-    public static function getColors()
+    public function getColors()
     {
         $module = Yii::$app->getModule('flex-theme');
 		$base_theme = ThemeHelper::getThemeByName('HumHub');
@@ -158,6 +158,9 @@ class ColorSettings extends \yii\base\Model
         // Calculate and save lightened, darkened and faded colors
         self::saveSpecialColors();
 
+        // Save colors to file
+        self::saveColorsToFile();
+
         return true;
     }
 
@@ -217,5 +220,22 @@ class ColorSettings extends \yii\base\Model
             // Save calculated value
             $module->settings->set($color, $value);
         }
+    }
+
+    public function saveColorsToFile()
+    {
+        $colors = self::getColors();
+
+        $vars = '';
+
+        foreach($colors as $key => $value) {
+              $vars = $vars .  '--' . $key . ':' . $value . ';';
+        }
+
+        $content = ':root {' . $vars . '}';
+
+        $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
+
+        file_put_contents($filename, $content);
     }
 }

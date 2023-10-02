@@ -1,5 +1,6 @@
 ## TBA
-- Add Dark Mode
+- Maintainance: update for HumHub 1.15 (WIP)
+- Enh: move variables to file (asset)
 - Enh: use CSS variables as theme variables in database
 
 ## 0.2.1 (22 may 2023)
