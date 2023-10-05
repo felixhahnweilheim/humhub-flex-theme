@@ -13,11 +13,18 @@ class ConsoleController extends Controller
     const DEST = '@flex-theme/themes/FlexTheme/less/humhub';
 
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
-    const UNSOPPORTED = ['saturate', 'desaturate', 'red', 'green', 'blue'];
+    const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
 
     public function actionRebuild()
     {
-        self::message('Starting to rebuild LESS files of FlexTheme.', 'important');
+        // Array of special colors, e.g. 'primary-darken-10'
+        $special_colors = [];
+        // Array of unsopported lines, e.g. [
+        $unsopported = [];
+        // Integer changed files
+        $changedFiles = 0;
+
+        self::message('Starting to rebuild LESS files of FlexTheme.', 'warning');
 
         // Copy LESS files
         $src = Yii::getAlias(self::SRC);
@@ -30,42 +37,83 @@ class ConsoleController extends Controller
         foreach ($files as $file)
         {
             if (basename($file) !== 'variables.less') {
-                self::checkAndCorrectFile($file);
+                $result = self::checkAndCorrectFile($file);//returns array [array special colors, array unsopported lines, bool changed]
+
+                foreach ($result[0] as $special_color)
+                {
+                    $special_colors[$special_color] = $special_color;
+                }
+                foreach ($result[1] as $unsopported_line)
+                {
+                    $unsopported[] = "$file at line $unsopported_line";
+                }
+                if ($result[2]) {
+                    $changedFiles++;
+                }
             }
         }
 
+        sort($special_colors);
+
         self::message('Successfully rebuilt theme files', 'success');
+        self::message("Changed Files: $changedFiles", 'success');
+        self::message('*** Special colors:', 'warning');
+        self::message(implode("\n", $special_colors));
+
+        self::message('***\n Unsopported Lines: ', 'warning');
+        foreach($unsopported as $fileAndLine) {
+            self::message($fileAndLine);
+        }
 
         return self::EXIT_CODE_NORMAL;
     }
 
     private function checkAndCorrectFile($file)
     {
-        self::message("Going through: $file");
+        //self::message("Going through: $file");
 
+        // Array of special colors, e.g. 'primary-darken-10'
         $special_colors = [];
+        // Array Unsopported lines
+        $unsopportedLines = [];
+        // Integer changed files
+        $changed = false;
 
         $lines = file($file, FILE_IGNORE_NEW_LINES);
         foreach($lines as $key => $line)
         {
-            $result = self::checkAndCorrectLine($key, $line, $file);
+            $result = self::checkAndCorrectLine($key, $line, $file); // returns array [line, bool or string]
             $lines[$key] = $result[0];
-            $special_colors[] = $result[1];
+
+            if ($result[1] == false) {
+                $unsopportedLines[$key] = $key;
+            } elseif ($result[1] !== true) {
+                $special_colors[] = $result[1];
+                $changed = true;
+            }
         }
         $data = implode(PHP_EOL, $lines);
         file_put_contents($file, $data);
 
-        self::message('Special colors: ' . implode(', ', $special_colors));
+        return [$special_colors, $unsopportedLines, $changed];
     }
 
+    /*
+     * returns array
+     * * First value: line (changed or not)
+     * * Second value:
+     * * * false: unsopported function recognized (line not changed)
+     * * * true: no function recognized (line not changed)
+     * * * string: special color, e.g. 'primary-darken-10'
+     */
     private function checkAndCorrectLine($lineNumber, $line, $file)
     {
         foreach (self::UNSOPPORTED as $less_function)
         {
             // Do not change lines with unsopported function but display a warning
             if (strpos($line, $less_function . '(') !== false) {
-                self::message("Manual correction required!\nUnsopported function in line $lineNumber + 1 in $file", 'warning');
-                return [$line, null];
+                self::message("Manual correction required!\nUnsopported function in line ++$lineNumber in $file", 'warning');
+                return [$line, false];
             }
         }
         foreach (self::SUPPORTED as $less_function)
@@ -91,14 +139,14 @@ class ConsoleController extends Controller
                 // Line ending (e.g. "!important;")
                 $end = $rest[1];
 
-                $newLine = $first . '@' . $color . '-' . $less_function . '-' . $amount . $end;
+                $special_color = '@' . $color . '-' . $less_function . '-' . $amount;
 
-                self::message("New Line: $newLine");
+                $line = $first . $special_color . $end;
 
-                return [$newLine, null];
+                return [$line, $special_color];
             }
         }
-        return [$line, null];
+        return [$line, true];
     }
 
     private function message($text, $level = 'info')
@@ -107,12 +155,11 @@ class ConsoleController extends Controller
         if ($level == 'success') {
             $color = Console::FG_GREEN;
             $text = "$text\n";
-        } elseif ($level == 'important') {
+        } elseif ($level == 'warning') {
             $color = Console::FG_YELLOW;
-            $text = "$text\n";
         } elseif ($level == 'error') {
             $color = Console::FG_RED;
-            $text = "\n*** $text\n";
+            $text = "\n*** $text";
         }
         $this->stdout("$text\n", $color);
     }
