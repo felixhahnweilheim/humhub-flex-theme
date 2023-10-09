@@ -61,7 +61,7 @@ class ConsoleController extends Controller
         self::message("\nSuccessfully rebuilt theme files", 'success');
         self::message("Changed Files: $changedFiles", 'success');
         self::message('*** Special colors to be copied:', 'warning');
-        self::message('const SPECIAL_COLORS = [', 'no-break');
+        self::message('    const SPECIAL_COLORS = [', 'no-break');
         foreach ($special_colors as $color)
         {
             self::message("'" . $color . "',", 'no-break');
@@ -69,7 +69,7 @@ class ConsoleController extends Controller
         self::message("];\n");
         foreach ($special_colors as $color)
         {
-            self::message('public $' . $color . ';');
+            self::message('    public $' . $color . ';');
         }
 
         self::message("***\n Unsopported Lines: ", 'warning');
