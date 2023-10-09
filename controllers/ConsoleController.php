@@ -16,16 +16,12 @@ class ConsoleController extends Controller
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
     const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
 
+    public $special_colors = [];
+    public $unsopportedLines = [];
+
     public function actionRebuild()
     {
-        // Array of special colors, e.g. 'primary-darken-10'
-        $special_colors = [];
-        // Array of unsopported lines, e.g. [
-        $unsopported = [];
-        // Integer changed files
-        $changedFiles = 0;
-
-        self::message('Starting to rebuild LESS files of FlexTheme.', 'warning');
+        //self::message('Starting to rebuild LESS files of FlexTheme.', 'warning');
 
         // Copy LESS files
         $src = Yii::getAlias(self::SRC);
@@ -38,43 +34,31 @@ class ConsoleController extends Controller
         foreach ($files as $file)
         {
             if (basename($file) !== 'variables.less') {
-                $result = self::checkAndCorrectFile($file);//returns array [array special colors, array unsopported lines, bool changed]
-
-                foreach ($result[0] as $special_color)
-                {
-                    $special_colors[$special_color] = $special_color;
-                }
-                foreach ($result[1] as $unsopported_line)
-                {
-                    $unsopported[] = "$file at line $unsopported_line";
-                }
-                if ($result[2]) {
-                    $changedFiles++;
-                }
+                self::checkAndCorrectFile($file);
             }
         }
 
-        sort($special_colors);
+        sort($this->special_colors);
 
-        self::createSpecialColorsLess($special_colors);
+        self::createSpecialColorsLess();
 
         self::message("\nSuccessfully rebuilt theme files", 'success');
-        self::message("Changed Files: $changedFiles", 'success');
         self::message('*** Special colors to be copied:', 'warning');
         self::message('    const SPECIAL_COLORS = [', 'no-break');
-        foreach ($special_colors as $color)
+        foreach ($this->special_colors as $color)
         {
             self::message("'" . $color . "',", 'no-break');
         }
         self::message("];\n");
-        foreach ($special_colors as $color)
+        foreach ($this->special_colors as $color)
         {
             self::message('    public $' . $color . ';');
         }
 
         self::message("***\n Unsopported Lines: ", 'warning');
-        foreach($unsopported as $fileAndLine) {
-            self::message($fileAndLine);
+        foreach($this->unsopportedLines as $line)
+        {
+            self::message("$line[2] at $line[1]: $line[2]");
         }
 
         return self::EXIT_CODE_NORMAL;
@@ -84,30 +68,13 @@ class ConsoleController extends Controller
     {
         //self::message("Going through: $file");
 
-        // Array of special colors, e.g. 'primary-darken-10'
-        $special_colors = [];
-        // Array Unsopported lines
-        $unsopportedLines = [];
-        // Integer changed files
-        $changed = false;
-
         $lines = file($file, FILE_IGNORE_NEW_LINES);
         foreach($lines as $key => $line)
         {
-            $result = self::checkAndCorrectLine($key, $line, $file); // returns array [line, bool or string]
-            $lines[$key] = $result[0];
-
-            if ($result[1] == false) {
-                $unsopportedLines[$key] = $key;
-            } elseif ($result[1] !== true) {
-                $special_colors[] = $result[1];
-                $changed = true;
-            }
+            $lines[$key] = self::checkAndCorrectLine($key, $line, $file);
         }
         $data = implode(PHP_EOL, $lines);
         file_put_contents($file, $data);
-
-        return [$special_colors, $unsopportedLines, $changed];
     }
 
     /*
@@ -125,25 +92,31 @@ class ConsoleController extends Controller
             // Do not change lines with unsopported function but display a warning
             if (strpos($line, $less_function . '(') !== false) {
                 self::message("Manual correction required!\nUnsopported function in line ++$lineNumber in $file", 'warning');
-                return [$line, false];
+
+                $this->unsopportedLines[] = [$line, $lineNumber, $file];
+
+                // Return unchanged
+                return $line;
             }
         }
         foreach (self::SUPPORTED as $less_function)
         {
             // Replace lines with supported function
-            if($pos = strpos($line, $less_function . '(') !== false) {
+            while ($pos = strpos($line, $less_function . '(') !== false) {
 
-                $parts = explode($less_function . '(@', $line);
+                //self::message("DEBUG: $less_function found in $line");
+
+                $parts = explode($less_function . '(@', $line, 2);
 
                 // Line beginning until LESS function
                 $first = $parts[0];
 
-                $rest = explode(',', $parts[1]);
+                $rest = explode(',', $parts[1], 2);
 
                 // Color variable (the @ symbol has been removed above)
                 $color = $rest[0];
 
-                $rest = explode(')', $rest[1]);
+                $rest = explode(')', $rest[1], 2);
 
                 // amount
                 $amount = trim($rest[0], ' %');
@@ -153,19 +126,20 @@ class ConsoleController extends Controller
 
                 $special_color = str_replace('-', '_', $color) . '__' . $less_function . '__' . $amount;
 
-                $line = $first . $special_color . $end;
+                $this->special_colors[$special_color] = $special_color;
 
-                return [$line, $special_color];
+                $line = $first . '@' . str_replace(['__', '_'], '-', $special_color) . $end;
             }
         }
-        return [$line, true];
+
+        return $line;
     }
 
-    private function createSpecialColorsLess($special_colors)
+    private function createSpecialColorsLess()
     {
         $content = '';
 
-        foreach ($special_colors as $color)
+        foreach ($this->special_colors as $color)
         {
             $colorAsLessVar = '@' . str_replace(['__', '_'], '-', $color);
             $content .= $colorAsLessVar . ': var(--' . $color . ');';
