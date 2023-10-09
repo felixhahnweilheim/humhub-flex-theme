@@ -11,6 +11,7 @@ class ConsoleController extends Controller
 {
     const SRC = '@webroot/static/less';
     const DEST = '@flex-theme/themes/FlexTheme/less/humhub';
+    const FLEXLESS = '@flex-theme/themes/FlexTheme/less';
 
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
     const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
@@ -55,12 +56,23 @@ class ConsoleController extends Controller
 
         sort($special_colors);
 
-        self::message('Successfully rebuilt theme files', 'success');
-        self::message("Changed Files: $changedFiles", 'success');
-        self::message('*** Special colors:', 'warning');
-        self::message(implode("\n", $special_colors));
+        self::createSpecialColorsLess($special_colors);
 
-        self::message('***\n Unsopported Lines: ', 'warning');
+        self::message("\nSuccessfully rebuilt theme files", 'success');
+        self::message("Changed Files: $changedFiles", 'success');
+        self::message('*** Special colors to be copied:', 'warning');
+        self::message('const SPECIAL_COLORS = [', 'no-break');
+        foreach ($special_colors as $color)
+        {
+            self::message("'" . $color . "',", 'no-break');
+        }
+        self::message("];\n");
+        foreach ($special_colors as $color)
+        {
+            self::message('public $' . $color . ';');
+        }
+
+        self::message("***\n Unsopported Lines: ", 'warning');
         foreach($unsopported as $fileAndLine) {
             self::message($fileAndLine);
         }
@@ -139,7 +151,7 @@ class ConsoleController extends Controller
                 // Line ending (e.g. "!important;")
                 $end = $rest[1];
 
-                $special_color = '@' . $color . '-' . $less_function . '-' . $amount;
+                $special_color = str_replace('-', '_', $color) . '__' . $less_function . '__' . $amount;
 
                 $line = $first . $special_color . $end;
 
@@ -147,6 +159,21 @@ class ConsoleController extends Controller
             }
         }
         return [$line, true];
+    }
+
+    private function createSpecialColorsLess($special_colors)
+    {
+        $content = '';
+
+        foreach ($special_colors as $color)
+        {
+            $colorAsLessVar = '@' . str_replace(['__', '_'], '-', $color);
+            $content .= $colorAsLessVar . ': var(--' . $color . ');';
+        }
+
+        $file = Yii::getAlias(self::FLEXLESS . '/special-colors.less');
+        file_put_contents($file, $content);
+        self::message('Rebuilt file: ' . $file);
     }
 
     private function message($text, $level = 'info')
@@ -161,6 +188,10 @@ class ConsoleController extends Controller
             $color = Console::FG_RED;
             $text = "\n*** $text";
         }
-        $this->stdout("$text\n", $color);
+        if ($level != 'no-break')
+        {
+            $text .= "\n";
+        }
+        $this->stdout("$text", $color);
     }
 }
