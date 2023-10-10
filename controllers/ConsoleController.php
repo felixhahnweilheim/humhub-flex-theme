@@ -10,8 +10,8 @@ use yii\helpers\FileHelper;
 class ConsoleController extends Controller
 {
     const SRC = '@webroot/static/less';
-    const DEST = '@flex-theme/themes/FlexTheme/less/humhub';
-    const FLEXLESS = '@flex-theme/themes/FlexTheme/less';
+    const DST = '@flex-theme/themes/FlexTheme/less/humhub';
+    const FLEX_LESS = '@flex-theme/themes/FlexTheme/less';
 
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
     const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
@@ -25,7 +25,7 @@ class ConsoleController extends Controller
 
         // Copy LESS files
         $src = Yii::getAlias(self::SRC);
-        $dst = Yii::getAlias(self::DEST);
+        $dst = Yii::getAlias(self::DST);
         FileHelper::copyDirectory($src, $dst);
         self::message("Copied $src to $dst", 'success');
 
@@ -145,7 +145,7 @@ class ConsoleController extends Controller
             $content .= $colorAsLessVar . ': var(--' . $color . ');';
         }
 
-        $file = Yii::getAlias(self::FLEXLESS . '/special-colors.less');
+        $file = Yii::getAlias(self::FLEX_LESS . '/special-colors.less');
         file_put_contents($file, $content);
         self::message('Rebuilt file: ' . $file);
     }
