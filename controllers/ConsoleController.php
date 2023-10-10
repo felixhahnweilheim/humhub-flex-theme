@@ -16,7 +16,9 @@ class ConsoleController extends Controller
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
     const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
 
-    public $special_colors = [];
+    // Special colors (prefill with those from select2-humhub-less ...)
+    public $special_colors = ['danger__darken__10', 'danger__lighten__20', 'primary__lighten__20', 'primary__lighten__25', 'success__darken__10', 'warning__darken__10', 'warning__lighten__20'];
+
     public $unsopportedLines = [];
 
     public function actionRebuild()
