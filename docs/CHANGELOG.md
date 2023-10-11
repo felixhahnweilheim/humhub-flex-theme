@@ -1,7 +1,7 @@
 ## TBA
-- Maintainance: update for HumHub 1.15 (WIP)
-- Enh: move variables to file (asset)
-- Enh: use CSS variables as theme variables in database
+- Maintainance: update for HumHub 1.15.0-beta.2
+- New controller action: flex-theme/console/rebuild - only for developping!
+- Enh: move variables to file (asset, enables browser caching)
 
 ## 0.2.1 (22 may 2023)
 - Fix: save likeIconColor
