@@ -9,6 +9,8 @@ use humhub\modules\ui\icon\widgets\Icon;
 
 class ColorSettings extends \yii\base\Model
 {
+    const BASE_THEME = 'HumHub';
+
     // Main Colors (configurable)
     const MAIN_COLORS = ['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'];
     public $default;
@@ -86,12 +88,12 @@ class ColorSettings extends \yii\base\Model
 
     public function getColors()
     {
-        $module = Yii::$app->getModule('flex-theme');
-		$base_theme = ThemeHelper::getThemeByName('HumHub');
+        $settings = self::getSettings();
+		$base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
         $all_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS, self::SPECIAL_COLORS);
 
         foreach ($all_colors as $color) {
-            $value = $module->settings->get($color);
+            $value = $settings->get($color);
 
             if (empty($value)) {
                 $theme_var = str_replace('_', '-', $color);
@@ -107,7 +109,7 @@ class ColorSettings extends \yii\base\Model
     {
         parent::init();
 
-        $settings = Yii::$app->getModule('flex-theme')->settings;
+        $settings = self::getSettings();
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
 
         foreach($configurable_colors as $color) {
@@ -119,7 +121,7 @@ class ColorSettings extends \yii\base\Model
     {
         $hints = [];
 
-        $base_theme = ThemeHelper::getThemeByName('HumHub');
+        $base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
 
         foreach ($configurable_colors as $color) {
@@ -170,7 +172,7 @@ class ColorSettings extends \yii\base\Model
 
     public function saveColors()
     {
-        $settings = Yii::$app->getModule('flex-theme')->settings;
+        $settings = self::getSettings();
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
 
         foreach ($configurable_colors as $color) {
@@ -179,12 +181,20 @@ class ColorSettings extends \yii\base\Model
 
             // Save as module settings (value can be emtpy)
             $settings->set($color, $value);
+
+            // Save color values as theme variables (take community theme's color if value is empty)
+            $theme_var = str_replace('_', '-', $color);
+            if (empty($value)) {
+                $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable($theme_var);
+            }
+            $theme_key = 'theme.var.FlexTheme.' . $theme_var;
+            Yii::$app->settings->set($theme_key, $value);
         }
     }
 
     public function saveSpecialColors()
     {
-        $module = Yii::$app->getModule('flex-theme');
+        $settings = self::getSettings();
 
         $special_colors = self::SPECIAL_COLORS;
 
@@ -197,7 +207,7 @@ class ColorSettings extends \yii\base\Model
             $original_color = $this->$base_var;
             if (empty($original_color)) {
                 $theme_var = str_replace('_', '-', $base_var);
-                $original_color = ThemeHelper::getThemeByName('HumHub')->variable($theme_var);
+                $original_color = ThemeHelper::getThemeByName(self::BASE_THEME)->variable($theme_var);
             }
 
             // Calculate color value with ColorHelper functions
@@ -222,7 +232,7 @@ class ColorSettings extends \yii\base\Model
             }
 
             // Save calculated value
-            $module->settings->set($color, $value);
+            $settings->set($color, $value);
         }
     }
 
@@ -241,5 +251,10 @@ class ColorSettings extends \yii\base\Model
         $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
 
         file_put_contents($filename, $content);
+    }
+
+    private function getSettings()
+    {
+        return Yii::$app->getModule('flex-theme')->settings;
     }
 }

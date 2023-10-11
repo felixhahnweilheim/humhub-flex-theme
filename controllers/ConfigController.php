@@ -34,7 +34,6 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             Yii::$app->assetManager->clear();
-            Yii::$app->view->theme->variables->flushCache();
             $this->view->saved();
             return $this->redirect(['/flex-theme/config/colors']);
         }
@@ -71,7 +70,6 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             // Save
             if ($config->save() && $colorSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
                 Yii::$app->assetManager->clear();
-                Yii::$app->view->theme->variables->flushCache();
                 $this->view->saved();
                 return $this->redirect(['/flex-theme/config/advanced']);
             }
