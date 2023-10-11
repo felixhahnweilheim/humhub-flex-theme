@@ -89,7 +89,7 @@ class ColorSettings extends \yii\base\Model
     public function getColors()
     {
         $settings = self::getSettings();
-		$base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
+        $base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
         $all_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS, self::SPECIAL_COLORS);
 
         foreach ($all_colors as $color) {
@@ -97,8 +97,8 @@ class ColorSettings extends \yii\base\Model
 
             if (empty($value)) {
                 $theme_var = str_replace('_', '-', $color);
-	            $value = $base_theme->variable($theme_var);
-	        }
+                $value = $base_theme->variable($theme_var);
+            }
             $result[$color] = $value;
         }
 
@@ -126,7 +126,7 @@ class ColorSettings extends \yii\base\Model
 
         foreach ($configurable_colors as $color) {
             $theme_var = str_replace('_', '-', $color);
-	        $default_value = $base_theme->variable($theme_var);
+            $default_value = $base_theme->variable($theme_var);
             $icon = Icon::get('circle', ['color' => $default_value ]);
             $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . $default_value . '</code> ' . $icon;
         }
@@ -142,7 +142,7 @@ class ColorSettings extends \yii\base\Model
                 'text_color_main', 'text_color_secondary', 'text_color_highlight', 'text_color_soft', 'text_color_soft2', 'text_color_soft3', 'text_color_contrast',
                 'background_color_main', 'background_color_secondary', 'background_color_page', 'background_color_highlight', 'background_color_highlight_soft', 'background3', 'background4'
                 ], 'validateHexColor']
-			];
+        ];
     }
 
     public function validateHexColor($attribute, $params, $validator)
