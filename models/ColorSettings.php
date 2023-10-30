@@ -246,7 +246,7 @@ class ColorSettings extends \yii\base\Model
               $vars = $vars .  '--' . $key . ':' . $value . ';';
         }
 
-        $additionalCss = Config::additionalCss();
+        $additionalCss = Config()->additionalCss();
 
         $content = ':root {' . $vars . $additionalCss . '}';
 
