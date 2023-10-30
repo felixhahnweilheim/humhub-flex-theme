@@ -1,5 +1,6 @@
 ## TBA
 - Maintainance: update for HumHub 1.15.0-beta.2
+- New option: show file upload options as buttons instead of dropdown)
 - New controller action: flex-theme/console/rebuild - only for developping!
 - Enh: move variables to file (asset, enables browser caching)
 
