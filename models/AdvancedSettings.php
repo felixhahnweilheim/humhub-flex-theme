@@ -66,7 +66,7 @@ class AdvancedSettings extends \yii\base\Model
         $module = Yii::$app->getModule('flex-theme');
 
         // Get base settings
-        $config_names = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor'];
+        $config_names = Config::CONFIG_NAMES;
         foreach( $config_names as $setting) {
             $value = $module->settings->get($setting);
 

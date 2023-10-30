@@ -16,6 +16,7 @@ use yii\base\UnknownPropertyException;
 class Config extends \yii\base\Model
 {
     // Module settings
+    const CONFIG_NAMES = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor', 'showTopicMenu', 'showUploadAsButtons'];
     public $commentLink;
     public $likeLink;
     public $likeIcon;
