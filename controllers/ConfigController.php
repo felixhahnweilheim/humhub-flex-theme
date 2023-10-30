@@ -22,7 +22,9 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new Config();
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            Yii::$app->assetManager->clear();
             $this->view->saved();
+            return $this->redirect(['/flex-theme/config']);
         }
 
         return $this->render('index', ['model' => $form]);

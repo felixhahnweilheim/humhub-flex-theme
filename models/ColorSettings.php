@@ -165,7 +165,7 @@ class ColorSettings extends \yii\base\Model
         self::saveSpecialColors();
 
         // Save colors to file
-        self::saveColorsToFile();
+        self::saveVarsToFile();
 
         return true;
     }
@@ -236,7 +236,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function saveColorsToFile()
+    public function saveVarsToFile()
     {
         $colors = self::getColors();
 
@@ -246,7 +246,9 @@ class ColorSettings extends \yii\base\Model
               $vars = $vars .  '--' . $key . ':' . $value . ';';
         }
 
-        $content = ':root {' . $vars . '}';
+        $additionalCss = Config::additionalCss();
+
+        $content = ':root {' . $vars . $additionalCss . '}';
 
         $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
 

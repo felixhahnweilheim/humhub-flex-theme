@@ -22,6 +22,9 @@ class Config extends \yii\base\Model
     public $likeIconFull;
     public $likeIconColor;
     public $showTopicMenu;
+    public $showUploadAsButtons;
+
+    const UPLOAD_BUTTONS_CSS = '.upload-buttons .btn-group .fileinput-button {   display: none; } .upload-buttons .btn-group .dropdown-toggle {   display: none; } .upload-buttons .btn-group .dropdown-menu {   display: inline-block;   position: relative;   border: none;   padding: 0;   margin: 0;   width: auto;   min-width: 0;   padding: 0 10px; } .upload-buttons .btn-group .dropdown-menu li {   float: left;   margin: 0 7px;   line-height: 1;   border-radius: 10px; } .upload-buttons .btn-group .dropdown-menu li a {   margin: 0 5px;   padding: 3px 7px; } .upload-buttons .btn-group .dropdown-menu li a i {   margin: 1px; } .upload-buttons .btn-group .dropdown-menu li a[data-action-click="file.uploadByType"] {   font-size: 0;   padding: 5px 3px; } .upload-buttons .btn-group .dropdown-menu li:hover {   border-left-color: transparent !important; }';
 
     public static function getSetting(string $setting_name) {
 
@@ -41,6 +44,7 @@ class Config extends \yii\base\Model
         $this->likeIconFull = $settings->get('likeIconFull', 'thumbs-up');
         $this->likeIconColor = $settings->get('likeIconColor');
         $this->showTopicMenu = $settings->get('showTopicMenu');
+        $this->showUploadAsButtons = $settings->get('showUploadAsButtons');
     }
 
     public function attributeLabels() {
@@ -52,7 +56,8 @@ class Config extends \yii\base\Model
             'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
             'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
             'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon'),
-            'showTopicMenu' => Yii::t('FlexThemeModule.admin', 'Show topic menu in user profiles and spaces.')
+            'showTopicMenu' => Yii::t('FlexThemeModule.admin', 'Show topic menu in user profiles and spaces.'),
+            'showUploadAsButtons' => Yii::t('FlexThemeModule.admin', 'Show File Upload options (image, audio, video...) as buttons instead of dropdown.')
         ];
     }
 
@@ -65,7 +70,7 @@ class Config extends \yii\base\Model
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
             }],
             [['likeIconColor'], 'validateHexColor'],
-            [['showTopicMenu'], 'boolean']
+            [['showTopicMenu', 'showUploadAsButtons'], 'boolean']
         ];
     }
 
@@ -91,7 +96,21 @@ class Config extends \yii\base\Model
         $module->settings->set('likeIconFull', $this->likeIconFull);
         $module->settings->set('likeIconColor', $this->likeIconColor);
         $module->settings->set('showTopicMenu', $this->showTopicMenu);
+        $module->settings->set('showUploadAsButtons', $this->showUploadAsButtons);
+
+        // Update variables.css (apply showUploadAsButtons)
+        $colors = new ColorSettings();
+        $colors->saveVarsToFile();
 
         return true;
+    }
+
+    /* Additional CSS (ColorSettings uses it to generate the variables.css */
+    public function additionalCss()
+    {
+        if ($this->showUploadAsButtons) {
+            return self::UPLOAD_BUTTONS_CSS;
+        }
+        return '';
     }
 }
