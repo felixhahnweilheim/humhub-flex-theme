@@ -31,17 +31,21 @@ class FileHelper {
 
     public static function updateThemeFile()
     {
+        // Base Theme
         $theme_base = file_get_contents(self::getThemeBaseFile());
-        $vars = file_get_contents(self::getVarsFile());
-        $options = '';
 
+        // CSS Variables
+        $vars = file_get_contents(self::getVarsFile());
+
+        // Get optional CSS
+        $options = '';
         $config = new Config();
         if ($config->showUploadAsButtons) {
-            $options = file_get_contents(self::getOptionsPath() . '/showUploadAsButtons.css');
+            $options .= file_get_contents(self::getOptionsPath() . '/showUploadAsButtons.css');
         }
 
+        // Create/Update theme.css
         $content = $theme_base . $options . $vars;
-
         file_put_contents(self::getThemeFile(), $content);
 
         // Clear Asset Manager to reload theme.css
