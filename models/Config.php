@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\models;
 
 use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
+use humhub\modules\flexTheme\helpers\FileHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
@@ -24,8 +25,6 @@ class Config extends \yii\base\Model
     public $likeIconColor;
     public $showTopicMenu;
     public $showUploadAsButtons;
-
-    const UPLOAD_BUTTONS_CSS = '.upload-buttons .btn-group .fileinput-button {display: none;} .upload-buttons .btn-group .dropdown-toggle {display: none;} .upload-buttons .btn-group .dropdown-menu {display: inline-block; position: relative; border: none; padding: 0; margin: 0; width: auto; min-width: 0;} .upload-buttons .btn-group .dropdown-menu li { float: left; margin: 0; line-height: 1; border-radius: 10px;} .upload-buttons .btn-group .dropdown-menu li a {margin: 0 3px; padding: 3px;} .upload-buttons .btn-group .dropdown-menu li a i {margin: 1px;} .upload-buttons .btn-group .dropdown-menu li a[data-action-click="file.uploadByType"] {font-size: 0; padding: 5px 3px; } .upload-buttons .btn-group .dropdown-menu li:hover {   border-left-color: transparent !important; }';
 
     public static function getSetting(string $setting_name) {
 
@@ -99,19 +98,9 @@ class Config extends \yii\base\Model
         $module->settings->set('showTopicMenu', $this->showTopicMenu);
         $module->settings->set('showUploadAsButtons', $this->showUploadAsButtons);
 
-        // Update variables.css (apply showUploadAsButtons)
-        $colors = new ColorSettings();
-        $colors->saveVarsToFile();
+        // Update theme.css (apply showUploadAsButtons)
+        FileHelper::updateThemeFile();
 
         return true;
-    }
-
-    /* Additional CSS (ColorSettings uses it to generate the variables.css */
-    public function additionalCss()
-    {
-        if ($this->showUploadAsButtons) {
-            return self::UPLOAD_BUTTONS_CSS;
-        }
-        return '';
     }
 }

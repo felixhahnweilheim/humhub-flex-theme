@@ -4,12 +4,14 @@ namespace humhub\modules\flexTheme\models;
 
 use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
+use humhub\modules\flexTheme\helpers\FileHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\ui\icon\widgets\Icon;
 
 class ColorSettings extends \yii\base\Model
 {
     const BASE_THEME = 'HumHub';
+    const VARS_FILE = '@flex-theme/themes/FlexTheme/css/variables.css';
 
     // Main Colors (configurable)
     const MAIN_COLORS = ['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'];
@@ -164,8 +166,11 @@ class ColorSettings extends \yii\base\Model
         // Calculate and save lightened, darkened and faded colors
         self::saveSpecialColors();
 
-        // Save colors to file
+        // Save colors to variables file
         self::saveVarsToFile();
+
+        // Update theme.css
+        FileHelper::updateThemeFile();
 
         return true;
     }
@@ -246,12 +251,9 @@ class ColorSettings extends \yii\base\Model
               $vars = $vars .  '--' . $key . ':' . $value . ';';
         }
 
-        $config = new Config();
-        $additionalCss = $config->additionalCss();
+        $content = ':root {' . $vars . '}';
 
-        $content = ':root {' . $vars . $additionalCss . '}';
-
-        $filename = Yii::getAlias('@flex-theme/themes/FlexTheme/css/variables.css');
+        $filename = FileHelper::getVarsFile();
 
         file_put_contents($filename, $content);
     }
