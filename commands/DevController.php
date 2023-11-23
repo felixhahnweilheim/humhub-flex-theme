@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\controllers;
 
 use Yii;
 use yii\console\Controller;
+use yii\console\ExitCode;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 
@@ -23,6 +24,10 @@ class DevController extends Controller
 
     public function actionRebuild()
     {
+        if (!$this->confirm('This action is only for developping. Continue?')) {
+            $this->stdout("Cancelled\n");
+            return ExitCode::OK;
+        }            
         //self::message('Starting to rebuild LESS files of FlexTheme.', 'warning');
 
         // Copy LESS files
@@ -65,7 +70,7 @@ class DevController extends Controller
         
         self::message("\n\n ***Remeber to update the select2 file manually! \n\n");
 
-        return self::EXIT_CODE_NORMAL;
+        return ExitCode::OK;
     }
 
     private function checkAndCorrectFile($file)
