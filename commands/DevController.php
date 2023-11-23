@@ -7,7 +7,7 @@ use yii\console\Controller;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 
-class ConsoleController extends Controller
+class DevController extends Controller
 {
     const SRC = '@webroot/static/less';
     const DST = '@flex-theme/themes/FlexTheme/less/humhub';
@@ -62,6 +62,8 @@ class ConsoleController extends Controller
         {
             self::message("$line[2] at $line[1]: $line[2]");
         }
+        
+        self::message("\n\n ***Remeber to update the select2 file manually! \n\n");
 
         return self::EXIT_CODE_NORMAL;
     }
@@ -87,7 +89,7 @@ class ConsoleController extends Controller
      * * * true: no function recognized (line not changed)
      * * * string: special color, e.g. 'primary-darken-10'
      */
-    private function checkAndCorrectLine($lineNumber, $line, $file)
+    private function checkAndCorrectLine($lineNumber, $line, $file): array
     {
         foreach (self::UNSOPPORTED as $less_function)
         {

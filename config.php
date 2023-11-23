@@ -1,9 +1,7 @@
 <?php
 
-use yii\base\Event;
-use humhub\components\ModuleManager;
-use humhub\modules\admin\widgets\AdminMenu;
 use humhub\modules\flexTheme\Events;
+use humhub\components\console\Application;
 
 return [
     'id' => 'flex-theme',
@@ -11,9 +9,9 @@ return [
     'namespace' => 'humhub\modules\flexTheme',
     'events' => [
 	    	[
-			'class' => AdminMenu::class,
-			'event' => AdminMenu::EVENT_INIT,
-			'callback' => [Events::class, 'onAdminMenuInit']
+			'class' => Application::class,
+			'event' => Application::EVENT_ON_INIT,
+			'callback' => [Events::class, 'onConsoleInit']
 		],
 	]
 ];

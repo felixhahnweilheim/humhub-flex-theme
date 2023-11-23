@@ -2,11 +2,8 @@
 
 namespace humhub\modules\flexTheme;
 
-use Yii;
-use yii\base\Model;
-use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\ui\icon\widgets\Icon;
-use yii\base\Theme;
+use Yii;
 use yii\helpers\Url;
 
 class Events
@@ -25,4 +22,9 @@ class Events
             'isVisible' => true,
         ]);
 	}
+    
+    public static function onConsoleInit($event)
+    {
+        $event->sender->controllerMap['flex-theme'] = commands\DevController::class;
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace humhub\modules\flexTheme;
 
 use humhub\modules\flexTheme\models\ColorSettings;
@@ -36,13 +35,6 @@ class Module extends \humhub\components\Module {
     private function enableTheme() {
 
         // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
-        // Already a theme based theme is active
-        foreach (ThemeHelper::getThemeTree(Yii::$app->view->theme) as $theme) {
-            if ($theme->name === self::FLEX_THEME_NAME) {
-                return;
-            }
-        }
-
         $theme = ThemeHelper::getThemeByName(self::FLEX_THEME_NAME);
         if ($theme !== null) {
             $theme->activate();
