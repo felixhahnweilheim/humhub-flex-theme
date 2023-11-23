@@ -8,7 +8,7 @@ class ColorHelper {
      * This function imitates the LESS function lighten()
      * But it does not convert the color into HSL and back because this is not necessary to achieve the same result.
      */
-	public static function lighten($color, $amount, $relative = false) {
+	public static function lighten(string $color, int $amount, bool $relative = false): string {
         
         /*
          * $color is expected to be a hexadecimal color code (including '#')
@@ -49,7 +49,7 @@ class ColorHelper {
     /*
      * Documentation, see lighten()
      */
-	public static function darken($color, $amount, $relative = false) {
+	public static function darken(string $color, int $amount, bool $relative = false): string {
 		
         $percentage = $amount / 100;
 		$color_parts = ColorHelper::getColorComponents($color);
@@ -77,7 +77,7 @@ class ColorHelper {
 		
 	}
     
-    public static function fade($color, $amount) {
+    public static function fade(string $color, int $amount): string {
        
         // $amount is expected to be between 0 and 100
         $opacity = ($amount / 100) * 255;
@@ -88,7 +88,7 @@ class ColorHelper {
         return $color . $opacity;
     }
 	
-	protected static function getColorComponents($color) {
+	protected static function getColorComponents(string $color): array {
 		
 		// Remove leading '#'
 		$hexstr = ltrim($color, '#');

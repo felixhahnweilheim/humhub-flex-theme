@@ -1,7 +1,8 @@
 ## TBA
-- Maintainance: update for HumHub 1.15.0-beta.2
+- remove admin menu item
+- Maintainance: update for HumHub 1.15.0
 - New option: show file upload options as buttons instead of dropdown)
-- New controller action: flex-theme/console/rebuild - only for developping!
+- New controller action: flex-theme/rebuild - only for developping!
 - Enh: move variables to file (asset, enables browser caching)
 
 ## 0.2.1 (22 may 2023)
