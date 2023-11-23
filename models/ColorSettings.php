@@ -88,7 +88,7 @@ class ColorSettings extends \yii\base\Model
     public $warning__lighten__40;
     public $warning__lighten__5;
 
-    public function getColors()
+    public function getColors(): array
     {
         $settings = self::getSettings();
         $base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
@@ -147,7 +147,7 @@ class ColorSettings extends \yii\base\Model
         ];
     }
 
-    public function validateHexColor($attribute, $params, $validator)
+    public function validateHexColor(string $attribute, $params, $validator)
     {
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
             $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'Invalid Format') . '. ' . Yii::t('FlexThemeModule.admin', 'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));

@@ -26,8 +26,8 @@ class Config extends \yii\base\Model
     public $showTopicMenu;
     public $showUploadAsButtons;
 
-    public static function getSetting(string $setting_name) {
-
+    public static function getSetting(string $setting_name): string
+    {
         // Note: return can be empty
         return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
@@ -74,7 +74,7 @@ class Config extends \yii\base\Model
         ];
     }
 
-    public function validateHexColor($attribute, $params, $validator)
+    public function validateHexColor(string $attribute, $params, $validator)
     {
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
             $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'Invalid Format') . '. ' . Yii::t('FlexThemeModule.admin', 'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));

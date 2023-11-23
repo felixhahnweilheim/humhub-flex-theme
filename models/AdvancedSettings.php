@@ -42,7 +42,7 @@ class AdvancedSettings extends \yii\base\Model
 		];
     }
 
-    public function isValidJSON($attribute, $params, $validator)
+    public function isValidJSON(string $attribute, $params, $validator)
     {
         if(json_decode($this->$attribute) === null) {
             $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'JSON could not be converted!'));
@@ -58,7 +58,7 @@ class AdvancedSettings extends \yii\base\Model
         return true;
     }
 
-    protected function getSettingsArray()
+    protected function getSettingsArray(): array
     {
         $config = [];
         $colors = [];
