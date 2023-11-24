@@ -2,6 +2,7 @@
 namespace humhub\modules\flexTheme;
 
 use humhub\modules\flexTheme\models\ColorSettings;
+use humhub\modules\flexTheme\helpers\FileHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\libs\DynamicConfig;
 use Yii;
@@ -44,6 +45,9 @@ class Module extends \humhub\components\Module {
         // Save special colors (lightened, darkened, faded colors)
         $model = new ColorSettings();
         $model->saveSpecialColors();
+        
+        // Create theme.css
+        FileHelper::updateThemeFile();
     }
 
     // Module Deactivation
