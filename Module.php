@@ -33,21 +33,18 @@ class Module extends \humhub\components\Module {
         return false;
     }
 
-    private function enableTheme() {
-
+    private function enableTheme()
+    {
+        // Save special colors (lightened, darkened, faded colors), create theme files etc.
+        $model = new ColorSettings();
+        $model->save();
+        
         // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
         $theme = ThemeHelper::getThemeByName(self::FLEX_THEME_NAME);
         if ($theme !== null) {
             $theme->activate();
             DynamicConfig::rewrite();
         }
-
-        // Save special colors (lightened, darkened, faded colors)
-        $model = new ColorSettings();
-        $model->saveSpecialColors();
-        
-        // Create theme.css
-        FileHelper::updateThemeFile();
     }
 
     // Module Deactivation
