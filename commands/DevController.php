@@ -73,7 +73,7 @@ class DevController extends Controller
         return ExitCode::OK;
     }
 
-    private function checkAndCorrectFile($file)
+    private function checkAndCorrectFile($file): void
     {
         //self::message("Going through: $file");
 
@@ -144,7 +144,7 @@ class DevController extends Controller
         return $line;
     }
 
-    private function createSpecialColorsLess()
+    private function createSpecialColorsLess(): void
     {
         $content = '';
 
@@ -159,7 +159,7 @@ class DevController extends Controller
         self::message('Rebuilt file: ' . $file);
     }
 
-    private function message($text, $level = 'info')
+    private function message($text, $level = 'info'): void
     {
         $color = '';
         if ($level == 'success') {

@@ -119,7 +119,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function attributeHints()
+    public function attributeHints(): array
     {
         $hints = [];
 
@@ -136,7 +136,7 @@ class ColorSettings extends \yii\base\Model
         return $hints;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [[
@@ -154,7 +154,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function save()
+    public function save(): bool
     {
         if(!$this->validate()) {
             return false;
@@ -175,7 +175,7 @@ class ColorSettings extends \yii\base\Model
         return true;
     }
 
-    public function saveColors()
+    public function saveColors(): void
     {
         $settings = self::getSettings();
         $configurable_colors = array_merge(self::MAIN_COLORS, self::TEXT_COLORS, self::BACKGROUND_COLORS);
@@ -197,7 +197,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function saveSpecialColors()
+    public function saveSpecialColors(): void
     {
         $settings = self::getSettings();
 
@@ -241,7 +241,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function saveVarsToFile()
+    public function saveVarsToFile(): void
     {
         $colors = self::getColors();
 
