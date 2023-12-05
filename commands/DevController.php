@@ -94,7 +94,7 @@ class DevController extends Controller
      * * * true: no function recognized (line not changed)
      * * * string: special color, e.g. 'primary-darken-10'
      */
-    private function checkAndCorrectLine($lineNumber, $line, $file): array
+    private function checkAndCorrectLine($lineNumber, $line, $file): string
     {
         foreach (self::UNSOPPORTED as $less_function)
         {
