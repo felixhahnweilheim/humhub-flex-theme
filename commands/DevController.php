@@ -1,6 +1,6 @@
 <?php
 
-namespace humhub\modules\flexTheme\controllers;
+namespace humhub\modules\flexTheme\commands;
 
 use Yii;
 use yii\console\Controller;
