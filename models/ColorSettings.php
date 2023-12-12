@@ -2,11 +2,12 @@
 
 namespace humhub\modules\flexTheme\models;
 
-use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
 use humhub\modules\flexTheme\helpers\FileHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\ui\icon\widgets\Icon;
+use Yii;
+use yii\base\ErrorException;
 
 class ColorSettings extends \yii\base\Model
 {
@@ -254,8 +255,12 @@ class ColorSettings extends \yii\base\Model
         $content = ':root {' . $vars . '}';
 
         $filename = FileHelper::getVarsFile();
-
-        file_put_contents($filename, $content);
+        
+        try {
+            file_put_contents($filename, $content);
+        } catch(ErrorException $e) {
+            Yii::error($e, 'flex-theme');
+        }
     }
 
     private function getSettings()

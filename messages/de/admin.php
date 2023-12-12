@@ -7,6 +7,7 @@ return [
     'Color for Like Icon' => 'Farbe für Like Icon',
     'Colors' => 'Farben',
     'Default' => 'Standard',
+    'Flex Theme' => 'Flex Theme',
     'Flexible Theme for HumHub' => 'Flexibles Theme für HumHub',
     'General Settings' => 'Allgemeine Einstellungen',
     'Import/Export' => 'Import/Export',
@@ -29,5 +30,8 @@ return [
     'WARNING' => 'WARNUNG',
     'Warning: Flex Theme is not active, settings on this page won\'t have any effect!' => 'Warnung: Flex Theme is nicht aktiv, Einstellungen auf dieser Seite haben keinen Effekt!',
     'Your settings will be overwritten!' => 'Ihre Einstellungen werden überschrieben!',
-    'Flex Theme' => 'Flex Theme',
+    'Dark Mode' => '',
+    'File upload links' => '',
+    'Please use the module {darkmode} and select "HumHub (dark)".' => '',
+    'Show File Upload options (image, audio, video...) as buttons instead of dropdown.' => '',
 ];

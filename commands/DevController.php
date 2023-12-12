@@ -15,10 +15,13 @@ class DevController extends Controller
     const FLEX_LESS = '@flex-theme/themes/FlexTheme/less';
 
     const SUPPORTED = ['darken', 'lighten', 'fade', 'fadein', 'fadeout'];
-    const UNSOPPORTED = ['saturate', 'desaturate', 'spin', 'red', 'green', 'blue'];
+    const UNSOPPORTED = ['saturate', 'desaturate', 'spin'];
+    
+    const SELECT2_SRC = '@webroot/static/css/select2Theme';
+    const SELECT2_DST = '@flex-theme/themes/FlexTheme/less/css/select2Theme';
 
-    // Special colors (prefill with those from select2-humhub-less ...)
-    public $special_colors = ['danger__darken__10', 'danger__lighten__20', 'primary__lighten__20', 'primary__lighten__25', 'success__darken__10', 'warning__darken__10', 'warning__lighten__20'];
+    // Special colors
+    public $special_colors = [];
 
     public $unsopportedLines = [];
 
@@ -44,6 +47,8 @@ class DevController extends Controller
                 self::checkAndCorrectFile($file);
             }
         }
+        
+        self::handleSelect2();
 
         sort($this->special_colors);
 
@@ -68,7 +73,6 @@ class DevController extends Controller
             self::message("$line[2] at $line[1]: $line[2]");
         }
         
-        self::message("\n\n ***Remeber to update the select2 file manually! \n\n");
 
         return ExitCode::OK;
     }
@@ -156,7 +160,63 @@ class DevController extends Controller
 
         $file = Yii::getAlias(self::FLEX_LESS . '/special-colors.less');
         file_put_contents($file, $content);
-        self::message('Rebuilt file: ' . $file);
+        self::message("Rebuilt file: $file", 'success');
+    }
+    
+    private function handleSelect2(): void
+    {
+        // Copy files
+        $src = Yii::getAlias(self::SELECT2_SRC);
+        $dst = Yii::getAlias(self::SELECT2_DST);
+        FileHelper::copyDirectory($src, $dst);
+        self::message("Copied $src to $dst", 'success');
+        
+        // Go through copied files
+        self::correctSelect2Build($dst . '/build.less');
+        self::correctSelect2Theme($dst . '/select2-humhub.less');
+        self::checkAndCorrectFile($dst . '/select2-humhub.less');
+    }
+    
+    private function correctSelect2Build($file): void
+    {
+        $lines = file($file, FILE_IGNORE_NEW_LINES);
+        foreach($lines as $key => $line)
+        {
+            if (strpos($line, '@import "../../../protected/') !== false) {
+                // Correct import because of subfolder
+                $lines[$key] = str_replace('@import "../../../protected/', '@import "../../../../../../../', $line);
+            }
+        }
+        $data = implode(PHP_EOL, $lines);
+        file_put_contents($file, $data);
+    }
+    
+    private function correctSelect2Theme($file): void
+    {
+        $lines = file($file, FILE_IGNORE_NEW_LINES);
+        foreach($lines as $key => $line)
+        {
+            if (!isset($pattern)) {
+                if (isset($copyEnd)) {
+                    $pattern = implode(PHP_EOL, array_slice($lines, $copyStart + 1, $copyEnd - $copyStart - 1));
+                } elseif (isset($copyStart)) {
+                    if ($line === '}') {
+                        $copyEnd = $key;
+                    }
+                } elseif (strpos($line, '.validation-state-focus(@color) {') !== false) {
+                    $copyStart = $key;
+                }
+            } else {
+                if (strpos($line, '.validation-state-focus(') !== false) {
+                    $parts = explode('(',  $line, 2);
+                    $color = trim($parts[1], ");");
+                    
+                    $lines[$key] = str_replace('@color', $color, $pattern);
+                }
+            }
+        }
+        $data = implode(PHP_EOL, $lines);
+        file_put_contents($file, $data);
     }
 
     private function message($text, $level = 'info'): void
@@ -178,3 +238,4 @@ class DevController extends Controller
         $this->stdout("$text", $color);
     }
 }
+

@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\helpers;
 
 use humhub\modules\flexTheme\models\Config;
 use Yii;
+use yii\base\ErrorException;
 
 class FileHelper {
 
@@ -46,9 +47,15 @@ class FileHelper {
 
         // Create/Update theme.css
         $content = $theme_base . $options . $vars;
-        file_put_contents(self::getThemeFile(), $content);
+        
+        try {
+            file_put_contents(self::getThemeFile(), $content);
+        } catch(ErrorException $e) {
+            Yii::error($e);
+        }
 
         // Clear Asset Manager to reload theme.css
         Yii::$app->assetManager->clear();
     }
 }
+
