@@ -1,4 +1,5 @@
 <?php
+
 namespace humhub\modules\flexTheme;
 
 use humhub\modules\flexTheme\models\ColorSettings;
