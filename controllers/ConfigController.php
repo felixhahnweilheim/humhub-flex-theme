@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\controllers;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
+use humhub\modules\flexTheme\models\DarkMode;
 use humhub\modules\flexTheme\models\AdvancedSettings;
 use Yii;
 
@@ -47,12 +48,14 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new AdvancedSettings();
         $config = new Config();
         $colorSettings = new ColorSettings();
+        $darkModeSettings = new DarkMode();
 
         if(!empty(Yii::$app->request->post())) {
             $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
 
             $config->load($data);
             $colorSettings->load($data);
+            $darkModeSettings->load($data);
 
             // Check validation before saving anything
             if (!$config->validate()) {
@@ -61,6 +64,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             }
             if (!$colorSettings->validate()) {
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (ColorSettings)');
+			    return $this->render('advanced', ['model' => $form]);
+            }
+            if (!$darkModeSettings->validate()) {
+                $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (DarkModeSettings)');
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save

@@ -7,7 +7,6 @@
 - New option: show file upload options as buttons instead of dropdown)
 - New controller action: flex-theme/rebuild - only for developping!
 - Enh: various code style improvements
-
 ## 0.2.1 (22 may 2023)
 - Fix: save likeIconColor
 - Enh: Import/Export (JSON)
