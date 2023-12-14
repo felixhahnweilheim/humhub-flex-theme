@@ -2,10 +2,6 @@
 
 namespace humhub\modules\flexTheme;
 
-use humhub\modules\ui\icon\widgets\Icon;
-use Yii;
-use yii\helpers\Url;
-
 class Events
 {
     public static function onConsoleInit($event)

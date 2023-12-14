@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\models;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
+use humhub\modules\flexTheme\models\DarkMode;
 
 use Yii;
 
@@ -62,6 +63,7 @@ class AdvancedSettings extends \yii\base\Model
     {
         $config = [];
         $colors = [];
+        $darkMode = [];
 
         $module = Yii::$app->getModule('flex-theme');
 
@@ -87,6 +89,22 @@ class AdvancedSettings extends \yii\base\Model
             }
         }
 
-        return ['Config' => $config, 'ColorSettings' => $colors];
+        // Get Dark Mode settings
+        $darkModeEnabled = $module->settings->get('darkModeEnabled');
+        if (!empty($darkModeEnabled)) {
+            $darkMode['darkModeEnabled'] = (bool) $darkModeEnabled;
+        }
+        // Get dark colors
+        $color_names = array_merge(DarkMode::MAIN_COLORS, DarkMode::TEXT_COLORS, DarkMode::BACKGROUND_COLORS);
+        foreach( $color_names as $color ) {
+            $value = $module->settings->get('dark_' . $color);
+
+            // exclude empty settings
+            if(!empty($value)) {
+                $darkMode[$color] = $value;
+            }
+        }
+
+        return ['Config' => $config, 'ColorSettings' => $colors, 'DarkMode' => $darkMode];
     }
 }
