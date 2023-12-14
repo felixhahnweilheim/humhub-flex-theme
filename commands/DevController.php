@@ -201,10 +201,10 @@ class DevController extends Controller
                     $pattern = implode(PHP_EOL, array_slice($lines, $copyStart + 1, $copyEnd - $copyStart - 1));
                 } elseif (isset($copyStart)) {
                     if ($line === '}') {
-                        $copyEnd = $key;
+                        $copyEnd = (int) $key;
                     }
                 } elseif (strpos($line, '.validation-state-focus(@color) {') !== false) {
-                    $copyStart = $key;
+                    $copyStart = (int) $key;
                 }
             } else {
                 if (strpos($line, '.validation-state-focus(') !== false) {
@@ -215,6 +215,14 @@ class DevController extends Controller
                 }
             }
         }
+        
+        // Comment out pattern
+        $i = $copyStart;
+        while ($i <= $copyEnd) {
+            $lines[$i] = '//' . $lines[$i];
+            $i++;
+        }
+        
         $data = implode(PHP_EOL, $lines);
         file_put_contents($file, $data);
     }
