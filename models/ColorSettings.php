@@ -254,14 +254,8 @@ class ColorSettings extends \yii\base\Model
         }
 
         $content = ':root {' . $vars . '}';
-
-        $filename = FileHelper::getVarsFile();
         
-        try {
-            file_put_contents($filename, $content);
-        } catch(ErrorException $e) {
-            Yii::error($e, 'flex-theme');
-        }
+        FileHelper::updateVarsFile($content);
     }
 
     private function getSettings()

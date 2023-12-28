@@ -10,7 +10,7 @@ class FileHelper {
 
     const THEME_PATH = '@flex-theme/themes/FlexTheme';
 
-    public static function getVarsFile()
+    private static function getVarsFile()
     {
         return Yii::getAlias(self::THEME_PATH . '/css/variables.css');
     }
@@ -29,8 +29,17 @@ class FileHelper {
     {
         return Yii::getAlias(self::THEME_PATH . '/css/theme_base.css');
     }
+    
+    public static function updateVarsFile(string $content): void
+    {
+        try {
+            file_put_contents(self::getVarsFile(), $content);
+        } catch(ErrorException $e) {
+            Yii::error($e, 'flex-theme');
+        }
+    }
 
-    public static function updateThemeFile()
+    public static function updateThemeFile(): void
     {
         // Base Theme
         $theme_base = file_get_contents(self::getThemeBaseFile());
@@ -51,11 +60,14 @@ class FileHelper {
         try {
             file_put_contents(self::getThemeFile(), $content);
         } catch(ErrorException $e) {
-            Yii::error($e);
+            Yii::error($e, 'flex-theme');
         }
 
         // Clear Asset Manager to reload theme.css
-        Yii::$app->assetManager->clear();
+        try {
+            Yii::$app->assetManager->clear();
+        } catch(ErrorException $e) {
+            Yii::warning($e, 'flex-theme');
+        }
     }
 }
-
