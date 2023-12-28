@@ -26,7 +26,8 @@ class SettingsCest
         $I->amOnRoute(['/flex-theme/config/colors']);
         $I->waitForText('Flex Theme');
         $I->executeJS("$( '.form-collapsible-fields' ).trigger( 'click' )");
-        $I->fillField('#colorsettings-background_color_page', self::BG_COLOR_PG);
+        $I->waitForText('Background Color Page');
+        $I->fillField('ColorSettings[background_color_page]', self::BG_COLOR_PG);
 
         $I->click('Save');
 
