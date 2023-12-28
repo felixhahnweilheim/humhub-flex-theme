@@ -2,8 +2,8 @@ name: PHP Codeception Tests - develop
 
 on:
   push:
-  schedule:
-    - cron: "0 0 * * 0"
+    branches:
+      -develop
     paths-ignore:
       - 'docs/**'
       - 'tests/**'
