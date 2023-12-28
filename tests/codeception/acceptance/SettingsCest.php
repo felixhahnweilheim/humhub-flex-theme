@@ -25,7 +25,7 @@ class SettingsCest
         $I->amAdmin();
         $I->amOnRoute(['/flex-theme/config/colors']);
         $I->waitForText('Flex Theme');
-        $I->executeJS("$( '.form-collapsible-fields' ).trigger( 'click' )");
+        $I->jsClick('.form-collapsible-fields:nth-child(3)');
         $I->waitForText('Background Color Page');
         $I->fillField('ColorSettings[background_color_page]', self::BG_COLOR_PG);
 
@@ -43,11 +43,11 @@ class SettingsCest
         $colorDarkened = $I->executeJS("getComputedStyle(document.documentElement).getPropertyValue('--background_color_page__darken__5');");
         
         if ($color !== self::BG_COLOR_PG) {
-            $I->fail('Fail. Expected background color: ' . self::BG_COLOR_PG . ' - found color: ' . $color);
+            $I->fail();//unknown function
         }
         
         if ($colorDarkened !== self::BG_COLOR_PG_D_5) {
-            $I->fail('Fail. Expected background color: ' . self::BG_COLOR_PG_D_5 . ' - found color: ' . $colorDarkened);
+            $I->fail();//unknown function
         }
     }
 }
