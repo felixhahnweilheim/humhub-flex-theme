@@ -25,7 +25,8 @@ class SettingsCest
         $I->amAdmin();
         $I->amOnRoute(['/flex-theme/config/colors']);
         $I->waitForText('Flex Theme');
-        $I->fillField('Background Color Page', self::BG_COLOR_PG);
+        $I->click('Background Colors');
+        $I->fillField('#colorsettings-background_color_page', self::BG_COLOR_PG);
 
         $I->click('Save');
 
@@ -35,7 +36,7 @@ class SettingsCest
     public function testEffectOfPreviousSettings(AcceptanceTester $I)
     {
         $I->amOnRoute(['/dashboard']);
-        $I->waitForElementVisible('#wallStream');
+        $I->waitForElementVisible('#layout-content');
 
         $color = $I->executeJS("getComputedStyle(document.documentElement).getPropertyValue('--background_color_page');");
         $colorDarkened = $I->executeJS("getComputedStyle(document.documentElement).getPropertyValue('--background_color_page__darken__5');");
