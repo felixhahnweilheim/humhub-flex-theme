@@ -6,9 +6,6 @@ on:
       - 'main'
     paths-ignore:
       - 'docs/**'
-      - 'tests/**'
-      - '.github/**'
-      - '.*'
       - '*.md'
 
 jobs:

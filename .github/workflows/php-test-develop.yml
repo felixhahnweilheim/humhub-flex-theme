@@ -6,9 +6,6 @@ on:
       -develop
     paths-ignore:
       - 'docs/**'
-      - 'tests/**'
-      - '.github/**'
-      - '.*'
       - '*.md'
 
 jobs:
