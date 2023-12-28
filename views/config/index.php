@@ -27,7 +27,7 @@ use yii\helpers\Url;
         <?= $form->field($model, 'likeIconColor')->widget(ColorInput::class, ['options' => ['placeholder' => \Yii::t('FlexThemeModule.admin', 'Select color ...')]]); ?>
         <strong><?= Yii::t('FlexThemeModule.admin', 'Topic Menu') ?></strong>
         <?= $form->field($model, 'showTopicMenu')->checkbox(); ?>
-        <strong><?= Yii::t('FlexThemeModule.admin', 'File upload links') ?></strong>
+        <strong><?= Yii::t('FlexThemeModule.admin', 'File upload links') . '&nbsp;&nbsp;' . Html::tag('span', Yii::t('FlexThemeModule.admin', 'Experimental'), ['class' => 'label label-danger']) ?></strong>
         <?= $form->field($model, 'showUploadAsButtons')->checkbox(); ?>
 
     <div class="form-group">
