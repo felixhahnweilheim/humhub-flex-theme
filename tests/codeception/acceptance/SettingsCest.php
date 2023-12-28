@@ -25,7 +25,6 @@ class SettingsCest
         $I->amAdmin();
         $I->amOnRoute(['/flex-theme/config/colors']);
         $I->waitForText('Flex Theme');
-        $I->click('Background Colors');
         $I->fillField('#colorsettings-background_color_page', self::BG_COLOR_PG);
 
         $I->click('Save');
