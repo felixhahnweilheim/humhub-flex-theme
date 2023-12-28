@@ -2,17 +2,8 @@ name: PHP Codeception Tests - develop
 
 on:
   push:
-    branches:
-      - 'develop'
-    paths-ignore:
-      - 'docs/**'
-      - 'tests/**'
-      - '.github/**'
-      - '.*'
-      - '*.md'
-  pull_request:
-    branches:
-      - 'develop'
+  schedule:
+    - cron: "0 0 * * 0"
     paths-ignore:
       - 'docs/**'
       - 'tests/**'
