@@ -5,6 +5,7 @@ use flexTheme\AcceptanceTester;
 class SettingsCest
 {
     $bg_color_pg = '#cfe2f3';
+    $bg_color_pg_d_5 = '#c3d5e5';
     
     public function testSettings(AcceptanceTester $I)
     {
@@ -37,8 +38,13 @@ class SettingsCest
         $I->waitForElementVisible('#wallStream');
 
         $color = $I->executeJS("getComputedStyle(document.documentElement).getPropertyValue('--background_color_page');");
+        $colorDarkened = $I->executeJS("getComputedStyle(document.documentElement).getPropertyValue('--background_color_page__darken__5');");
         
         if ($color !== $this->bg_color_pg) {
+            return false;
+        }
+        
+        if ($colorDarkened !== $this->bg_color_pg_d_5) {
             return false;
         }
     }
