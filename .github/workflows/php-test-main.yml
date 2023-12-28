@@ -1,12 +1,9 @@
-name: PHP Codeception Tests - master
+name: PHP Codeception Tests - main
 
 on:
   push:
-    branches:
-      - 'main'
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
   tests:
