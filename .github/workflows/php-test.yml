@@ -2,8 +2,9 @@ name: PHP Codeception Tests - main
 
 on:
   push:
-  schedule:
-    - cron: "0 0 * * 0"
+    branches:
+      -main
+      -develop
 
 jobs:
   tests:
@@ -11,4 +12,3 @@ jobs:
     with:
       module-id: flex-theme
       use-rest-module: false
-      install-composer: true
