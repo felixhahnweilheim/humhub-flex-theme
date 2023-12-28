@@ -10,13 +10,7 @@ use Yii;
 
 class ConfigController extends \humhub\modules\admin\components\Controller
 {
-
-    public function init()
-    {
-        parent::init();
-
-        $this->subLayout = '@flex-theme/views/layouts/admin';
-    }
+    public $subLayout = '@flex-theme/views/layouts/admin';
 
     public function actionIndex()
     {
@@ -24,6 +18,8 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
+            // Redirect instead of render to make browser reload CSS
+            return $this->redirect(['/flex-theme/config']);
         }
 
         return $this->render('index', ['model' => $form]);
@@ -35,6 +31,8 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
+            // Redirect instead of render to make browser reload CSS
+            return $this->redirect(['/flex-theme/config/colors']);
         }
 
         return $this->render('colors', ['model' => $form]);
@@ -42,13 +40,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 
     public function actionDarkMode()
     {
-        $form = new DarkMode();
-
-        if ($form->load(Yii::$app->request->post()) && $form->save()) {
-            $this->view->saved();
-        }
-
-        return $this->render('dark-mode', ['model' => $form]);
+        return $this->render('dark-mode');
     }
 
     public function actionAdvanced()
@@ -65,7 +57,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             $colorSettings->load($data);
             $darkModeSettings->load($data);
 
-            // Check validation
+            // Check validation before saving anything
             if (!$config->validate()) {
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (Config)');
                 return $this->render('advanced', ['model' => $form]);
@@ -79,8 +71,10 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save
-            if ($config->save() && $colorSettings->save() && $darkModeSettings->save() && $form->load(Yii::$app->request->post()) && $form->save()) {
+            if ($config->save() && $colorSettings->save()) {
                 $this->view->saved();
+                // Redirect instead of render to make browser reload CSS
+                return $this->redirect(['/flex-theme/config/advanced']);
             }
         }
 

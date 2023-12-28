@@ -1,0 +1,38 @@
+.upload-buttons .btn-group .fileinput-button, .upload-buttons .btn-group .dropdown-toggle,
+.contentForm_options .btn-group .fileinput-button, .contentForm_options .btn-group .dropdown-toggle {
+    display: none;
+}
+.upload-buttons .btn-group .dropdown-menu,
+.contentForm_options .btn-group .dropdown-menu {
+    display: inline-block;
+    position: relative;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    min-width: 0;
+}
+.upload-buttons .btn-group .dropdown-menu li,
+.contentForm_options .btn-group .dropdown-menu li {
+    float: left;
+    margin: 0;
+    line-height: 1;
+    border-radius: 10px;
+}
+.upload-buttons .btn-group .dropdown-menu li a,
+.contentForm_options .btn-group .dropdown-menu li a {
+    margin: 0 3px;
+    padding: 3px;
+}
+.upload-buttons .btn-group .dropdown-menu li a i,
+.contentForm_options .btn-group .dropdown-menu li a i {
+    margin: 1px;
+}
+.upload-buttons .btn-group .dropdown-menu li a[data-action-click="file.uploadByType"],
+.contentForm_options .btn-group .dropdown-menu li a[data-action-click="file.uploadByType"] {
+    font-size: 0; padding: 5px 3px;
+}
+.upload-buttons .btn-group .dropdown-menu li:hover,
+.contentForm_options .btn-group .dropdown-menu li:hover {
+    border-left-color: transparent !important;
+}

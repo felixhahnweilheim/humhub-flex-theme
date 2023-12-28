@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme\models;
 
 use Yii;
 use humhub\modules\flexTheme\helpers\ColorHelper;
+use humhub\modules\flexTheme\helpers\FileHelper;
 use humhub\modules\ui\view\helpers\ThemeHelper;
 use humhub\modules\user\models\User;
 use humhub\modules\ui\icon\widgets\Icon;
@@ -16,15 +17,17 @@ use yii\base\UnknownPropertyException;
 class Config extends \yii\base\Model
 {
     // Module settings
+    const CONFIG_NAMES = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor', 'showTopicMenu', 'showUploadAsButtons'];
     public $commentLink;
     public $likeLink;
     public $likeIcon;
     public $likeIconFull;
     public $likeIconColor;
     public $showTopicMenu;
+    public $showUploadAsButtons;
 
-    public static function getSetting(string $setting_name) {
-
+    public static function getSetting(string $setting_name): string
+    {
         // Note: return can be empty
         return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
@@ -41,6 +44,7 @@ class Config extends \yii\base\Model
         $this->likeIconFull = $settings->get('likeIconFull', 'thumbs-up');
         $this->likeIconColor = $settings->get('likeIconColor');
         $this->showTopicMenu = $settings->get('showTopicMenu');
+        $this->showUploadAsButtons = $settings->get('showUploadAsButtons');
     }
 
     public function attributeLabels() {
@@ -52,7 +56,8 @@ class Config extends \yii\base\Model
             'likeIcon' => Yii::t('FlexThemeModule.admin', 'Like Icon'),
             'likeIconFull' => Yii::t('FlexThemeModule.admin', 'Like Icon (already liked)'),
             'likeIconColor' => Yii::t('FlexThemeModule.admin', 'Color for Like Icon'),
-            'showTopicMenu' => Yii::t('FlexThemeModule.admin', 'Show topic menu in user profiles and spaces.')
+            'showTopicMenu' => Yii::t('FlexThemeModule.admin', 'Show topic menu in user profiles and spaces.'),
+            'showUploadAsButtons' => Yii::t('FlexThemeModule.admin', 'Show File Upload options (image, audio, video...) as buttons instead of dropdown.')
         ];
     }
 
@@ -65,11 +70,11 @@ class Config extends \yii\base\Model
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
             }],
             [['likeIconColor'], 'validateHexColor'],
-            [['showTopicMenu'], 'boolean']
+            [['showTopicMenu', 'showUploadAsButtons'], 'boolean']
         ];
     }
 
-    public function validateHexColor($attribute, $params, $validator)
+    public function validateHexColor(string $attribute, $params, $validator)
     {
         if (!preg_match("/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/", $this->$attribute)) {
             $this->addError($attribute, Yii::t('FlexThemeModule.admin', 'Invalid Format') . '. ' . Yii::t('FlexThemeModule.admin', 'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"'));
@@ -91,6 +96,13 @@ class Config extends \yii\base\Model
         $module->settings->set('likeIconFull', $this->likeIconFull);
         $module->settings->set('likeIconColor', $this->likeIconColor);
         $module->settings->set('showTopicMenu', $this->showTopicMenu);
+        $module->settings->set('showUploadAsButtons', $this->showUploadAsButtons);
+
+        // Make sure variables.css has the current colors
+        (new ColorSettings())->saveVarsToFile();
+
+        // Update theme.css (apply showUploadAsButtons)
+        FileHelper::updateThemeFile();
 
         return true;
     }
