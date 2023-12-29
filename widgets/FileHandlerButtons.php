@@ -13,8 +13,17 @@ use Yii;
 
 class FileHandlerButtons extends FileHandlerButtonDropdown
 {
-    const KNOWN_LABELS = ['Attach an image', 'Attach a video ', 'Attach an audio message', 'Attach a video'];
+    public $known_labels = [];
     
+    public function init()
+    {
+        $this->known_labels = [
+            Yii::t('FileModule.base', 'Attach an image'),
+            Yii::t('FileModule.base', 'Attach a video '),
+            Yii::t('FileModule.base', 'Attach an audio message'),
+            Yii::t('FileModule.base', 'Attach a video')
+        ];
+    }
     public function run()
     {
         if (!$this->primaryButton && count($this->handlers) === 0) {
@@ -65,13 +74,19 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
         $label = ArrayHelper::remove($options, 'label', 'Label');
         
         // Move text from known labels into tooltip
-        foreach (self::KNOWN_LABELS as $search)
+        foreach ($this->known_labels as $search)
         {
             if (strpos($label, $search) !== false) {
                 $label = trim(str_replace($search, '', $label));
                 $options['class'] .= ' tt btn-icon-only';
                 $options['title'] = $search;
             }
+        }
+        // Shorten "Create draw.io document"
+        if (stripos($label, 'draw.io') !== false) {
+            $options['title'] = $label;
+            $label = 'draw.io';
+            $options['class'] .= ' tt btn-icon-only';
         }
 
         if (isset($options['url'])) {
