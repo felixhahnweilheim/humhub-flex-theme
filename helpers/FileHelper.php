@@ -2,7 +2,6 @@
 
 namespace humhub\modules\flexTheme\helpers;
 
-use humhub\modules\flexTheme\models\Config;
 use Yii;
 use yii\base\ErrorException;
 
@@ -13,11 +12,6 @@ class FileHelper {
     private static function getVarsFile()
     {
         return Yii::getAlias(self::THEME_PATH . '/css/variables.css');
-    }
-
-    private static function getOptionsPath()
-    {
-        return Yii::getAlias(self::THEME_PATH . '/css/options');
     }
 
     private static function getThemeFile()
@@ -47,15 +41,8 @@ class FileHelper {
         // CSS Variables
         $vars = file_get_contents(self::getVarsFile());
 
-        // Get optional CSS
-        $options = '';
-        $config = new Config();
-        if ($config->showUploadAsButtons) {
-            $options .= file_get_contents(self::getOptionsPath() . '/showUploadAsButtons.css');
-        }
-
         // Create/Update theme.css
-        $content = $theme_base . $options . $vars;
+        $content = $theme_base . $vars;
         
         try {
             file_put_contents(self::getThemeFile(), $content);
