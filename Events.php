@@ -4,6 +4,7 @@ namespace humhub\modules\flexTheme;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\libs\WidgetCreateEvent;
+use Yii;
 
 class Events
 {
@@ -14,6 +15,9 @@ class Events
     
     public static function onFileHandlerButtonDropdownBeforeRun(WidgetCreateEvent $event)
     {
+        if (Yii::$app->view->theme->name !== 'FlexTheme') {
+            return;
+        }
         $config = new Config();
         if ($config->showUploadAsButtons) {
             $event->config['class'] = widgets\FileHandlerButtons::class;
