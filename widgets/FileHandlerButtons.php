@@ -59,6 +59,8 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
     {
         $options['data-action-process'] = 'file-handler';
         $options['data-placement'] = 'bottom';
+        $options['class'] = 'btn '.$this->cssButtonClass.' fileinput-button';
+        $options['style'] = ['margin-left' => '0'];
         
         $label = ArrayHelper::remove($options, 'label', 'Label');
         
@@ -67,12 +69,10 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
         {
             if (strpos($label, $search) !== false) {
                 $label = trim(str_replace($search, '', $label));
-                $tooltip = $search;
+                $options['class'] .= ' tt btn-icon-only';
+                $options['title'] = $search;
             }
         }
-        
-        $options['class'] = (isset($tooltip)) ? 'btn '.$this->cssButtonClass.' fileinput-button tt' : 'btn '.$this->cssButtonClass.'  fileinput-button';
-        $options['title'] = (isset($tooltip)) ? $tooltip : '';
 
         if (isset($options['url'])) {
             $url = ArrayHelper::remove($options, 'url', '#');
