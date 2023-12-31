@@ -98,12 +98,6 @@ class Config extends \yii\base\Model
         $module->settings->set('showTopicMenu', $this->showTopicMenu);
         $module->settings->set('showUploadAsButtons', $this->showUploadAsButtons);
 
-        // Make sure variables.css has the current colors
-        (new ColorSettings())->saveVarsToFile();
-
-        // Update theme.css (apply showUploadAsButtons)
-        FileHelper::updateThemeFile();
-
         return true;
     }
 }
