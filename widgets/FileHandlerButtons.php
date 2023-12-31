@@ -30,7 +30,11 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
             return;
         }
 
-        $output = Html::beginTag('div', ['class' => $this->cssClass]);
+        if ($this->cssButtonClass === 'btn-defaul') {
+            $output = Html::beginTag('div', ['class' => $this->cssClass, 'style' => 'margin-right: 120px']);
+        } else {
+            $output = Html::beginTag('div', ['class' => $this->cssClass]);
+        }
 
         if (!$this->primaryButton) {
             $firstButton = array_shift($this->handlers)->getLinkAttributes();
@@ -94,6 +98,6 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
             $options['href'] = $url;
         }
 
-        return Html::tag('a', $label, $options);
+        return Html::tag('span', $label, $options);
     }
 }
