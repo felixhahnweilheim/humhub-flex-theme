@@ -30,7 +30,7 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
             return;
         }
 
-        if ($this->cssButtonClass === 'btn-defaul') {
+        if ($this->cssButtonClass === 'btn-default') {
             $output = Html::beginTag('div', ['class' => $this->cssClass, 'style' => 'margin-right: 120px']);
         } else {
             $output = Html::beginTag('div', ['class' => $this->cssClass]);
