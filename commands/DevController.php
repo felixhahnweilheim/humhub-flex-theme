@@ -155,7 +155,8 @@ class DevController extends Controller
         foreach ($this->special_colors as $color)
         {
             $colorAsLessVar = '@' . str_replace(['__', '_'], '-', $color);
-            $content .= $colorAsLessVar . ': var(--' . $color . ');';
+	    $color = str_replace('_', '-', $color);
+	    $content .= $colorAsLessVar . ': var(--' . $color . ');';
         }
 
         $file = Yii::getAlias(self::FLEX_LESS . '/special-colors.less');

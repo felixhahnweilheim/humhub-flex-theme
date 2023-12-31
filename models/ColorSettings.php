@@ -102,7 +102,8 @@ class ColorSettings extends \yii\base\Model
             if (empty($value)) {
                 $theme_var = str_replace('_', '-', $color);
                 $value = $base_theme->variable($theme_var);
-            }
+	    }
+	    $color = str_replace('_', '-', $color);
             $result[$color] = $value;
         }
 
