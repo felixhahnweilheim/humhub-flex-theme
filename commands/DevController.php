@@ -62,10 +62,6 @@ class DevController extends Controller
             self::message("'" . $color . "',", 'no-break');
         }
         self::message("];\n");
-        foreach ($this->special_colors as $color)
-        {
-            self::message('    public $' . $color . ';');
-        }
 
         self::message("***\n Unsopported Lines: ", 'warning');
         foreach($this->unsopportedLines as $line)
