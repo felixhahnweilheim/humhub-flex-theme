@@ -32,8 +32,8 @@ class SettingsCest
         $I->seeSuccess();
         
         // Test effect
-        $color = $I->executeJS("return getComputedStyle(document.documentElement).getPropertyValue('--background_color_page');");
-        $colorDarkened = $I->executeJS("return getComputedStyle(document.documentElement).getPropertyValue('--background_color_page__darken__5');");
+        $color = $I->executeJS("return getComputedStyle(document.documentElement).getPropertyValue('--background-color-page');");
+        $colorDarkened = $I->executeJS("return getComputedStyle(document.documentElement).getPropertyValue('--background-color-page--darken--5');");
         
         if ($color !== self::BG_COLOR_PG) {
             throw new Exception("Unexpected color: $color");
