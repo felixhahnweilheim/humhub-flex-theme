@@ -15,6 +15,7 @@ class ColorSettings extends \yii\base\Model
     const VARS_FILE = '@flex-theme/themes/FlexTheme/css/variables.css';
 
     public $configurableColors = [];
+    public $hasWarnings = false;
     
     // Main Colors (configurable)
     const MAIN_COLORS = ['default', 'primary', 'info', 'link', 'success', 'warning', 'danger'];
@@ -141,10 +142,14 @@ class ColorSettings extends \yii\base\Model
         self::saveSpecialColors();
 
         // Save colors to variables file
-        self::saveVarsToFile();
+        if (!self::saveVarsToFile()) {
+            $this->hasWarnings = true;
+        }
 
         // Update theme.css
-        FileHelper::updateThemeFile();
+        if (!FileHelper::updateThemeFile()) {
+            $this->hasWarnings = true;
+        }
 
         return true;
     }
@@ -214,7 +219,7 @@ class ColorSettings extends \yii\base\Model
         }
     }
 
-    public function saveVarsToFile(): void
+    public function saveVarsToFile(): bool
     {
         $colors = self::getColors();
 
@@ -226,7 +231,7 @@ class ColorSettings extends \yii\base\Model
 
         $content = ':root {' . $vars . '}';
         
-        FileHelper::updateVarsFile($content);
+        return FileHelper::updateVarsFile($content);
     }
 
     private function getSettings()

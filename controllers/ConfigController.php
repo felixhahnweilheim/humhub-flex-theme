@@ -30,7 +30,11 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new ColorSettings();
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
-            $this->view->saved();
+            if ($form->hasWarnings) {
+                $this->view->warn(Yii::t('FlexThemeModule.admin', 'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)'));
+            } else {
+                $this->view->saved();
+            }
             // Redirect instead of render to make browser reload CSS
             return $this->redirect(['/flex-theme/config/colors']);
         }
