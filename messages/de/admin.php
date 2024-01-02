@@ -39,5 +39,6 @@ return [
     'Note' => '',
     'Please define all colors below, at least text and Background colors.' => '',
     'Please use the module {darkmode} and select "HumHub (dark)".' => '',
+    'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)' => '',
     'Show File Upload options (image, audio, video...) as buttons instead of dropdown.' => '',
 ];

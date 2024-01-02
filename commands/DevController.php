@@ -31,7 +31,6 @@ class DevController extends Controller
             $this->stdout("Cancelled\n");
             return ExitCode::OK;
         }            
-        //self::message('Starting to rebuild LESS files of FlexTheme.', 'warning');
 
         // Copy LESS files
         $src = Yii::getAlias(self::SRC);
@@ -96,6 +95,11 @@ class DevController extends Controller
      */
     private function checkAndCorrectLine($lineNumber, $line, $file): string
     {
+        // Return unchanged if line is a comment
+        if (substr($line, 0, 2) === '//') {
+            return $line;
+        }
+
         foreach (self::UNSOPPORTED as $less_function)
         {
             // Do not change lines with unsopported function but display a warning
