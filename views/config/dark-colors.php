@@ -4,6 +4,7 @@ use humhub\modules\flexTheme\models\DarkColorSettings;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use kartik\widgets\ColorInput;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $main_colors = DarkColorSettings::MAIN_COLORS;
 $text_colors = DarkColorSettings::TEXT_COLORS;
