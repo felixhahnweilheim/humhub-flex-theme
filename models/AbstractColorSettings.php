@@ -11,7 +11,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
     /*
      * Prefix (needed for DarkMode)
      */
-    public $prefix = '';
+    public const PREFIX = '';
     
     public $configurableColors = [];
     public $hasWarnings = false;
@@ -50,6 +50,8 @@ abstract class AbstractColorSettings extends \yii\base\Model
     const SPECIAL_COLORS = ['background_color_page__darken__5','background_color_page__darken__8','background_color_page__lighten__3','background_color_secondary__darken__5','danger__darken__10','danger__darken__5','danger__lighten__20','danger__lighten__5','default__darken__2','default__darken__5','default__lighten__2','info__darken__10','info__darken__5','info__lighten__25','info__lighten__30','info__lighten__40','info__lighten__45','info__lighten__5','info__lighten__50','info__lighten__8','link__darken__2','link__fade__60','link__lighten__5','primary__darken__10','primary__darken__5','primary__lighten__10','primary__lighten__20','primary__lighten__25','primary__lighten__5','primary__lighten__8','success__darken__10','success__darken__5','success__lighten__20','success__lighten__5','text_color_secondary__lighten__25','warning__darken__10','warning__darken__2','warning__darken__5','warning__lighten__10','warning__lighten__20','warning__lighten__40','warning__lighten__5',];
 
     abstract public function getColors(): array;
+
+    abstract protected function getColorFallback(string $color): string;
     
     public function init()
     {
@@ -59,7 +61,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
         
         $settings = static::getSettings();
         foreach($this->configurableColors as $color) {
-            $this->$color = $settings->get($this->prefix . $color);
+            $this->$color = $settings->get(static::PREFIX . $color);
         }
     }
 
@@ -99,7 +101,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
         }
 
         // Update theme.css
-        if (!FileHelper::updateThemeFile($this->prefix)) {
+        if (!FileHelper::updateThemeFile((static::PREFIX))) {
             $this->hasWarnings = true;
         }
 
@@ -115,7 +117,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
             $value = $this->$color;
 
             // Save as module settings (value can be emtpy)
-            $settings->set($this->prefix . $color, $value);
+            $settings->set(static::PREFIX . $color, $value);
             
             // Additional color saving, used by light mode to save colors as theme var
             $this->additonalColorSaving($color, $value);
@@ -125,7 +127,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
     /*
      * Additional color saving, used by light mode to save colors as theme var
      */
-    protected function additonalColorSaving(string $color, string $value): void {}
+    protected function additonalColorSaving(string $color, ?string $value): void {}
 
     protected function saveSpecialColors(): void
     {
@@ -140,7 +142,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
             $original_color = $this->$base_var;
             if (empty($original_color)) {
                 // Get Base Theme Fallback (only used by light mode)
-                $original_color = $this->getBaseThemeFallback($base_var);
+                $original_color = $this->getColorFallback($base_var);
             }
 			
             // Calculate color value with ColorHelper functions
@@ -165,15 +167,8 @@ abstract class AbstractColorSettings extends \yii\base\Model
             }
 			
             // Save calculated value
-            $settings->set($this->prefix . $color, $value);
+            $settings->set(static::PREFIX . $color, $value);
         }
-    }
-    
-    /*
-     * Get Base Theme Fallback (only used by light mode)
-     */
-    protected function getBaseThemeFallback(string $base_var): string {
-        return '';
     }
 
     protected function saveVarsToFile(): bool
@@ -188,7 +183,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
 
         $content = ':root {' . $vars . '}';
         
-        return FileHelper::updateVarsFile($content, $this->prefix);
+        return FileHelper::updateVarsFile($content, static::PREFIX);
     }
 
     protected function getSettings()

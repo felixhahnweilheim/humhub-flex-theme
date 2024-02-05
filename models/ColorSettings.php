@@ -17,7 +17,7 @@ class ColorSettings extends AbstractColorSettings
         $base_theme = ThemeHelper::getThemeByName(self::BASE_THEME);
 
         foreach ($this->configurableColors as $color) {
-            $value = $settings->get($this->prefix . $color);
+            $value = $settings->get(static::PREFIX . $color);
             
             // If empty get default value
             if (empty($value)) {
@@ -34,7 +34,7 @@ class ColorSettings extends AbstractColorSettings
         }
         
         foreach (self::SPECIAL_COLORS as $color) {
-            $value = $settings->get($this->prefix . $color);
+            $value = $settings->get(static::PREFIX . $color);
             $color = str_replace('_', '-', $color);
             $result[$color] = $value;
         }
@@ -62,19 +62,24 @@ class ColorSettings extends AbstractColorSettings
         return $hints;
     }
 
-    protected function additonalColorSaving(string $color, string $value): void
+    protected function additonalColorSaving(string $color, ?string $value): void
     {
         // Save color values as theme variables (take default theme's color if value is empty)
         $theme_var = str_replace('_', '-', $color);
         if (empty($value)) {
             $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable($theme_var);
         }
-        $theme_key = 'theme.var.FlexTheme.' . $this->prefix . $theme_var;
+        $theme_key = 'theme.var.FlexTheme.' . static::PREFIX . $theme_var;
         Yii::$app->settings->set($theme_key, $value);
     }
     
-    protected function getBaseThemeFallBack(string $base_var): string {
-        $theme_var = str_replace('_', '-', $base_var);
-        return ThemeHelper::getThemeByName(self::BASE_THEME)->variable($this->prefix . $theme_var);
+    protected function getColorFallBack(string $color): string
+    {
+        $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+        if (empty($value)) {
+            $theme_var = str_replace('_', '-', $color);
+            $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable(static::PREFIX . $theme_var);
+        }
+        return $value;
     }
 }

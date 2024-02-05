@@ -7,7 +7,7 @@ use Yii;
 
 class DarkColorSettings extends AbstractColorSettings
 {
-    public $prefix = 'dark_';
+    public const PREFIX = 'dark_';
     /* @todo
     --background-color-success:#3e423b;--text-color-success:#84be5e;--border-color-success:#97d271;--background-color-warning:#4d443b;--text-color-warning:#e9b168;--border-color-warning:#fdd198;--background-color-danger:#372a2a;--text-color-danger:#ff8989;--border-color-danger:#ff8989;}
     
@@ -35,7 +35,7 @@ class DarkColorSettings extends AbstractColorSettings
         $settings = self::getSettings();
         
         foreach (static::MAIN_COLORS as $color) {
-            $value = $settings->get($this->prefix . $color);
+            $value = $settings->get(self::PREFIX . $color);
             
             // If empty get default value
             if (empty($value)) {
@@ -55,7 +55,7 @@ class DarkColorSettings extends AbstractColorSettings
         
         $otherColors = array_merge(static::TEXT_COLORS, static::BACKGROUND_COLORS);
         foreach ($otherColors as $color) {
-            $value = $settings->get($this->prefix . $color);
+            $value = $settings->get(self::PREFIX . $color);
             
             // If empty get default value
             if (empty($value)) {
@@ -67,7 +67,7 @@ class DarkColorSettings extends AbstractColorSettings
         }
         
         foreach (self::SPECIAL_COLORS as $color) {
-            $value = $settings->get($this->prefix . $color);
+            $value = $settings->get(self::PREFIX . $color);
             $color = str_replace('_', '-', $color);
             $result[$color] = $value;
         }
@@ -103,5 +103,17 @@ class DarkColorSettings extends AbstractColorSettings
         // @todo check that it works for background_color_highlight and background_color_highlight_soft
 		
         return $hints;
+    }
+    
+    protected function getColorFallBack(string $color): string
+    {
+        $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+        if (empty($value)) {// only main colors can be empty!
+            if (!isset($lightColors)) {
+                $lightColors = (new ColorSettings())->getColors();
+            }
+            $value = $lightColors[$color];
+        }
+        return $value;
     }
 }

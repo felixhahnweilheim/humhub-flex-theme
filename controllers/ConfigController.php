@@ -87,7 +87,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
 			    return $this->render('advanced', ['model' => $form]);
             }
             // Save
-            if ($config->save() && $colorSettings->save() && $DarkColorSettings->save()) {
+            if ($config->save() && $colorSettings->save() && $darkColorSettings->save()) {
                 $this->view->saved();
                 // Redirect instead of render to make browser reload CSS
                 return $this->redirect(['/flex-theme/config/advanced']);
