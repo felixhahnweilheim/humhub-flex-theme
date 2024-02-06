@@ -19,6 +19,9 @@ class DevController extends Controller
     
     const SELECT2_SRC = '@webroot/static/css/select2Theme';
     const SELECT2_DST = '@flex-theme/themes/FlexTheme/less/css/select2Theme';
+    
+    const DARK_FILE_SRC = '@dark-mode/resources/DarkHumHub/less/theme.less';
+    const DARK_FILE_DST = '@flex-theme/themes/FlexTheme/less/dark/theme.less';
 
     // Special colors
     public $special_colors = [];
@@ -32,13 +35,13 @@ class DevController extends Controller
             return ExitCode::OK;
         }            
 
-        // Copy LESS files
+        // Copy HumHub LESS files
         $src = Yii::getAlias(self::SRC);
         $dst = Yii::getAlias(self::DST);
         FileHelper::copyDirectory($src, $dst);
         self::message("Copied $src to $dst", 'success');
 
-        // Go through copied files
+        // Check and correct copied files
         $files = FileHelper::findFiles($dst);
         foreach ($files as $file)
         {
@@ -47,12 +50,25 @@ class DevController extends Controller
             }
         }
         
+        // Select2
         self::handleSelect2();
+        
+        // Dark Mode 
+        // @todo variables.less of the module has a few more CSS rules that should be imported, too
+        if ($this->confirm('Also update Dark Mode file? Dark Mode Module needs to be installed!')) {
+            $src = Yii::getAlias(self::DARK_FILE_SRC);
+            $dst = Yii::getAlias(self::DARK_FILE_DST);
+            copy($src, $dst);
+            self::message("Copied $src to $dst", 'success');
+            self::checkAndCorrectFile($dst);
+        }  
+        
 
+        // special-colors.less
         sort($this->special_colors);
-
         self::createSpecialColorsLess();
-
+        
+        // Output special colors array for manually updating AbstractColorSettings.php
         self::message("\nSuccessfully rebuilt theme files", 'success');
         self::message('*** Special colors to be copied:', 'warning');
         self::message('    const SPECIAL_COLORS = [', 'no-break');
@@ -61,17 +77,23 @@ class DevController extends Controller
             self::message("'" . $color . "',", 'no-break');
         }
         self::message("];\n");
-
-        self::message("***\n Unsopported Lines: ", 'warning');
-        foreach($this->unsopportedLines as $line)
-        {
-            self::message("$line[2] at $line[1]: $line[2]");
-        }
         
+        // Warning about unsopported lines
+        if ($this->unsopportedLines !== [])) {
+            self::message("***\n Unsopported Lines: ", 'warning');
+            foreach($this->unsopportedLines as $line)
+            {
+                self::message("$line[2] at $line[1]: $line[0]");
+            }
+        }        
 
         return ExitCode::OK;
     }
-
+    
+    /*
+     * Checks the given file line by line for LESS functions
+     * and replaces them with special color variables
+     */
     private function checkAndCorrectFile($file): void
     {
         //self::message("Going through: $file");
@@ -86,12 +108,8 @@ class DevController extends Controller
     }
 
     /*
-     * returns array
-     * * First value: line (changed or not)
-     * * Second value:
-     * * * false: unsopported function recognized (line not changed)
-     * * * true: no function recognized (line not changed)
-     * * * string: special color, e.g. 'primary-darken-10'
+     * returns string the corrected line
+     * and fills $this->special_colors and $this->unsopportedLines
      */
     private function checkAndCorrectLine($lineNumber, $line, $file): string
     {
@@ -116,8 +134,6 @@ class DevController extends Controller
         {
             // Replace lines with supported function
             while ($pos = strpos($line, $less_function . '(') !== false) {
-
-                //self::message("DEBUG: $less_function found in $line");
 
                 $parts = explode($less_function . '(@', $line, 2);
 
@@ -147,7 +163,12 @@ class DevController extends Controller
 
         return $line;
     }
-
+    
+    /*
+     * Creates the file special-colors.less
+     * LESS variables referring to CSS variables
+     * e.g. @primary-darken-5: var(--primary--darken--5);
+     */
     private function createSpecialColorsLess(): void
     {
         $content = '';
@@ -155,8 +176,8 @@ class DevController extends Controller
         foreach ($this->special_colors as $color)
         {
             $colorAsLessVar = '@' . str_replace(['__', '_'], '-', $color);
-	    $color = str_replace('_', '-', $color);
-	    $content .= $colorAsLessVar . ': var(--' . $color . ');';
+            $color = str_replace('_', '-', $color);
+            $content .= $colorAsLessVar . ': var(--' . $color . ');';
         }
 
         $file = Yii::getAlias(self::FLEX_LESS . '/special-colors.less');
@@ -227,7 +248,10 @@ class DevController extends Controller
         $data = implode(PHP_EOL, $lines);
         file_put_contents($file, $data);
     }
-
+    
+    /*
+     * Helper function to output messages with a defined level
+     */
     private function message($text, $level = 'info'): void
     {
         $color = '';
