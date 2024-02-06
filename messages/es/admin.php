@@ -1,17 +1,13 @@
 <?php
 
 return [
-    ' (experimental)' => '',
     '<strong>Flex Theme</strong> Configuration' => '',
     'Advanced' => '',
     'Background Colors' => '',
     'Color for Like Icon' => '',
     'Colors' => '',
     'Dark Mode' => '',
-    'Dark Mode will only be active when the user\'s browser is in dark mode.' => '',
     'Default' => '',
-    'Default (Light Theme)' => '',
-    'Enable Dark Mode' => '',
     'Experimental' => '',
     'File upload links' => '',
     'Flexible Theme for HumHub' => '',
@@ -23,9 +19,7 @@ return [
     'Like Icon (already liked)' => '',
     'Main Colors' => '',
     'Must be a color in hexadecimal format, like "#00aaff" or "#FA0"' => '',
-    'Note' => '',
     'Only icon' => '',
-    'Please define all colors below, at least text and Background colors.' => '',
     'Please go to Administration > Settings > Appearance and select "Flex Theme".' => '',
     'Please use the module {darkmode} and select "HumHub (dark)".' => '',
     'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)' => '',
