@@ -79,7 +79,7 @@ class DevController extends Controller
         self::message("];\n");
         
         // Warning about unsopported lines
-        if ($this->unsopportedLines !== [])) {
+        if ($this->unsopportedLines !== []) {
             self::message("***\n Unsopported Lines: ", 'warning');
             foreach($this->unsopportedLines as $line)
             {
