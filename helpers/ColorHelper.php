@@ -29,7 +29,7 @@ class ColorHelper {
             $max = hexdec(max($color_parts));
             $min = hexdec(min($color_parts));
             if ($max !=0) {
-			    $percentage = 2 * 255 * $percentage / ( $max + $min );
+			    $percentage = $percentage / ( 1 - ($max + $min)/(2*255));
             }
         }
         
@@ -88,8 +88,8 @@ class ColorHelper {
         return $color . $opacity;
     }
 	
-	protected static function getColorComponents(string $color): array {
-		
+	protected static function getColorComponents(string $color): array
+    {
 		// Remove leading '#'
 		$hexstr = ltrim($color, '#');
 		// if color has just 3 digits
