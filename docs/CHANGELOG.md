@@ -1,12 +1,14 @@
 ## TBA
 **NOTE** Files in themes/FlexTheme/css now need to be writable by the PHP process (see https://docs.humhub.org/docs/admin/installation/#file-permissions)
 
-- Enh: remove variable declaration from HTML (performance improvement)
+- New: Dark Mode (compatibility with the Dark Mode module)
+- Enh: move variable declaration from HTML into CSS file (performance improvement)
 - remove admin menu item
-- Maintainance: update for HumHub 1.15.0
-- New option: show file upload options as buttons instead of dropdown)
+- Maintainance: update for HumHub 1.15
+- New option: show file upload options as buttons instead of dropdown) - experimental
 - New controller action: flex-theme/rebuild - only for developping!
 - Enh: various code style improvements
+
 ## 0.2.1 (22 may 2023)
 - Fix: save likeIconColor
 - Enh: Import/Export (JSON)
