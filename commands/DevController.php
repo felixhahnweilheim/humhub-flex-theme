@@ -20,8 +20,8 @@ class DevController extends Controller
     const SELECT2_SRC = '@webroot/static/css/select2Theme';
     const SELECT2_DST = '@flex-theme/themes/FlexTheme/less/css/select2Theme';
     
-    const DARK_SRC = '@dark-mode/resources/DarkHumHub/less';
-    const DARK_DST = '@flex-theme/themes/FlexTheme/less/dark';
+    const DARK_FILE_SRC = '@dark-mode/resources/DarkHumHub/less/theme.less';
+    const DARK_FILE_DST = '@flex-theme/themes/FlexTheme/less/dark/theme.less';
 
     // Special colors
     public $special_colors = [];
@@ -56,11 +56,11 @@ class DevController extends Controller
         // Dark Mode 
         // @todo variables.less of the module has a few more CSS rules that should be imported, too
         if ($this->confirm('Also update Dark Mode file? Dark Mode Module needs to be installed!')) {
-            $src = Yii::getAlias(self::DARK_SRC);
-            $dst = Yii::getAlias(self::DARK_DST);
-            FileHelper::copyDirectory($src, $dst);
+            $src = Yii::getAlias(self::DARK_FILE_SRC);
+            $dst = Yii::getAlias(self::DARK_FILE_DST);
+            copy($src, $dst);
             self::message("Copied $src to $dst", 'success');
-            self::checkAndCorrectFile($dst . '/theme.less');
+            self::checkAndCorrectFile($dst);
         }  
         
 
