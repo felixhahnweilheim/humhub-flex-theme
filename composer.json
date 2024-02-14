@@ -5,7 +5,7 @@
   "config": {
     "process-timeout": 1800,
     "platform": {
-      "php": "8.0"
+      "php": "8.2"
     }
   },
   "minimum-stability": "dev"

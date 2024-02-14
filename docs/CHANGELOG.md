@@ -1,4 +1,4 @@
-## TBA
+## 0.3.0 (14 february 2024)
 **NOTE** Files in themes/FlexTheme/css now need to be writable by the PHP process (see https://docs.humhub.org/docs/admin/installation/#file-permissions)
 
 - New: Dark Mode (compatibility with the Dark Mode module)

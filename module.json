@@ -1,10 +1,10 @@
 {
     "id": "flex-theme",
-    "version": "0.3.0-dev",
+    "version": "0.3.0",
     "name": "Flex Theme",
     "description": "Flexible Theme for HumHub",
     "humhub": {
-        "minVersion": "1.14"
+        "minVersion": "1.15"
     },
     "keywords": [
         "flexible", "configurable"
