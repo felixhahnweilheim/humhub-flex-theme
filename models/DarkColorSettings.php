@@ -118,7 +118,7 @@ class DarkColorSettings extends AbstractColorSettings
         return $value;
     }
     
-    private function getDefaultValue(string $color): string
+    private function getDefaultValue(string $color): ?string
     {
         // compatiblity with PHP 7.4 will be removed in next version
         if (version_compare(phpversion(), '8.0.0', '<')) {
