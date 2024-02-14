@@ -114,7 +114,14 @@ class DarkColorSettings extends AbstractColorSettings
 
     protected function getColorFallBack(string $color): string
     {
-        $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+        // compatiblity with PHP 7.4 will be removed in next version
+        if (version_compare(phpversion(), '8.0.0', '<')) {
+            $value = (new \ReflectionProperty($this))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
+        } else {
+            // min PHP 8.0
+            $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+        }
+        
         if (empty($value)) {// only main colors can be empty!
             if (!isset($lightColors)) {
                 $lightColors = (new ColorSettings())->getColors();
