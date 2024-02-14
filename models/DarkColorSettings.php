@@ -39,14 +39,7 @@ class DarkColorSettings extends AbstractColorSettings
 
             // If empty get default value
             if (empty($value)) {
-                
-                // compatiblity with PHP 7.4 will be removed in next version
-                if (version_compare(phpversion(), '8.0.0', '<')) {
-                    $value = (new \ReflectionProperty($this))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
-                } else {
-                    // min PHP 8.0
-                    $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
-                }
+                $value = self::getDefaultValue($color);
             }
             // For the main colors we can take the light theme as fallback
             if (empty($value)) {
@@ -66,7 +59,7 @@ class DarkColorSettings extends AbstractColorSettings
 
             // If empty get default value
             if (empty($value)) {
-                $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+                $value = self::getDefaultValue($color);
             }
 
             $color = str_replace('_', '-', $color);
@@ -87,7 +80,7 @@ class DarkColorSettings extends AbstractColorSettings
         $hints = [];
 
         foreach (static::MAIN_COLORS as $color) {
-            $default_value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+            $default_value = self::getDefaultValue($color);
 
             // For the main colors we use the light theme as default
             if (empty($default_value)) {
@@ -103,7 +96,7 @@ class DarkColorSettings extends AbstractColorSettings
         $otherColors = array_merge(static::TEXT_COLORS, static::BACKGROUND_COLORS);
         foreach ($otherColors as $color) {
 
-            $default_value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+            $default_value = self::getDefaultValue($color);
             $icon = Icon::get('circle', ['color' => $default_value]);
             $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . $default_value . '</code> ' . $icon;
         }
@@ -114,19 +107,25 @@ class DarkColorSettings extends AbstractColorSettings
 
     protected function getColorFallBack(string $color): string
     {
-        // compatiblity with PHP 7.4 will be removed in next version
-        if (version_compare(phpversion(), '8.0.0', '<')) {
-            $value = (new \ReflectionProperty($this))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
-        } else {
-            // min PHP 8.0
-            $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
-        }
+        $value = self::getDefaultValue($color);
         
         if (empty($value)) {// only main colors can be empty!
             if (!isset($lightColors)) {
                 $lightColors = (new ColorSettings())->getColors();
             }
             $value = $lightColors[$color];
+        }
+        return $value;
+    }
+    
+    private function getDefaultValue(string $color): string
+    {
+        // compatiblity with PHP 7.4 will be removed in next version
+        if (version_compare(phpversion(), '8.0.0', '<')) {
+            $value = (new \ReflectionProperty($this, $color))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
+        } else {
+            // min PHP 8.0
+            $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
         }
         return $value;
     }
