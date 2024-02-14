@@ -4,7 +4,7 @@ namespace humhub\modules\flexTheme\controllers;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
-use humhub\modules\flexTheme\models\DarkMode;
+use humhub\modules\flexTheme\models\DarkColorSettings;
 use humhub\modules\flexTheme\models\AdvancedSettings;
 use Yii;
 
@@ -30,7 +30,11 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new ColorSettings();
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
-            $this->view->saved();
+            if ($form->hasWarnings) {
+                $this->view->warn(Yii::t('FlexThemeModule.admin', 'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)'));
+            } else {
+                $this->view->saved();
+            }
             // Redirect instead of render to make browser reload CSS
             return $this->redirect(['/flex-theme/config/colors']);
         }
@@ -38,9 +42,21 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         return $this->render('colors', ['model' => $form]);
     }
 
-    public function actionDarkMode()
+    public function actionDarkColors()
     {
-        return $this->render('dark-mode');
+        $form = new DarkColorSettings();
+
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            if ($form->hasWarnings) {
+                $this->view->warn(Yii::t('FlexThemeModule.admin', 'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)'));
+            } else {
+                $this->view->saved();
+            }
+            // Redirect instead of render to make browser reload CSS
+            return $this->redirect(['/flex-theme/config/dark-colors']);
+        }
+
+        return $this->render('dark-colors', ['model' => $form]);
     }
 
     public function actionAdvanced()
@@ -48,14 +64,14 @@ class ConfigController extends \humhub\modules\admin\components\Controller
         $form = new AdvancedSettings();
         $config = new Config();
         $colorSettings = new ColorSettings();
-        $darkModeSettings = new DarkMode();
+        $darkColorSettings = new DarkColorSettings();
 
         if(!empty(Yii::$app->request->post())) {
             $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
 
             $config->load($data);
             $colorSettings->load($data);
-            $darkModeSettings->load($data);
+            $darkColorSettings->load($data);
 
             // Check validation before saving anything
             if (!$config->validate()) {
@@ -64,14 +80,14 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             }
             if (!$colorSettings->validate()) {
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (ColorSettings)');
-			    return $this->render('advanced', ['model' => $form]);
+                return $this->render('advanced', ['model' => $form]);
             }
-            if (!$darkModeSettings->validate()) {
+            if (!$darkColorSettings->validate()) {
                 $form->addError('settingsJson', Yii::t('FlexThemeModule.admin', 'There seem to be invalid values!') . ' (DarkModeSettings)');
-			    return $this->render('advanced', ['model' => $form]);
+                return $this->render('advanced', ['model' => $form]);
             }
             // Save
-            if ($config->save() && $colorSettings->save()) {
+            if ($config->save() && $colorSettings->save() && $darkColorSettings->save()) {
                 $this->view->saved();
                 // Redirect instead of render to make browser reload CSS
                 return $this->redirect(['/flex-theme/config/advanced']);

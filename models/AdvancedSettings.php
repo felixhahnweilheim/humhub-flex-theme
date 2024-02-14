@@ -4,13 +4,12 @@ namespace humhub\modules\flexTheme\models;
 
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
-use humhub\modules\flexTheme\models\DarkMode;
+use humhub\modules\flexTheme\models\DarkColorSettings;
 
 use Yii;
 
 class AdvancedSettings extends \yii\base\Model
 {
-
     public $settingsJson;
 
     public function init()
@@ -40,7 +39,7 @@ class AdvancedSettings extends \yii\base\Model
     {
         return [
             [['settingsJson'], 'isValidJSON']
-		];
+        ];
     }
 
     public function isValidJSON(string $attribute, $params, $validator)
@@ -63,13 +62,13 @@ class AdvancedSettings extends \yii\base\Model
     {
         $config = [];
         $colors = [];
-        $darkMode = [];
+        $darkColors = [];
 
         $module = Yii::$app->getModule('flex-theme');
 
         // Get base settings
         $config_names = Config::CONFIG_NAMES;
-        foreach( $config_names as $setting) {
+        foreach($config_names as $setting) {
             $value = $module->settings->get($setting);
 
             // exclude empty settings
@@ -80,7 +79,7 @@ class AdvancedSettings extends \yii\base\Model
 
         // Get color settings
         $color_names = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLORS, ColorSettings::BACKGROUND_COLORS);
-        foreach( $color_names as $color) {
+        foreach($color_names as $color) {
             $value = $module->settings->get($color);
 
             // exclude empty settings
@@ -89,22 +88,17 @@ class AdvancedSettings extends \yii\base\Model
             }
         }
 
-        // Get Dark Mode settings
-        $darkModeEnabled = $module->settings->get('darkModeEnabled');
-        if (!empty($darkModeEnabled)) {
-            $darkMode['darkModeEnabled'] = (bool) $darkModeEnabled;
-        }
         // Get dark colors
-        $color_names = array_merge(DarkMode::MAIN_COLORS, DarkMode::TEXT_COLORS, DarkMode::BACKGROUND_COLORS);
-        foreach( $color_names as $color ) {
-            $value = $module->settings->get('dark_' . $color);
+        $color_names = array_merge(DarkColorSettings::MAIN_COLORS, DarkColorSettings::TEXT_COLORS, DarkColorSettings::BACKGROUND_COLORS);
+        foreach($color_names as $color) {
+            $value = $module->settings->get(DarkColorSettings::PREFIX . $color);
 
             // exclude empty settings
             if(!empty($value)) {
-                $darkMode[$color] = $value;
+                $darkColors[$color] = $value;
             }
         }
 
-        return ['Config' => $config, 'ColorSettings' => $colors, 'DarkMode' => $darkMode];
+        return ['Config' => $config, 'ColorSettings' => $colors, 'DarkColorSettings' => $darkColors];
     }
 }

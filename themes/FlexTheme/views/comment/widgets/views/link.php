@@ -1,13 +1,13 @@
 <?php
 
 //FlexTheme
-use \humhub\modules\flexTheme\models\Config;
+use humhub\modules\flexTheme\models\Config;
 //FlexTheme end
 use humhub\modules\comment\widgets\CommentLink;
 use humhub\widgets\Button;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use \humhub\modules\comment\models\Comment;
+use humhub\modules\comment\models\Comment;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $objectModel string */
@@ -22,9 +22,9 @@ use \humhub\modules\comment\models\Comment;
 //FlexTheme
 $style = Config::getSetting('commentLink');
 if ($style == 'text') {
-	$additionalClass = 'no-icon';
+    $additionalClass = 'no-icon';
 } else {
-	$additionalClass = '';
+    $additionalClass = '';
 }
 //FlexTheme end
 
@@ -73,8 +73,9 @@ if ($mode == CommentLink::MODE_POPUP): ?>
     <?= Html::a(
         $label . $commentCountSpan,
         Yii::$app->user->loginUrl,
-        ['data-target' => '#globalModal']) ?>
+        ['data-target' => '#globalModal']
+    ) ?>
 <?php else : ?>
     <?= Button::asLink($label . $commentCountSpan)
-        ->action('comment.toggleComment', null, '#comment_' . $id) ?>
+            ->action('comment.toggleComment', null, '#comment_' . $id) ?>
 <?php endif; ?>

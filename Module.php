@@ -9,11 +9,11 @@ use humhub\libs\DynamicConfig;
 use Yii;
 use yii\helpers\Url;
 
-class Module extends \humhub\components\Module {
-
+class Module extends \humhub\components\Module
+{
     public $resourcesPath = 'resources';
 
-    const FLEX_THEME_NAME = 'FlexTheme';
+    public const FLEX_THEME_NAME = 'FlexTheme';
 
     // Translatable Module Description
     public function getDescription()
@@ -42,7 +42,7 @@ class Module extends \humhub\components\Module {
         // Save special colors (lightened, darkened, faded colors), create theme files etc.
         $model = new ColorSettings();
         $model->save();
-        
+
         // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
         $theme = ThemeHelper::getThemeByName(self::FLEX_THEME_NAME);
         if ($theme !== null) {
@@ -59,7 +59,7 @@ class Module extends \humhub\components\Module {
     }
 
     // see https://community.humhub.com/s/module-development/wiki/Theme+Modules
-    private function disableTheme():void
+    private function disableTheme(): void
     {
         foreach (ThemeHelper::getThemeTree(Yii::$app->view->theme) as $theme) {
             if ($theme->name === self::FLEX_THEME_NAME) {

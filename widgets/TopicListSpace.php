@@ -40,7 +40,7 @@ class TopicListSpace extends LeftNavigation
                 'icon' => 'fa-star',
                 'sortOrder' => $topic->sort_order,
             ]));
-         }
+        }
 
         parent::init();
     }

@@ -11,6 +11,7 @@ use humhub\widgets\FooterMenu;
 // Flex Theme
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\widgets\TopicListSpace;
+
 // Flex Theme end
 
 /**
@@ -32,11 +33,11 @@ $space = $context->contentContainer;
     <div class="row space-content">
         <div class="col-md-2 layout-nav-container">
             <?= Menu::widget(['space' => $space]); ?>
-<?php // Flex Theme ?>
+<?php // Flex Theme?>
             <?php if(Config::getSetting('showTopicMenu')): ?>
                 <?= TopicListSpace::widget(['space' => $space]); ?>
             <?php endif; ?>
-<?php // Flex Theme end ?>
+<?php // Flex Theme end?>
         </div>
         <div class="col-md-<?= ($this->hasSidebar()) ? '7' : '10' ?> layout-content-container">
             <?= SpaceContent::widget(['contentContainer' => $space, 'content' => $content]) ?>

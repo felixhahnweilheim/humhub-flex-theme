@@ -2,11 +2,13 @@
 use humhub\modules\user\widgets\ProfileHeader;
 use humhub\modules\user\widgets\ProfileMenu;
 use humhub\widgets\FooterMenu;
+
 $user = $this->context->contentContainer;
 
 // Flex Theme
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\widgets\TopicListUser;
+
 // Flex Theme end
 ?>
 <div class="container profile-layout-container">
@@ -18,11 +20,11 @@ use humhub\modules\flexTheme\widgets\TopicListUser;
     <div class="row profile-content">
         <div class="col-md-2 layout-nav-container">
             <?= ProfileMenu::widget(['user' => $user]); ?>
-<?php // Flex Theme ?>
+<?php // Flex Theme?>
             <?php if(Config::getSetting('showTopicMenu')): ?>
                 <?= TopicListUser::widget(['user' => $user]); ?>
             <?php endif; ?>
-<?php // Flex Theme end ?>
+<?php // Flex Theme end?>
         </div>
         <div class="col-md-<?= ($this->hasSidebar()) ? '7' : '10' ?> layout-content-container">
             <?= $content; ?>
