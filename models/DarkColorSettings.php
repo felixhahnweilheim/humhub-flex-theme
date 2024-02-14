@@ -39,7 +39,14 @@ class DarkColorSettings extends AbstractColorSettings
 
             // If empty get default value
             if (empty($value)) {
-                $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+                
+                // compatiblity with PHP 7.4 will be removed in next version
+                if (version_compare(phpversion(), '8.0.0', '<')) {
+                    $value = (new \ReflectionProperty($this))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
+                } else {
+                    // min PHP 8.0
+                    $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+                }
             }
             // For the main colors we can take the light theme as fallback
             if (empty($value)) {

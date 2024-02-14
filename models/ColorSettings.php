@@ -21,8 +21,14 @@ class ColorSettings extends AbstractColorSettings
 
             // If empty get default value
             if (empty($value)) {
-                // min PHP 8.x
-                $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+                
+                // compatiblity with PHP 7.4 will be removed in next version
+                if (version_compare(phpversion(), '8.0.0', '<')) {
+                    $value = (new \ReflectionProperty($this))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
+                } else {
+                    // min PHP 8.0
+                    $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
+                }
             }
             // If still empty get value from base theme
             if (empty($value)) {
