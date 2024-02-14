@@ -14,7 +14,7 @@ use Yii;
 class FileHandlerButtons extends FileHandlerButtonDropdown
 {
     public $known_labels = [];
-    
+
     public function init()
     {
         $this->known_labels = [
@@ -74,12 +74,11 @@ class FileHandlerButtons extends FileHandlerButtonDropdown
         $options['data-placement'] = 'bottom';
         $options['class'] = 'btn '.$this->cssButtonClass.' fileinput-button';
         $options['style'] = ['margin-left' => '0'];
-        
+
         $label = ArrayHelper::remove($options, 'label', 'Label');
-        
+
         // Move text from known labels into tooltip
-        foreach ($this->known_labels as $search)
-        {
+        foreach ($this->known_labels as $search) {
             if (strpos($label, $search) !== false) {
                 $label = trim(str_replace($search, '', $label));
                 $options['class'] .= ' tt btn-icon-only';

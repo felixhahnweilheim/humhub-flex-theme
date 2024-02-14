@@ -5,9 +5,9 @@ namespace humhub\modules\flexTheme\helpers;
 use Yii;
 use yii\base\ErrorException;
 
-class FileHelper {
-
-    const THEME_PATH = '@flex-theme/themes/FlexTheme';
+class FileHelper
+{
+    public const THEME_PATH = '@flex-theme/themes/FlexTheme';
 
     private static function getVarsFile(string $prefix)
     {
@@ -28,7 +28,7 @@ class FileHelper {
     {
         return Yii::getAlias(self::THEME_PATH . '/css/' . $prefix . 'theme_base.css');
     }
-    
+
     public static function updateVarsFile(string $content, string $prefix): bool
     {
         try {
@@ -40,7 +40,7 @@ class FileHelper {
         return true;
     }
 
-    public static function updateThemeFile( string $prefix ): bool
+    public static function updateThemeFile(string $prefix): bool
     {
         // Base Theme
         $theme_base = file_get_contents(self::getThemeBaseFile($prefix));
@@ -50,7 +50,7 @@ class FileHelper {
 
         // Create/Update theme.css
         $content = $theme_base . $vars;
-        
+
         try {
             file_put_contents(self::getThemeFile($prefix), $content);
         } catch(ErrorException $e) {

@@ -1,6 +1,6 @@
 <?php
 //FlexTheme
-use \humhub\modules\flexTheme\models\Config;
+use humhub\modules\flexTheme\models\Config;
 use humhub\modules\ui\icon\widgets\Icon;
 //FlexTheme end
 use yii\helpers\Html;
@@ -23,8 +23,8 @@ if ($style == 'icon') {
     $likeText = $iconEmpty;
     $unlikeText = $iconFull;
 } elseif ($style == 'both') {
-	$likeText = $iconEmpty . HTML::tag('span', Yii::t('LikeModule.base', 'Like'), ['class' => 'like-label-both']);
-	$unlikeText = $iconFull . HTML::tag('span', Yii::t('LikeModule.base', 'Unlike'), ['class' => 'unlike-label-both']);
+    $likeText = $iconEmpty . HTML::tag('span', Yii::t('LikeModule.base', 'Like'), ['class' => 'like-label-both']);
+    $unlikeText = $iconFull . HTML::tag('span', Yii::t('LikeModule.base', 'Unlike'), ['class' => 'unlike-label-both']);
 } else {
     $likeContainerClass = 'no-icon';
     $likeText = Yii::t('LikeModule.base', 'Like');
@@ -33,19 +33,19 @@ if ($style == 'icon') {
 ?>
 
 <span class="likeLinkContainer <?= $likeContainerClass ?>" id="likeLinkContainer_<?= $id ?>">
-<?php //FlexTheme end ?>
+<?php //FlexTheme end?>
     <?php if (Yii::$app->user->isGuest): ?>
-<?php //FlexTheme ?>
+<?php //FlexTheme?>
         <?= Html::a($likeText, Yii::$app->user->loginUrl, ['data-target' => '#globalModal']); ?>
-<?php //FlexTheme end ?>
+<?php //FlexTheme end?>
     <?php else: ?>
-<?php //FlexTheme ?>
+<?php //FlexTheme?>
         <a href="#" data-action-click="like.toggleLike" data-action-url="<?= $likeUrl ?>" class="like likeAnchor<?= !$canLike ? ' disabled' : '' ?>" style="<?= (!$currentUserLiked) ? '' : 'display:none'?>" title="<?= Yii::t('LikeModule.base', 'Like') ?>">
 		    <?= $likeText ?>
         </a>
         <a href="#" data-action-click="like.toggleLike" data-action-url="<?= $unlikeUrl ?>" class="unlike likeAnchor<?= !$canLike ? ' disabled' : '' ?>" style="<?= ($currentUserLiked) ? '' : 'display:none'?>" title="<?= Yii::t('LikeModule.base', 'Unlike') ?>">
 		    <?= $unlikeText ?>
-<?php //FlexTheme end ?>
+<?php //FlexTheme end?>
         </a>
     <?php endif; ?>
 

@@ -12,7 +12,7 @@ class Events
     {
         $event->sender->controllerMap['flex-theme'] = commands\DevController::class;
     }
-    
+
     public static function onFileHandlerButtonDropdownBeforeRun(WidgetCreateEvent $event)
     {
         if (Yii::$app->view->theme->name !== 'FlexTheme') {

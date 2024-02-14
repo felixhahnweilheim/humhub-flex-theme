@@ -20,7 +20,6 @@ use humhub\modules\ui\menu\widgets\TabMenu;
  */
 class AdminMenu extends TabMenu
 {
-
     /**
      * @inheritdoc
      */

@@ -10,7 +10,6 @@ use Yii;
 
 class AdvancedSettings extends \yii\base\Model
 {
-
     public $settingsJson;
 
     public function init()
@@ -40,7 +39,7 @@ class AdvancedSettings extends \yii\base\Model
     {
         return [
             [['settingsJson'], 'isValidJSON']
-		];
+        ];
     }
 
     public function isValidJSON(string $attribute, $params, $validator)
@@ -69,7 +68,7 @@ class AdvancedSettings extends \yii\base\Model
 
         // Get base settings
         $config_names = Config::CONFIG_NAMES;
-        foreach( $config_names as $setting) {
+        foreach($config_names as $setting) {
             $value = $module->settings->get($setting);
 
             // exclude empty settings
@@ -80,7 +79,7 @@ class AdvancedSettings extends \yii\base\Model
 
         // Get color settings
         $color_names = array_merge(ColorSettings::MAIN_COLORS, ColorSettings::TEXT_COLORS, ColorSettings::BACKGROUND_COLORS);
-        foreach( $color_names as $color) {
+        foreach($color_names as $color) {
             $value = $module->settings->get($color);
 
             // exclude empty settings
@@ -91,7 +90,7 @@ class AdvancedSettings extends \yii\base\Model
 
         // Get dark colors
         $color_names = array_merge(DarkColorSettings::MAIN_COLORS, DarkColorSettings::TEXT_COLORS, DarkColorSettings::BACKGROUND_COLORS);
-        foreach( $color_names as $color ) {
+        foreach($color_names as $color) {
             $value = $module->settings->get(DarkColorSettings::PREFIX . $color);
 
             // exclude empty settings

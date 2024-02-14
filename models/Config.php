@@ -17,7 +17,7 @@ use yii\base\UnknownPropertyException;
 class Config extends \yii\base\Model
 {
     // Module settings
-    const CONFIG_NAMES = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor', 'showTopicMenu', 'showUploadAsButtons'];
+    public const CONFIG_NAMES = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor', 'showTopicMenu', 'showUploadAsButtons'];
     public $commentLink;
     public $likeLink;
     public $likeIcon;
@@ -32,7 +32,8 @@ class Config extends \yii\base\Model
         return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
 
-    public function init() {
+    public function init()
+    {
 
         parent::init();
 
@@ -47,7 +48,8 @@ class Config extends \yii\base\Model
         $this->showUploadAsButtons = $settings->get('showUploadAsButtons');
     }
 
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
 
         // Note: the attribute name in uppercase is used as fallback
         return [
@@ -61,12 +63,13 @@ class Config extends \yii\base\Model
         ];
     }
 
-    public function rules() {
+    public function rules()
+    {
 
         return [
             [['commentLink', 'likeLink', 'likeIcon', 'likeIconFull'], 'string'],
             [['commentLink', 'likeLink'], 'in', 'range' => ['icon', 'text', 'both']],
-            [['likeIcon', 'likeIconFull'], 'required', 'when' => function() {
+            [['likeIcon', 'likeIconFull'], 'required', 'when' => function () {
                 return $this->likeLink == 'both' || $this->likeLink == 'icon';
             }],
             [['likeIconColor'], 'validateHexColor'],
@@ -81,7 +84,8 @@ class Config extends \yii\base\Model
         }
     }
 
-    public function save() {
+    public function save()
+    {
 
         if(!$this->validate()) {
             return false;

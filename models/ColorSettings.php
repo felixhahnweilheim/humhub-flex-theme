@@ -9,8 +9,8 @@ use Yii;
 class ColorSettings extends AbstractColorSettings
 {
     // Base Theme for fallback and default values
-    const BASE_THEME = 'HumHub';
-    
+    public const BASE_THEME = 'HumHub';
+
     public function getColors(): array
     {
         $settings = self::getSettings();
@@ -18,7 +18,7 @@ class ColorSettings extends AbstractColorSettings
 
         foreach ($this->configurableColors as $color) {
             $value = $settings->get(static::PREFIX . $color);
-            
+
             // If empty get default value
             if (empty($value)) {
                 // min PHP 8.x
@@ -32,7 +32,7 @@ class ColorSettings extends AbstractColorSettings
             $color = str_replace('_', '-', $color);
             $result[$color] = $value;
         }
-        
+
         foreach (self::SPECIAL_COLORS as $color) {
             $value = $settings->get(static::PREFIX . $color);
             $color = str_replace('_', '-', $color);
@@ -54,11 +54,11 @@ class ColorSettings extends AbstractColorSettings
             $icon = Icon::get('circle', ['color' => $default_value]);
             $hints[$color] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . $default_value . '</code> ' . $icon;
         }
-		$icon = Icon::get('circle', ['color' => '#daf0f3']);
+        $icon = Icon::get('circle', ['color' => '#daf0f3']);
         $hints['background_color_highlight'] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . '#daf0f3' . '</code> ' . $icon;
-		$icon = Icon::get('circle', ['color' => '#f2f9fb']);
-		$hints['background_color_highlight_soft'] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . '#f2f9fb' . '</code> ' . $icon;
-		
+        $icon = Icon::get('circle', ['color' => '#f2f9fb']);
+        $hints['background_color_highlight_soft'] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . '#f2f9fb' . '</code> ' . $icon;
+
         return $hints;
     }
 
@@ -72,7 +72,7 @@ class ColorSettings extends AbstractColorSettings
         $theme_key = 'theme.var.FlexTheme.' . static::PREFIX . $theme_var;
         Yii::$app->settings->set($theme_key, $value);
     }
-    
+
     protected function getColorFallBack(string $color): string
     {
         $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
