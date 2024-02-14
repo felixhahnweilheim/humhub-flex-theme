@@ -1,6 +1,6 @@
 # FlexTheme for HumHub
 
-The first free configurable theme for HumHub
+An easy-to-use configurable theme for HumHub.
 
 **Version: 0.3** (for HumHub 1.15)
 
@@ -21,7 +21,9 @@ Please consider a donation: https://github.com/sponsors/felixhahnweilheim
 You can configure nearly all colors (main colors, text colors, background colors).  
 Please note: This still needs more testing and some colors that are hard-coded in HumHub can't be changed.
 
-[Details for Developpers](https://github.com/felixhahnweilheim/humhub-flex-theme/blob/main/themes/FlexTheme/less/README.md)
+### Dark Mode
+**Define your custom colors!**  
+Only works with the [Dark Mode](https://marketplace.humhub.com/module/dark-mode/description) module.
 
 ### Social Controls
 
