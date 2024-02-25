@@ -24,7 +24,7 @@ class Module extends \humhub\components\Module
     // Link to configuration page
     public function getConfigUrl()
     {
-        return Url::to(['/flex-theme/config']);
+        return Url::to(['/flex-theme/admin']);
     }
 
     // Module Activation

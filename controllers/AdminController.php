@@ -8,7 +8,7 @@ use humhub\modules\flexTheme\models\DarkColorSettings;
 use humhub\modules\flexTheme\models\AdvancedSettings;
 use Yii;
 
-class ConfigController extends \humhub\modules\admin\components\Controller
+class AdminController extends \humhub\modules\admin\components\Controller
 {
     public $subLayout = '@flex-theme/views/layouts/admin';
 
