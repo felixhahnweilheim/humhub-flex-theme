@@ -19,7 +19,7 @@ class AdminController extends \humhub\modules\admin\components\Controller
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
             // Redirect instead of render to make browser reload CSS
-            return $this->redirect(['/flex-theme/config']);
+            return $this->redirect(['/flex-theme/admin']);
         }
 
         return $this->render('index', ['model' => $form]);
@@ -36,7 +36,7 @@ class AdminController extends \humhub\modules\admin\components\Controller
                 $this->view->saved();
             }
             // Redirect instead of render to make browser reload CSS
-            return $this->redirect(['/flex-theme/config/colors']);
+            return $this->redirect(['/flex-theme/admin/colors']);
         }
 
         return $this->render('colors', ['model' => $form]);
@@ -53,7 +53,7 @@ class AdminController extends \humhub\modules\admin\components\Controller
                 $this->view->saved();
             }
             // Redirect instead of render to make browser reload CSS
-            return $this->redirect(['/flex-theme/config/dark-colors']);
+            return $this->redirect(['/flex-theme/admin/dark-colors']);
         }
 
         return $this->render('dark-colors', ['model' => $form]);
@@ -90,7 +90,7 @@ class AdminController extends \humhub\modules\admin\components\Controller
             if ($config->save() && $colorSettings->save() && $darkColorSettings->save()) {
                 $this->view->saved();
                 // Redirect instead of render to make browser reload CSS
-                return $this->redirect(['/flex-theme/config/advanced']);
+                return $this->redirect(['/flex-theme/admin/advanced']);
             }
         }
 

@@ -15,8 +15,6 @@ use humhub\modules\ui\menu\widgets\TabMenu;
 
 /**
  * User Administration Menu
- *
- * @author Basti
  */
 class AdminMenu extends TabMenu
 {
@@ -27,9 +25,9 @@ class AdminMenu extends TabMenu
     {
         $this->addEntry(new MenuLink([
             'label' => Yii::t('FlexThemeModule.admin', 'General Settings'),
-            'url' => ['/flex-theme/config/index'],
+            'url' => ['/flex-theme/admin/index'],
             'sortOrder' => 100,
-            'isActive' => MenuLink::isActiveState('flex-theme', 'config', 'index'),
+            'isActive' => MenuLink::isActiveState('flex-theme', 'admin', 'index'),
             'isVisible' => Yii::$app->user->can([
                 ManageSettings::class
             ])
@@ -37,9 +35,9 @@ class AdminMenu extends TabMenu
 
         $this->addEntry(new MenuLink([
             'label' => Yii::t('FlexThemeModule.admin', 'Colors'),
-            'url' => ['/flex-theme/config/colors'],
+            'url' => ['/flex-theme/admin/colors'],
             'sortOrder' => 200,
-            'isActive' => MenuLink::isActiveState('flex-theme', 'config', 'colors'),
+            'isActive' => MenuLink::isActiveState('flex-theme', 'admin', 'colors'),
             'isVisible' => Yii::$app->user->can([
                 ManageSettings::class
             ])
@@ -47,9 +45,9 @@ class AdminMenu extends TabMenu
 
         $this->addEntry(new MenuLink([
             'label' => Yii::t('FlexThemeModule.admin', 'Dark Mode'),
-            'url' => ['/flex-theme/config/dark-colors'],
+            'url' => ['/flex-theme/admin/dark-colors'],
             'sortOrder' => 300,
-            'isActive' => MenuLink::isActiveState('flex-theme', 'config', 'dark-colors'),
+            'isActive' => MenuLink::isActiveState('flex-theme', 'admin', 'dark-colors'),
             'isVisible' => Yii::$app->user->can([
                 ManageSettings::class
             ])
@@ -57,9 +55,9 @@ class AdminMenu extends TabMenu
 
         $this->addEntry(new MenuLink([
             'label' => Yii::t('FlexThemeModule.admin', 'Advanced'),
-            'url' => ['/flex-theme/config/advanced'],
+            'url' => ['/flex-theme/admin/advanced'],
             'sortOrder' => 400,
-            'isActive' => MenuLink::isActiveState('flex-theme', 'config', 'advanced'),
+            'isActive' => MenuLink::isActiveState('flex-theme', 'admin', 'advanced'),
             'isVisible' => Yii::$app->user->can([
                 ManageSettings::class
             ])
