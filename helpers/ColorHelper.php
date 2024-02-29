@@ -88,7 +88,7 @@ class ColorHelper
      */
     public static function fade(string $color, int $amount): string
     {
-        $opacity = ($amount / 100) * 255;
+        $opacity = round($amount / 100) * 255;
         $opacity = max(min($opacity, 255), 0); // keep between 0 and 255
         $opacity = str_pad(dechex($opacity), 2, '0', STR_PAD_LEFT); // make 2 char hex code
 
