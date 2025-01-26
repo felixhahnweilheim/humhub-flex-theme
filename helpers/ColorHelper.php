@@ -10,7 +10,6 @@ class ColorHelper
      */
     public static function lighten(string $color, int $amount, bool $relative = false): string
     {
-
         /*
          * $color is expected to be a hexadecimal color code (including '#')
          * and has to be splitted into its components
@@ -29,13 +28,15 @@ class ColorHelper
              */
             $max = hexdec(max($color_parts));
             $min = hexdec(min($color_parts));
-            /* if $max is null we have the black color #000000
-             * if $min is 255, we would divide by zero, we have the white color #ffffff
-             * in both cases relative and absolute lightening have the same effect anyways
+
+            /*
+             * if $min is 255, we would divide by zero below
+             * and white #ffffff does not need lightening anyways
              */
-            if ($max != 0 && $min != 255) {
-                $percentage = $percentage / (1 - ($max + $min) / (2 * 255));
+            if ($min == 255) {
+                return $color;
             }
+            $percentage = $percentage / (1 - ($max + $min) / (2 * 255));
         }
 
         $return = '#';
@@ -85,7 +86,6 @@ class ColorHelper
 
     public static function fade(string $color, int $amount): string
     {
-
         // $amount is expected to be between 0 and 100
         $opacity = ($amount / 100) * 255;
         $opacity = max(min($opacity, 255), 0); // keep between 0 and 255
