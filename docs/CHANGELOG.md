@@ -1,3 +1,6 @@
+## TBA
+- Fix #42: Division by zero (when trying to lighten white color)
+
 ## 0.3.0 (14 february 2024)
 **NOTE** Files in themes/FlexTheme/css now need to be writable by the PHP process (see https://docs.humhub.org/docs/admin/installation/#file-permissions)
 
