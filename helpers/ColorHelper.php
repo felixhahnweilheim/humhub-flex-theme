@@ -29,7 +29,11 @@ class ColorHelper
              */
             $max = hexdec(max($color_parts));
             $min = hexdec(min($color_parts));
-            if ($max != 0) {
+            /* if $max is null we have the black color #000000
+             * if $min is 255, we would divide by zero, we have the white color #ffffff
+             * in both cases relative and absolute lightening have the same effect anyways
+             */
+            if ($max != 0 && $min != 255) {
                 $percentage = $percentage / (1 - ($max + $min) / (2 * 255));
             }
         }
