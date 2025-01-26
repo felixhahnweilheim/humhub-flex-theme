@@ -86,6 +86,9 @@ class ColorHelper
 
     public static function fade(string $color, int $amount): string
     {
+        // make sure we have 6 letters code not 3
+        $color = '#' . self::getSixDigitsColor($color);
+        
         // $amount is expected to be between 0 and 100
         $opacity = ($amount / 100) * 255;
         $opacity = max(min($opacity, 255), 0); // keep between 0 and 255
@@ -97,13 +100,18 @@ class ColorHelper
 
     protected static function getColorComponents(string $color): array
     {
+        $hexstr = self::getSixDigitsColor($color);
+        return str_split($hexstr, 2);
+    }
+
+    protected static function getSixDigitsColor(string $color): string
+    {
         // Remove leading '#'
         $hexstr = ltrim($color, '#');
         // if color has just 3 digits
         if (strlen($hexstr) == 3) {
             $hexstr = $hexstr[0] . $hexstr[0] . $hexstr[1] . $hexstr[1] . $hexstr[2] . $hexstr[2];
         }
-
-        return str_split($hexstr, 2);
+        return $hexstr;
     }
 }
