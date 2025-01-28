@@ -17,7 +17,10 @@ class ColorHelper
      */
     public static function lighten(string $color, int $amount, bool $relative = false): string
     {
-        // split color into its components
+        /*
+         * $color is expected to be a hexadecimal color code (including '#')
+         * and has to be splitted into its components
+         */
         $color_parts = ColorHelper::getColorComponents($color);
 
         $percentage = $amount / 100;
@@ -27,9 +30,15 @@ class ColorHelper
             //Converting a RGB color to HSL, the Lightness would be calculated by L = [max(R,G,B) + min(R,G,B)] / (2 * 255)
             $max = hexdec(max($color_parts));
             $min = hexdec(min($color_parts));
-            if ($max != 0) {
-                $percentage = $percentage / (1 - ($max + $min) / (2 * 255));
+
+            /*
+             * if $min is 255, we would divide by zero below
+             * and white #ffffff does not need lightening anyways
+             */
+            if ($min == 255) {
+                return $color;
             }
+            $percentage = $percentage / (1 - ($max + $min) / (2 * 255));
         }
 
         $result = '#';
@@ -88,6 +97,10 @@ class ColorHelper
      */
     public static function fade(string $color, int $amount): string
     {
+        // make sure we have 6 letters code not 3
+        $color = '#' . self::getSixDigitsColor($color);
+        
+        // $amount is expected to be between 0 and 100
         $opacity = round(($amount / 100) * 255);
         $opacity = max(min($opacity, 255), 0); // keep between 0 and 255
         $opacity = str_pad(dechex($opacity), 2, '0', STR_PAD_LEFT); // make 2 char hex code
@@ -102,13 +115,18 @@ class ColorHelper
      */
     protected static function getColorComponents(string $color): array
     {
+        $hexstr = self::getSixDigitsColor($color);
+        return str_split($hexstr, 2);
+    }
+
+    protected static function getSixDigitsColor(string $color): string
+    {
         // Remove leading '#'
         $hexstr = ltrim($color, '#');
         // if color has just 3 digits
         if (strlen($hexstr) == 3) {
             $hexstr = $hexstr[0] . $hexstr[0] . $hexstr[1] . $hexstr[1] . $hexstr[2] . $hexstr[2];
         }
-
-        return str_split($hexstr, 2);
+        return $hexstr;
     }
 }
