@@ -1,3 +1,8 @@
+<?php
+
+\humhub\modules\flexTheme\assets\AdminAssets::register($this);
+
+?>
 <?php $this->beginContent('@admin/views/layouts/main.php') ?>
 <div class="panel panel-default">
     <div class="panel-heading">

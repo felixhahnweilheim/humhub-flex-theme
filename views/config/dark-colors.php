@@ -2,6 +2,7 @@
 
 use humhub\modules\flexTheme\models\DarkColorSettings;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\ui\icon\widgets\Icon;
 use kartik\widgets\ColorInput;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -22,7 +23,7 @@ $link = '<a href=' . $darkModeUrl . '>' . $darkModeName . '</a>';
         </p>
     </div>
 
-    <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
+    <?php $form = ActiveForm::begin(['id' => 'colors-form']);?>
 
         <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
             <?php foreach ($main_colors as $color): ?>
@@ -44,6 +45,7 @@ $link = '<a href=' . $darkModeUrl . '>' . $darkModeName . '</a>';
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
+        <button class="btn btn-sm pull-right" id="refresh-button" style="color:var(--danger);background-color:var(--background-color-main);font-weight:600" href="#" data-action-click="humhub.modules.flex_theme.admin.emptyColors"><?= Icon::get('refresh') ?> <?= Yii::t('FlexThemeModule.admin', 'Reset all colors') ?></button>
     </div>
 
     <?php ActiveForm::end(); ?>
