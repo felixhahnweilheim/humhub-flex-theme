@@ -16,7 +16,7 @@ $link = '<a href=' . $darkModeUrl . '>' . $darkModeName . '</a>';
 ?>
 <div class="panel-body">
     <div class="alert alert-info">
-        <p><?= Yii::t('FlexThemeModule.admin', 'Please use the module {darkmode} and select "HumHub (dark)".', [
+        <p><?= Yii::t('FlexThemeModule.admin', 'Please use the module {darkmode} and select "FlexTheme (dark)".', [
             'darkmode' => $link,
         ]) ?>
         </p>
