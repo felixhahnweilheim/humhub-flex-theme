@@ -16,6 +16,8 @@ use yii\base\UnknownPropertyException;
  */
 class Config extends \yii\base\Model
 {
+    public bool $autoLoadSettings = true;
+
     // Module settings
     public const CONFIG_NAMES = ['commentLink', 'likeLink', 'likeIcon', 'likeIconFull', 'likeIconColor', 'showTopicMenu', 'showUploadAsButtons'];
     public $commentLink;
@@ -26,17 +28,21 @@ class Config extends \yii\base\Model
     public $showTopicMenu;
     public $showUploadAsButtons;
 
-    public static function getSetting(string $setting_name): string
-    {
-        // Note: return can be empty
-        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
+    public function __construct($autoLoadSettings = true) {
+        $this->autoLoadSettings = $autoLoadSettings;
     }
 
     public function init()
     {
-
         parent::init();
 
+        if ($this->autoLoadSettings) {
+            $this->loadSettings();
+        }
+    }
+
+    public function loadSettings()
+    {
         $settings = Yii::$app->getModule('flex-theme')->settings;
 
         $this->commentLink = $settings->get('commentLink', 'text');
@@ -46,6 +52,12 @@ class Config extends \yii\base\Model
         $this->likeIconColor = $settings->get('likeIconColor');
         $this->showTopicMenu = $settings->get('showTopicMenu');
         $this->showUploadAsButtons = $settings->get('showUploadAsButtons');
+    }
+
+    public static function getSetting(string $setting_name): string
+    {
+        // Note: return can be empty
+        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
     }
 
     public function attributeLabels()

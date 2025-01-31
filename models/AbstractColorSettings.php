@@ -13,6 +13,8 @@ abstract class AbstractColorSettings extends \yii\base\Model
      */
     public const PREFIX = '';
 
+    public bool $autoLoadSettings = true;
+
     public $configurableColors = [];
     public $hasWarnings = false;
 
@@ -53,12 +55,23 @@ abstract class AbstractColorSettings extends \yii\base\Model
 
     abstract protected function getColorFallback(string $color): string;
 
+    public function __construct($autoLoadSettings = true) {
+        $this->autoLoadSettings = $autoLoadSettings;
+    }
+
     public function init()
     {
         parent::init();
 
         $this->configurableColors = array_merge(static::MAIN_COLORS, static::TEXT_COLORS, static::BACKGROUND_COLORS);
 
+        if ($this->autoLoadSettings) {
+            $this->loadSettings();
+        }
+    }
+
+    public function loadSettings()
+    {
         $settings = static::getSettings();
         foreach($this->configurableColors as $color) {
             $this->$color = $settings->get(static::PREFIX . $color);
