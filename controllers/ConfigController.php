@@ -75,7 +75,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             $darkColorSettings = new DarkColorSettings($loadSettings);
 
             // Decode the imported json
-            $data = json_decode($form->settingsJson);
+            $data = json_decode($form->settingsJson, true);
 
             //$overWriteAll = (bool) Yii::$app->request->post()['AdvancedSettings']['overwriteAll'];
             //$data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
