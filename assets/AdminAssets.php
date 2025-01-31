@@ -5,7 +5,7 @@ namespace humhub\modules\flexTheme\assets;
 class AdminAssets extends \humhub\components\assets\AssetBundle
 {
     public $publishOptions = [
-        'forceCopy' => true
+        'forceCopy' => false
     ];
     
     public $sourcePath = '@flex-theme/resources';
