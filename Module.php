@@ -12,6 +12,7 @@ use yii\helpers\Url;
 class Module extends \humhub\components\Module
 {
     public $resourcesPath = 'resources';
+    public $defaultRoute = 'admin';
 
     public const FLEX_THEME_NAME = 'FlexTheme';
 

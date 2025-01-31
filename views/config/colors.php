@@ -2,6 +2,7 @@
 
 use humhub\modules\flexTheme\models\ColorSettings;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\ui\icon\widgets\Icon;
 use kartik\widgets\ColorInput;
 use yii\helpers\Html;
 
@@ -10,7 +11,7 @@ $text_colors = ColorSettings::TEXT_COLORS;
 $background_colors = ColorSettings::BACKGROUND_COLORS;
 ?>
 <div class="panel-body">
-    <?php $form = ActiveForm::begin(['id' => 'configure-form']);?>
+    <?php $form = ActiveForm::begin(['id' => 'colors-form']);?>
 
         <?= $form->beginCollapsibleFields(Yii::t('FlexThemeModule.admin', 'Main Colors')); ?>
             <?php foreach ($main_colors as $color): ?>
@@ -32,6 +33,7 @@ $background_colors = ColorSettings::BACKGROUND_COLORS;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
+        <button class="btn btn-sm pull-right" id="refresh-button" style="color:var(--danger);background-color:var(--background-color-main);font-weight:600" href="#" data-action-click="humhub.modules.flex_theme.admin.emptyColors"><?= Icon::get('refresh') ?> <?= Yii::t('FlexThemeModule.admin', 'Reset all colors') ?></button>
     </div>
 
     <?php ActiveForm::end(); ?>
