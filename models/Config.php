@@ -26,7 +26,7 @@ class Config extends \yii\base\Model
     public $showTopicMenu;
     public $showUploadAsButtons;
 
-    public static function getSetting(string $setting_name): string
+    public static function getSetting(string $setting_name): ?string
     {
         // Note: return can be empty
         return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
