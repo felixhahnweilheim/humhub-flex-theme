@@ -1,6 +1,8 @@
 ## TBA
 - Fix #42: Division by zero (when trying to lighten white color)
 - Fix #43: Invalid faded color calculated from 3 digits base color
+- Enh #45: Add option to reset all colors of the current form
+- Enh #45: Add default route 'admin'
 
 ## 0.3.0 (14 february 2024)
 **NOTE** Files in themes/FlexTheme/css now need to be writable by the PHP process (see https://docs.humhub.org/docs/admin/installation/#file-permissions)
