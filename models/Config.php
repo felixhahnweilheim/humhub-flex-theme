@@ -29,6 +29,7 @@ class Config extends \yii\base\Model
     public $showUploadAsButtons;
 
     public function __construct($autoLoadSettings = true) {
+        parent::__construct();
         $this->autoLoadSettings = $autoLoadSettings;
     }
 

@@ -56,6 +56,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
     abstract protected function getColorFallback(string $color): string;
 
     public function __construct($autoLoadSettings = true) {
+        parent::__construct();
         $this->autoLoadSettings = $autoLoadSettings;
     }
 
