@@ -22,6 +22,7 @@ return [
     'Only icon' => '',
     'Please go to Administration > Settings > Appearance and select "Flex Theme".' => '',
     'Please use the module {darkmode} and select "HumHub (dark)".' => '',
+    'Reset all colors' => '',
     'Settings were saved with warnings/errors. Please check the logging. (Administration > Information > Logging)' => '',
     'Show File Upload options (image, audio, video...) as buttons instead of dropdown.' => '',
     'Show topic menu in user profiles and spaces.' => '',
