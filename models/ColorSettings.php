@@ -8,9 +8,21 @@ use Yii;
 
 class ColorSettings extends AbstractColorSettings
 {
-    // Base Theme for fallback and default values
+    // Colors that are not hard coded in default theme
+    public const DEFAULT_COLORS = [
+        'background_color_highlight' => '#daf0f3',
+        'background_color_highlight_soft' => '#f2f9fb',
+    ]; 
+
+    /*
+     * Base Theme for fallback values
+     */
     public const BASE_THEME = 'HumHub';
 
+    /*
+     * get all colors, configured, default or fallback to standard theme color
+     * mainly used to store them in the variables.less file, see saveVarsToFile()
+     */
     public function getColors(): array
     {
         $settings = self::getSettings();
@@ -41,6 +53,35 @@ class ColorSettings extends AbstractColorSettings
         return $result;
     }
 
+    /*
+     * color fallback
+     * 1. default value
+     * 2. get from standard theme
+     */
+    protected function getColorFallBack(string $color): string
+    {
+        $value = self::getDefaultValue($color);
+        
+        if (empty($value)) {
+            $theme_var = str_replace('_', '-', $color);
+            $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable(static::PREFIX . $theme_var);
+        }
+        return $value;
+    }
+    
+    /*
+     * Save color values as theme variables (take default theme's color if value is empty)
+     */
+    protected function additonalColorSaving(string $color, ?string $value): void
+    {
+        $theme_var = str_replace('_', '-', $color);
+        if (empty($value)) {
+            $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable($theme_var);
+        }
+        $theme_key = 'theme.var.FlexTheme.' . static::PREFIX . $theme_var;
+        Yii::$app->settings->set($theme_key, $value);
+    }
+    
     public function attributeHints(): array
     {
         $hints = [];
@@ -59,39 +100,5 @@ class ColorSettings extends AbstractColorSettings
         $hints['background_color_highlight_soft'] = Yii::t('FlexThemeModule.admin', 'Default') . ': ' . '<code>' . '#f2f9fb' . '</code> ' . $icon;
 
         return $hints;
-    }
-
-    protected function additonalColorSaving(string $color, ?string $value): void
-    {
-        // Save color values as theme variables (take default theme's color if value is empty)
-        $theme_var = str_replace('_', '-', $color);
-        if (empty($value)) {
-            $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable($theme_var);
-        }
-        $theme_key = 'theme.var.FlexTheme.' . static::PREFIX . $theme_var;
-        Yii::$app->settings->set($theme_key, $value);
-    }
-
-    protected function getColorFallBack(string $color): string
-    {
-        $value = self::getDefaultValue($color);
-        
-        if (empty($value)) {
-            $theme_var = str_replace('_', '-', $color);
-            $value = ThemeHelper::getThemeByName(self::BASE_THEME)->variable(static::PREFIX . $theme_var);
-        }
-        return $value;
-    }
-    
-    private function getDefaultValue(string $color): ?string
-    {
-        // compatiblity with PHP 7.4 will be removed in next version
-        if (version_compare(phpversion(), '8.0.0', '<')) {
-            $value = (new \ReflectionProperty($this, $color))->getDeclaringClass()->getDefaultProperties()[$color] ?? null;
-        } else {
-            // min PHP 8.0
-            $value = (new \ReflectionClass($this))->getProperty($color)->getDefaultValue();
-        }
-        return $value;
     }
 }
