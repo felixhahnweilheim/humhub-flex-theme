@@ -238,7 +238,7 @@ abstract class AbstractColorSettings extends \yii\base\Model
     
     protected function getDefaultValue(string $color): ?string
     {
-         if (array_key_exists($color, static::EXTRA_COLORS)) {
+         if (array_key_exists($color, static::DEFAULT_COLORS)) {
              return static::DEFAULT_COLORS[$color];
          }
          return '';
