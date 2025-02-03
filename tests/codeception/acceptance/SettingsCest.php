@@ -56,13 +56,14 @@ class SettingsCest
     "DarkColorSettings": []
 }';
 
+    // do not change indentation (we also use it to test the result)
     public const JSON_SAMPLE_2 = '{
-        "Config": [],
-        "ColorSettings": {
-            "background4": "#0c343d"
-        },
-        "DarkColorSettings": []
-    }';
+    "Config": [],
+    "ColorSettings": {
+        "background4": "#0c343d"
+    },
+    "DarkColorSettings": []
+}';
 
     public function testSettings(AcceptanceTester $I)
     {
