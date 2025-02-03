@@ -14,14 +14,40 @@ $background_colors = DarkColorSettings::BACKGROUND_COLORS;
 $darkModeUrl = Url::toRoute('/marketplace/browse?keyword=dark-mode&tags=');
 $darkModeName = Yii::t('FlexThemeModule.admin', 'Dark Mode');
 $link = '<a href=' . $darkModeUrl . '>' . $darkModeName . '</a>';
+$darkModeConfigUrl = Url::toRoute('/dark-mode/admin');
+$darkModeConfigName = Yii::t('FlexThemeModule.admin', 'Dark Mode Settings');
+$configLink = '<a href=' . $darkModeConfigUrl . '>' . $darkModeConfigName . '</a>';
 ?>
 <div class="panel-body">
-    <div class="alert alert-info">
-        <p><?= Yii::t('FlexThemeModule.admin', 'Please use the module {darkmode} and select "HumHub (dark)".', [
-            'darkmode' => $link,
-        ]) ?>
-        </p>
-    </div>
+    <?php
+    if (! Yii::$app->hasModule('dark-mode')) {
+        echo '<div class="alert alert-info">
+            <p>' . Yii::t('FlexThemeModule.admin', 'Please use the module {darkmode}.', [
+                'darkmode' => $link,
+            ]) .
+            '</p>
+        </div>';
+    } else {
+        try {
+            $darkModeConfig = new \humhub\modules\darkMode\models\Config();
+            if ($darkModeConfig->theme !== 'FlexTheme (dark)') {
+                echo '<div class="alert alert-info">
+                    <p>' . Yii::t('FlexThemeModule.admin', 'Please select "FlexTheme (dark)" in the {link}.', [
+                        'link' => $configLink,
+                    ]) .
+                    '</p>
+                </div>';
+            }
+        } catch (Exception $e) {
+            echo '<div class="alert alert-info">
+            <p>' . Yii::t('FlexThemeModule.admin', 'Could not check the dark mode module settings, check the logs for details.', [
+                'link' => $configLink,
+            ]) .
+            '</p>';
+            Yii::error($e, 'flex-theme');
+        }
+    }
+    ?>
 
     <?php $form = ActiveForm::begin(['id' => 'colors-form']);?>
 
