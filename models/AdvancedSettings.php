@@ -5,12 +5,12 @@ namespace humhub\modules\flexTheme\models;
 use humhub\modules\flexTheme\models\Config;
 use humhub\modules\flexTheme\models\ColorSettings;
 use humhub\modules\flexTheme\models\DarkColorSettings;
-
 use Yii;
 
 class AdvancedSettings extends \yii\base\Model
 {
     public $settingsJson;
+    public bool $overwriteAll = false;
 
     public function init()
     {
@@ -24,6 +24,7 @@ class AdvancedSettings extends \yii\base\Model
     public function attributeLabels()
     {
         $labels['settingsJson'] = 'Settings JSON';
+        $labels['overwriteAll'] = Yii::t('FlexThemeModule.admin', 'Overwrite all Settings');
 
         return $labels;
     }
@@ -31,14 +32,16 @@ class AdvancedSettings extends \yii\base\Model
     public function attributeHints()
     {
         $hints['settingsJson'] = '<b>' . Yii::t('FlexThemeModule.admin', 'WARNING') . '</b>' . ': ' . Yii::t('FlexThemeModule.admin', 'Your settings will be overwritten!');
-
+        $hints['overwriteAll'] = Yii::t('FlexThemeModule.admin', 'With this option all stored settings will be deleted, only the imported settings remain.');
+        
         return $hints;
     }
 
     public function rules()
     {
         return [
-            [['settingsJson'], 'isValidJSON']
+            [['settingsJson'], 'isValidJSON'],
+            [['overwriteAll'], 'boolean'],
         ];
     }
 

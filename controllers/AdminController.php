@@ -62,13 +62,25 @@ class AdminController extends \humhub\modules\admin\components\Controller
     public function actionAdvanced()
     {
         $form = new AdvancedSettings();
-        $config = new Config();
-        $colorSettings = new ColorSettings();
-        $darkColorSettings = new DarkColorSettings();
 
-        if(!empty(Yii::$app->request->post())) {
-            $data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
+        if (!empty(Yii::$app->request->post())) {
 
+            $form->load(Yii::$app->request->post());
+
+            // Load settings if we should merge or do not load them if we should overwrite all
+            $loadSettings = ! $form->overwriteAll;
+
+            $config = new Config($loadSettings);
+            $colorSettings = new ColorSettings($loadSettings);
+            $darkColorSettings = new DarkColorSettings($loadSettings);
+
+            // Decode the imported json
+            $data = json_decode($form->settingsJson, true);
+
+            //$overWriteAll = (bool) Yii::$app->request->post()['AdvancedSettings']['overwriteAll'];
+            //$data = json_decode(Yii::$app->request->post()['AdvancedSettings']['settingsJson'], true);
+
+            // Load the imported data into the models
             $config->load($data);
             $colorSettings->load($data);
             $darkColorSettings->load($data);
