@@ -106,7 +106,7 @@ class SettingsCest
     {
         // Test merging (background-color-page was already set in testSettingsColor())
         $I->amAdmin();
-        $I->amOnRoute(['/flex-theme/config/advanced']);
+        $I->amOnRoute(['/flex-theme/admin/advanced']);
         $I->waitForText('Flex Theme');
         $I->fillField('AdvancedSettings[settingsJson]', self::JSON_SAMPLE_1);
         $I->click('Save');

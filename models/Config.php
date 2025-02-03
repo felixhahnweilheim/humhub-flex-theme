@@ -59,7 +59,7 @@ class Config extends \yii\base\Model
     public static function getSetting(string $setting_name): string
     {
         // Note: return can be empty
-        return Yii::$app->getModule('flex-theme')->settings->get($setting_name);
+        return Yii::$app->getModule('flex-theme')->settings->get($setting_name) ?? '';
     }
 
     public function attributeLabels()
