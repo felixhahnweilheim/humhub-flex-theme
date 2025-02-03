@@ -30,31 +30,32 @@ class SettingsCest
         "DarkColorSettings": []
     }';
 
+    // do not change indentation
     public const JSON_RESULT_1 = '{
-        "Config": {
-            "commentLink": "icon",
-            "likeLink": "icon",
-            "likeIcon": "heart-o",
-            "likeIconFull": "heart",
-            "likeIconColor": "#cc0000",
-            "showTopicMenu": 1,
-            "showUploadAsButtons": 1
-        },
-        "ColorSettings": {
-            "default": "#cccccc",
-            "primary": "#ff9900",
-            "info": "#783f04",
-            "link": "#45818e",
-            "text_color_main": "#3d2323",
-            "text_color_secondary": "#554646",
-            "text_color_highlight": "#000000",
-            "background_color_main": "#fdb8b8",
-            "background_color_secondary": "#e7d1d1",
-            "background_color_page": "#cfe2f3"
-        },
-        "DarkColorSettings": []
-    }';
-    
+    "Config": {
+        "commentLink": "icon",
+        "likeLink": "icon",
+        "likeIcon": "heart-o",
+        "likeIconFull": "heart",
+        "likeIconColor": "#cc0000",
+        "showTopicMenu": 1,
+        "showUploadAsButtons": 1
+    },
+    "ColorSettings": {
+        "default": "#cccccc",
+        "primary": "#ff9900",
+        "info": "#783f04",
+        "link": "#45818e",
+        "text_color_main": "#3d2323",
+        "text_color_secondary": "#554646",
+        "text_color_highlight": "#000000",
+        "background_color_main": "#fdb8b8",
+        "background_color_secondary": "#e7d1d1",
+        "background_color_page": "#cfe2f3"
+    },
+    "DarkColorSettings": []
+}';
+
     public const JSON_SAMPLE_2 = '{
         "Config": [],
         "ColorSettings": {
