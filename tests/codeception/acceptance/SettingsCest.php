@@ -68,7 +68,7 @@ class SettingsCest
     public function testSettings(AcceptanceTester $I)
     {
         $I->amAdmin();
-        $I->amOnRoute(['/flex-theme/config']);
+        $I->amOnRoute(['/flex-theme/admin']);
         $I->waitForText('Flex Theme');
         $I->selectOption('#config-commentlink', 'icon');
         $I->selectOption('#config-likelink', 'icon');
@@ -80,7 +80,7 @@ class SettingsCest
     public function testSettingsColor(AcceptanceTester $I)
     {
         $I->amAdmin();
-        $I->amOnRoute(['/flex-theme/config/colors']);
+        $I->amOnRoute(['/flex-theme/admin/colors']);
         $I->waitForText('Flex Theme');
         $I->jsClick('.form-collapsible-fields:nth-of-type(3) > div');
         $I->see('Background Color Page');

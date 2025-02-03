@@ -1,4 +1,5 @@
 ## TBA
+- Fix #39: rounding issue in ColorHelper - thanks to @marc-farre
 - Fix #42: Division by zero (when trying to lighten white color)
 - Fix #43: Invalid faded color calculated from 3 digits base color
 - Enh #45: Add option to reset all colors of the current form
